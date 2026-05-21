@@ -1,4 +1,4 @@
-# la-hieu-fullstack | Structure | 2026-05-20 10:28:02
+# la-hieu-fullstack | Structure | 2026-05-20 16:25:17
 
 .
 ├── app/
@@ -45,6 +45,18 @@
 ├── public/
 │   ├── client/
 │   │   └── assets/
+│   │       ├── fonts/
+│   │       │   ├── Archivo_wdth_wght__1.ttf
+│   │       │   ├── Arima_wght__1.ttf
+│   │       │   ├── BeVietnam-Bold_1.ttf
+│   │       │   ├── BeVietnam-ExtraBold_1.ttf
+│   │       │   ├── BeVietnam-Light_1.ttf
+│   │       │   ├── BeVietnam-Medium_1.ttf
+│   │       │   ├── BeVietnam-Regular_1.ttf
+│   │       │   ├── BeVietnam-SemiBold_1.ttf
+│   │       │   ├── BeVietnam-SemiBoldItalic_1.ttf
+│   │       │   ├── BeVietnam-Thin_1.ttf
+│   │       │   └── ... (+7 more)
 │   │       └── static/
 │   │           ├── about/
 │   │           │   ├── about.png
@@ -218,8 +230,8 @@
 │   │   │   ├── 075bf8fad9cb3f4c6d8427db5dd16533.php
 │   │   │   ├── 08bc131c08ba7e077797c4b865094bb7.php
 │   │   │   ├── 098cf7fbcc1ed708c9b9d1d48f93e143.php
-│   │   │   ├── 0c7ea427e47b6a56e186cfed5ef2fd8d.php
-│   │   │   └── ... (+108 more)
+│   │   │   ├── 0c2e04f195331aca957d200b087ee890.php
+│   │   │   └── ... (+112 more)
 │   │   └── .gitignore
 │   └── logs/
 │       └── .gitignore
@@ -233,6 +245,7 @@
 ├── .env.example
 ├── .gitattributes
 ├── .gitignore
+├── .htaccess
 ├── artisan
 ├── composer.json
 ├── composer.lock

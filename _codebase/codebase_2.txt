@@ -1,0 +1,515 @@
+# codebase | 52 files | 2026-05-20 16:25:17
+
+# Part 2/5
+
+p class="font-be-vietnam font-light text-[14px] lg:text-[16px] leading-[23px] text-black mt-6">
+            {{ $description }}
+        </p>
+    </div>
+    <!-- ==========================================
+         ALBUM GALLERY GRID (Max-width 1320px)
+         ========================================== -->
+    <div class="w-full max-w-[1320px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[10px]">
+        <!-- COLUMN 1 (Gồm 2 ảnh) -->
+        <div class="flex flex-col gap-[10px]" data-aos="fade-up" data-aos-delay="100">
+            <!-- Image 1: Tỷ lệ 322x510 -->
+            <div class="w-full aspect-[322/510] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
+                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[0] ?? '')) }}"
+                    alt="Gallery Image 1"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 2: Tỷ lệ 322x451 -->
+            <div class="w-full aspect-[322/451] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
+                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[1] ?? '')) }}"
+                    alt="Gallery Image 2"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+        </div>
+        <!-- COLUMN 2 (Gồm 3 ảnh) -->
+        <div class="flex flex-col gap-[10px]" data-aos="fade-up" data-aos-delay="200">
+            <!-- Image 3: Tỷ lệ 322x218 -->
+            <div class="w-full aspect-[322/218] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
+                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[2] ?? '')) }}"
+                    alt="Gallery Image 3"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 4: Tỷ lệ 322x504 -->
+            <div class="w-full aspect-[322/504] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
+                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[3] ?? '')) }}"
+                    alt="Gallery Image 4"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 5: Tỷ lệ 322x218 -->
+            <div class="w-full aspect-[322/218] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
+                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[4] ?? '')) }}"
+                    alt="Gallery Image 5"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+        </div>
+        <!-- COLUMN 3 (Gồm 2 ảnh) -->
+        <div class="flex flex-col gap-[10px]" data-aos="fade-up" data-aos-delay="300">
+            <!-- Image 6: Tỷ lệ 322x451 -->
+            <div class="w-full aspect-[322/451] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
+                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[5] ?? '')) }}"
+                    alt="Gallery Image 6"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 7: Tỷ lệ 322x452 -->
+            <div class="w-full aspect-[322/452] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
+                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[6] ?? '')) }}"
+                    alt="Gallery Image 7"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+        </div>
+        <!-- COLUMN 4 (Gồm 2 ảnh) -->
+        <div class="flex flex-col gap-[10px]" data-aos="fade-up" data-aos-delay="400">
+            <!-- Image 8: Tỷ lệ 322x598 -->
+            <div class="w-full aspect-[322/598] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
+                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[7] ?? '')) }}"
+                    alt="Gallery Image 8"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 9: Tỷ lệ 322x221 -->
+            <div class="w-full aspect-[322/221] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
+                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[8] ?? '')) }}"
+                    alt="Gallery Image 9"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+// resources/views/client/faces-and-places/partials/hero-section.blade.php
+<section
+    class="relative w-full bg-white overflow-hidden pt-16 lg:pt-[80px] pb-12 lg:pb-[50px] flex flex-col items-center">
+    <!-- ==========================================
+         BACKGROUND LAYER (Chữ chìm SVG)
+         ========================================== -->
+    <!-- Căn giữa tuyệt đối, không cho phép click/bôi đen để tránh ảnh hưởng UX -->
+    <div
+        class="absolute top-[0px] lg:top-[0px] left-1/2 -translate-x-1/2 w-max flex items-center gap-[5px] lg:gap-[15px] z-0 pointer-events-none select-none opacity-80">
+        <!-- Chữ EVENT -->
+        <img src="{{ asset('client/assets/static/faces-and-places/faces-and-places-background-text.svg') }}"
+            alt="E" class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+    </div>
+    <!-- ==========================================
+         FOREGROUND LAYER (Nội dung hiển thị)
+         ========================================== -->
+    <div class="relative z-10 w-full px-4 flex flex-col items-center">
+        <!-- Heading Chính -->
+        <h1
+            class="font-be-vietnam font-extrabold text-[44px] md:text-[60px] lg:text-[75px] text-black uppercase text-center leading-none tracking-tight typing-effect">
+            FACES AND PLACES
+        </h1>
+        <!-- Subtitle -->
+        <!-- mt-[32px] dựa theo tính toán khoảng cách từ bottom của H1 xuống Subtitle -->
+        <p
+            class="font-be-vietnam font-light text-[14px] lg:text-[16px] text-black text-center mt-6 lg:mt-[15px] leading-[22px]" data-aos="fade-up" data-aos-delay="200">
+            Unposed emotions. The true pulse of the event
+        </p>
+        <!-- Vertical Divider (Đường kẻ màu vàng/nâu nhạt) -->
+        <!-- Logic 84.43px tổng gap: line cao 38px, cách trên 22px, cách dưới 24px => 22 + 38 + 24.43 = ~84.43px -->
+        <div class="w-[2px] h-[38px] bg-[#C5AA82] mt-[22px]" data-aos="fade-up" data-aos-delay="300"></div>
+    </div>
+</section>
+
+// resources/views/client/photojournalism/detail.blade.php
+@extends('components.layouts.main-client')
+@section('title', 'Photojournalism detail')
+@section('content')
+    @include('client.photojournalism.partials.detail-hero-slider-section')
+    @include('client.photojournalism.partials.detail-heading-section')
+    @include('client.photojournalism.partials.detail-content-section')
+    @include('components.clients.follow-section')
+@endsection
+
+// resources/views/client/photojournalism/index.blade.php
+@extends('components.layouts.main-client')
+@section('title', 'Photojournalism')
+@section('content')
+    @include('client.photojournalism.partials.hero-section')
+    @include('client.photojournalism.partials.photojournalism-list-card-contain-section')
+    @include('components.clients.follow-section')
+@endsection
+
+// resources/views/client/photojournalism/partials/detail-content-section.blade.php
+{{-- resources/views/client/photojournalism/partials/detail-content-section.blade.php --}}
+@php
+    // Mô phỏng dữ liệu dạng Block Content trả về từ Backend/Database
+    $contentBlocks = [
+        [
+            'type' => 'dropcap_paragraph',
+            'dropcap' => 'E',
+            'text' =>
+                'ven in the middle of a vibrant crowd, I am always looking for the same thing: the raw, genuine moments that define the true character of the event. Even in the middle of a vibrant crowd, I am always looking for the same thing.Increasingly, in the smartphone market, barring a radical change in trend, that’s Android until some will argue that the third quarter was a fluke, another point is that because a million or so die-hard Apple fanatics will buy anything Apple puts out, even if it is a brick.',
+        ],
+        [
+            'type' => 'heading',
+            'text' => 'google will change thE field',
+        ],
+        [
+            'type' => 'paragraph',
+            'text' =>
+                'Because a million or so die-hard Apple fanatics will buy anything Apple puts out, even if it is a brick on the contrary Apple is likely to respond with a calculated price cut for instance Apple’s sales have peaked, until Android’s already working on a rival to Siri’s digital assistant, at the end some will argue that the third quarter was a fluke, due to it seems to me that innovation is beginning to run dry,and the stock price is overinflated especially Apple stores will have to sacrifice some selling space of other gadgets moreover the stock has begun to fall already dropping from its $426 high.',
+        ],
+        [
+            'type' => 'paragraph',
+            'text' =>
+                'But my sell signal stands, and I wanted to offer rational and objective clarity for that call, at last consumers were disappointed that it wasn‘t the iPhone 5 during Apple stores will have to sacrifice some selling space of other gadgets first but my sell signal stands, and I wanted to offer rational and objective clarity for that call, before there’s too much cash snoozing on Apple’s balance sheet, what some will argue that the third quarter was a fluke.',
+        ],
+        [
+            'type' => 'link',
+            'text' => 'Learn more about the project here',
+            'url' => '#',
+        ],
+    ];
+@endphp
+<section class="w-full bg-white px-4 py-12 lg:pt-0 lg:pb-[50px] flex flex-col items-center">
+    <!-- Container giới hạn chuẩn 700px theo thiết kế -->
+    <div class="w-full max-w-[700px] flex flex-col">
+        <!-- Render dữ liệu thông qua vòng lặp -->
+        @foreach ($contentBlocks as $block)
+            @switch($block['type'])
+                @case('dropcap_paragraph')
+                    <div class="w-full relative @if (!$loop->first) mt-[50px] @endif" data-aos="fade-up">
+                        <p class="font-be-vietnam font-light text-[16px] leading-[23px] text-black">
+                            <!-- Chữ cái Dropcap: 78px, weight 400. Dùng float-left để text tự động bao quanh -->
+                            <span
+                                class="float-left font-be-vietnam font-normal text-[78px] leading-[60px] pt-[6px] pr-[10px] text-black">
+                                {{ $block['dropcap'] }}
+                            </span>
+                            {{ $block['text'] }}
+                        </p>
+                    </div>
+                @break
+                @case('heading')
+                    <!-- Khoảng cách margin-top 47px theo design measure -->
+                    <h2
+                        class="font-be-vietnam font-extrabold text-[28px] md:text-[36px] uppercase text-black text-center mt-[47px] break-words typing-effect" data-aos="fade-up">
+                        {{ $block['text'] }}
+                    </h2>
+                @break
+                @case('paragraph')
+                    <!-- Khoảng cách margin-top 50px theo design measure -->
+                    <p class="font-be-vietnam font-light text-[16px] leading-[23px] text-black mt-[50px]" data-aos="fade-up">
+                        {{ $block['text'] }}
+                    </p>
+                @break
+                @case('link')
+                    <!-- Khoảng cách margin-top 50px theo design measure -->
+                    <div class="w-full flex justify-center mt-[50px]" data-aos="fade-up">
+                        <a href="{{ $block['url'] }}"
+                            class="font-be-vietnam font-normal text-[16px] leading-[23px] text-black text-center hover:text-gray-500 transition-colors hover:underline">
+                            {{ $block['text'] }}
+                        </a>
+                    </div>
+                @break
+            @endswitch
+        @endforeach
+    </div>
+</section>
+
+// resources/views/client/photojournalism/partials/detail-heading-section.blade.php
+<section
+    class="relative w-full bg-white overflow-hidden pt-16 lg:pt-[80px] pb-10 lg:pb-[60px] flex flex-col items-center">
+    <!-- ==========================================
+         BACKGROUND LAYER (Chữ chìm SVG)
+         ========================================== -->
+    <!-- Căn giữa tuyệt đối, không cho phép click/bôi đen để tránh ảnh hưởng UX -->
+    <div
+        class="absolute top-[0px] lg:top-[0px] left-1/2 -translate-x-1/2 w-max flex items-center gap-[5px] lg:gap-[15px] z-0 pointer-events-none select-none opacity-80">
+        <!-- Chữ EVENT -->
+        <img src="{{ asset('client/assets/static/photojournalism/photojournalism-hero-background-text.svg') }}"
+            alt="E" class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+    </div>
+    <!-- ==========================================
+         FOREGROUND LAYER (Nội dung hiển thị)
+         ========================================== -->
+    <div class="relative z-10 w-full px-4 flex flex-col items-center">
+        <!-- Heading Chính -->
+        <h1
+            class="font-be-vietnam font-extrabold text-[25px] md:text-[30px] lg:text-[48px] text-black uppercase text-center leading-none tracking-tight typing-effect">
+            Morden trendy & design app
+        </h1>
+        <!-- Subtitle -->
+        <!-- mt-[32px] dựa theo tính toán khoảng cách từ bottom của H1 xuống Subtitle -->
+        <p
+            class="font-be-vietnam font-light text-[14px] lg:text-[16px] text-black text-center mt-6 lg:mt-[15px] leading-[22px]" data-aos="fade-up" data-aos-delay="200">
+            Unposed emotions. The true pulse of the event
+        </p>
+        <!-- Vertical Divider (Đường kẻ màu vàng/nâu nhạt) -->
+        <!-- Logic 84.43px tổng gap: line cao 38px, cách trên 22px, cách dưới 24px => 22 + 38 + 24.43 = ~84.43px -->
+        <div class="w-[2px] h-[38px] bg-[#C5AA82] mt-[22px]" data-aos="fade-up" data-aos-delay="300"></div>
+    </div>
+</section>
+
+// resources/views/client/photojournalism/partials/detail-hero-slider-section.blade.php
+{{-- resources/views/client/photojournalism/partials/detail-hero-slider-section.blade.php --}}
+@push('styles')
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        /* Tùy chỉnh kích thước cố định của slide theo yêu cầu (1096x800) */
+        .photojournalism-detail-swiper .swiper-slide {
+            width: 1096px !important;
+            height: 800px;
+            transition: opacity 0.5s ease;
+        }
+        /* Làm mờ nhẹ các slide không active để tôn slide chính (Tùy chọn thẩm mỹ) */
+        .photojournalism-detail-swiper .swiper-slide:not(.swiper-slide-active) {
+            opacity: 0.5;
+        }
+        .photojournalism-detail-swiper .swiper-slide-active {
+            opacity: 1;
+        }
+        /* Responsive cho Desktop nhỏ, Tablet & Mobile */
+        @media (max-width: 1280px) {
+            .photojournalism-detail-swiper .swiper-slide {
+                width: 85vw !important;
+                height: 60vw;
+                /* Giữ tỷ lệ khung hình tương đối */
+                max-height: 800px;
+            }
+        }
+        @media (max-width: 768px) {
+            .photojournalism-detail-swiper .swiper-slide {
+                width: 90vw !important;
+                height: 65vw;
+            }
+        }
+        @media (max-width: 480px) {
+            .photojournalism-detail-swiper .swiper-slide {
+                width: 92vw !important;
+                height: 250px;
+            }
+        }
+    </style>
+@endpush
+<!-- Padding bottom 37px theo chuẩn thiết kế. Thêm padding top để cách header -->
+<section class="w-full bg-white pb-[37px] overflow-hidden" data-aos="fade-up">
+    <!-- Swiper Container: Full Width -->
+    <div class="swiper photojournalism-detail-swiper w-full">
+        <div class="swiper-wrapper">
+            @php
+                // Có 2 ảnh gốc trong folder, nhân bản ra mảng 4 item để demo slider vuốt mượt mà
+                $sliderImages = [
+                    'detail-slider-swiper-1.png',
+                    'detail-slider-swiper-2.png',
+                    'detail-slider-swiper-1.png',
+                    'detail-slider-swiper-2.png',
+                ];
+            @endphp
+            @foreach ($sliderImages as $index => $image)
+                <!-- Swiper Slide -->
+                <div class="swiper-slide overflow-hidden shadow-sm">
+                    <!-- Ảnh full width và height của thẻ bọc 1096x800, object-cover tránh méo ảnh -->
+                    <img src="{{ asset('client/assets/static/photojournalism/' . $image) }}"
+                        alt="Photojournalism Detail Slide {{ $index + 1 }}" class="w-full h-full object-cover">
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@push('scripts')
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const swiper = new Swiper('.photojournalism-detail-swiper', {
+                // Nhận độ rộng cấu hình trong CSS thay vì chia đều cột
+                slidesPerView: 'auto',
+                // Gap cố định 25px giữa các item
+                spaceBetween: 25,
+                // Main slide vẫn luôn ở giữa màn hình
+                centeredSlides: true,
+                // Bắt đầu ở slider đầu tiên (Index 0)
+                initialSlide: 0,
+                // ĐIỂM QUAN TRỌNG NHẤT LÀ Ở ĐÂY: 
+                // Đổi thành false để Swiper không nhân bản slide cuối lên đặt vào bên trái slide đầu tiên nữa
+                loop: false,
+                grabCursor: true,
+                speed: 600, // Tốc độ chuyển cảnh mượt mà
+                keyboard: {
+                    enabled: true,
+                },
+            });
+        });
+    </script>
+@endpush
+
+// resources/views/client/photojournalism/partials/hero-section.blade.php
+<section
+    class="relative w-full bg-white overflow-hidden pt-16 lg:pt-[80px] pb-12 lg:pb-[80px] flex flex-col items-center">
+    <!-- ==========================================
+         BACKGROUND LAYER (Chữ chìm SVG)
+         ========================================== -->
+    <!-- Căn giữa tuyệt đối, không cho phép click/bôi đen để tránh ảnh hưởng UX -->
+    <div
+        class="absolute top-[0px] lg:top-[0px] left-1/2 -translate-x-1/2 w-max flex items-center gap-[5px] lg:gap-[15px] z-0 pointer-events-none select-none opacity-80">
+        <!-- Chữ EVENT -->
+        <img src="{{ asset('client/assets/static/photojournalism/photojournalism-hero-background-text.svg') }}" alt="E"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+    </div>
+    <!-- ==========================================
+         FOREGROUND LAYER (Nội dung hiển thị)
+         ========================================== -->
+    <div class="relative z-10 w-full px-4 flex flex-col items-center">
+        <!-- Heading Chính -->
+        <h1
+            class="font-be-vietnam font-extrabold text-[44px] md:text-[60px] lg:text-[75px] text-black uppercase text-center leading-none tracking-tight typing-effect">
+            PHOTOJOURNALISM
+        </h1>
+        <!-- Subtitle -->
+        <!-- mt-[32px] dựa theo tính toán khoảng cách từ bottom của H1 xuống Subtitle -->
+        <p
+            class="font-be-vietnam font-light text-[14px] lg:text-[16px] text-black text-center mt-6 lg:mt-[15px] leading-[22px]" data-aos="fade-up" data-aos-delay="200">
+            Unposed emotions. The true pulse of the event
+        </p>
+        <!-- Vertical Divider (Đường kẻ màu vàng/nâu nhạt) -->
+        <!-- Logic 84.43px tổng gap: line cao 38px, cách trên 22px, cách dưới 24px => 22 + 38 + 24.43 = ~84.43px -->
+        <div class="w-[2px] h-[38px] bg-[#C5AA82] mt-[22px]" data-aos="fade-up" data-aos-delay="300"></div>
+    </div>
+</section>
+
+// resources/views/client/photojournalism/partials/photojournalism-card.blade.php
+@props([
+    'bgColor' => 'transparent', // Nhận mã màu, ví dụ: '#FAFAFA' hoặc 'transparent'
+    'isSwapped' => false, // true: Logo bên trái, Ảnh & Text bên phải
+    'image' => asset('client/assets/static/photojournalism/photo-image-card-1.png'),
+    'logo' => asset('client/assets/static/photojournalism/photo-logo-card-1.svg'),
+    'category' => 'Uncategorized',
+    'title' => 'Mordern & Trendy App Designs',
+    'description' =>
+        'Even in the middle of a vibrant crowd, I am always looking for the same thing: the raw, genuine moments that define the true character of the event. Even in the middle of a vibrant crowd, I am always looking for the same thing: the raw, genuine moments that define the true character.',
+    'date' => 'August 6, 2020',
+])
+<!-- Card Container -->
+<div class="w-full flex justify-center py-10 lg:py-[48px]" style="background-color: {{ $bgColor }}" data-aos="fade-up">
+    <!--
+      Max-width: 1320px dựa trên tổng width thiết kế (Left: 88, Image: 714, Gap: 116, Logo: 290, Right: 112)
+      Nếu isSwapped = true -> Đảo ngược vị trí trên Desktop bằng flex-row-reverse
+    -->
+    <div
+        class="w-full max-w-[1320px] mx-auto px-4 lg:pl-[88px] lg:pr-[112px] flex flex-col {{ $isSwapped ? 'lg:flex-row-reverse' : 'lg:flex-row' }} items-center lg:items-start justify-between gap-12 lg:gap-[116px]">
+        <!-- ==========================================
+             COLUMN 1: IMAGE & TEXT (Max width 714px)
+             ========================================== -->
+        <div class="flex flex-col w-full lg:max-w-[714px] flex-shrink-0">
+            <!-- Main Image (714x714 trên Desktop) -->
+            <div class="w-full aspect-square overflow-hidden shadow-sm group bg-gray-100" data-aos="zoom-out" data-aos-duration="1000">
+                <img src="{{ $image }}" alt="{{ $title }}"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+            </div>
+            <!-- Text Content -->
+            <div class="flex flex-col w-full mt-6 lg:mt-[28px]" data-aos="fade-up" data-aos-delay="150">
+                <!-- Category (14px, weight 300, line-height 22px) -->
+                <span class="font-be-vietnam font-light text-[14px] leading-[22px] text-black">
+                    {{ $category }}
+                </span>
+                <!-- Title (18px, weight 600, line-height 22px, cách top 6px) -->
+                <h3 class="font-be-vietnam font-semibold text-[18px] leading-[22px] text-black mt-1 lg:mt-[6px]">
+                    {{ $title }}
+                </h3>
+                <!-- Divider Line (Cách top 22px, lấy line màu nâu nhạt chung của website) -->
+                <div class="w-[40px] h-[2px] bg-[#C5AA82] mt-4 lg:mt-[22px]"></div>
+                <!-- Description (14px, weight 300, max-width 642px, cách line 18px) -->
+                <p
+                    class="font-be-vietnam font-light text-[14px] leading-[22px] text-black w-full lg:max-w-[642px] mt-4 lg:mt-[18px]">
+                    {{ $description }}
+                </p>
+                <!-- Date (14px, weight 300, cách top 18px) -->
+                <span class="font-be-vietnam font-light text-[14px] leading-[22px] text-black mt-4 lg:mt-[18px]">
+                    {{ $date }}
+                </span>
+            </div>
+        </div>
+        <!-- ==========================================
+             COLUMN 2: LOGO (Width 290px)
+             ========================================== -->
+        <!-- Logic padding top theo thiết kế: Ảnh (top 48px), Logo (top 298px) => Khoảng cách bù trừ là 250px -->
+        <div class="w-[200px] lg:w-[290px] flex-shrink-0 flex justify-center lg:mt-[250px]" data-aos="fade-up" data-aos-delay="250">
+            <img src="{{ $logo }}" alt="Photojournalism Logo"
+                class="w-full aspect-square object-contain transition-transform duration-500 hover:rotate-6"
+                loading="lazy">
+        </div>
+    </div>
+</div>
+
+// resources/views/client/photojournalism/partials/photojournalism-list-card-contain-section.blade.php
+<section class="photojournalism-list-card-contain-section w-full max-w-[1320px] mx-auto pb-20">
+    <!-- Sử dụng flex-col và gap để tạo khoảng cách chính xác giữa các card -->
+    <div class="w-full flex flex-col gap-[25px]">
+        @for ($i = 0; $i < 4; $i++)
+            @php
+                // 1. Logic Background: Card đầu tiên (index = 0) có màu xám, các card sau trong suốt
+                $bgColor = $i === 0 ? 'rgba(250, 250, 250, 1)' : 'transparent';
+                // 2. Logic Swap: Đảo tuần tự (index 0: Không swap, index 1: Swap, index 2: Không swap,...)
+                $isSwapped = $i % 2 !== 0;
+                // 3. Logic Hình ảnh: Luân phiên dùng ảnh 1 và 2 (Vì trong folder của bạn chỉ có 2 file)
+                $assetIndex = ($i % 2) + 1;
+            @endphp
+            <!-- Gọi Component và truyền biến vào -->
+            @include('client.photojournalism.partials.photojournalism-card', [
+                'bgColor' => $bgColor,
+                'isSwapped' => $isSwapped,
+                'image' => asset("client/assets/static/photojournalism/photo-image-card-{$assetIndex}.png"),
+                'logo' => asset("client/assets/static/photojournalism/photo-logo-card-{$assetIndex}.svg"),
+                // Dummy data text để test
+                'title' => 'Mordern & Trendy App Designs ' . ($i + 1),
+                'category' => 'Uncategorized',
+                'date' => 'August 6, 2020',
+                'description' =>
+                    'Even in the middle of a vibrant crowd, I am always looking for the same thing: the raw, genuine moments that define the true character of the event. Even in the middle of a vibrant crowd, I am always looking for the same thing: the raw, genuine moments that define the true character.',
+            ])
+        @endfor
+    </div>
+    <!-- ==========================================
+         2. PAGINATION (Căn giữa bằng Flexbox)
+         ========================================== -->
+    <!-- Margin top 64px (mt-16) cách List Card -->
+    <div class="w-full flex justify-center mt-12 lg:mt-16 px-4" data-aos="fade-up">
+        @include('components.clients.pagination')
+    </div>
+</section>
+
+// resources/views/client/videography/detail.blade.php
+@extends('components.layouts.main-client')
+@section('title', 'Videography  detail')
+@s

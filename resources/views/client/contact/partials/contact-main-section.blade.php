@@ -1,7 +1,7 @@
-<section class="w-full bg-[#FAFAFA] flex items-center justify-center overflow-hidden py-12 lg:py-0 lg:h-[765px] lg:mb-[50px]">
+<section class="w-full bg-[#FAFAFA] flex items-center justify-center overflow-hidden py-12 lg:py-0 lg:mb-[50px]">
     <!-- Container chính: max-width 1600px, padding hai bên 128px theo đúng thiết kế -->
     <div
-        class="w-full max-w-[1600px] h-full mx-auto px-6 sm:px-12 lg:px-[128px] flex flex-col lg:flex-row lg:gap-[74px] items-start">
+        class="w-full max-w-[1600px] h-full mx-auto px-6 sm:px-12 lg:px-[128px] pb-[70px] flex flex-col lg:flex-row lg:gap-[74px] items-start">
 
         <!-- ==========================================
              CỘT TRÁI: CONTACT TITLE & MAIN IMAGE
@@ -18,7 +18,8 @@
             <!-- Main Image -->
             <!-- Image top là 205px. Title top là 96px + line-height 22px = 118px. Khoảng cách = 205 - 118 = 87px -->
             <!-- Kích thước chuẩn: 613x460 -->
-            <div class="w-full h-auto lg:h-[460px] mt-8 lg:mt-[87px] overflow-hidden bg-gray-100 shadow-sm" data-aos="zoom-out" data-aos-duration="1000">
+            <div class="w-full h-auto lg:h-[460px] mt-8 lg:mt-[87px] overflow-hidden bg-gray-100 shadow-sm"
+                data-aos="zoom-out" data-aos-duration="1000">
                 <img src="{{ asset('client/assets/static/contact/contact-main-image.png') }}"
                     alt="La Hieu Photography Contact Journey" class="w-full h-full object-cover" loading="lazy">
             </div>
@@ -33,7 +34,7 @@
             <!-- Description -->
             <!-- Size 32px, Light 300 -->
             <p
-                class="font-be-vietnam font-light text-[24px] sm:text-[28px] lg:text-[32px] text-black leading-snug sm:leading-normal typing-effect">
+                class="font-be-vietnam font-light text-[24px] sm:text-[28px] lg:text-[32px] text-black leading-snug sm:leading-normal typing-effect mt-[50px]">
                 I'm always ready for the next journey<br />
                 Let’s talk about yours
             </p>

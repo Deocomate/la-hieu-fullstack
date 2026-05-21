@@ -1,0 +1,619 @@
+# codebase | 52 files | 2026-05-20 16:25:17
+
+# Part 1/5
+
+// composer.json
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The skeleton application for the Laravel framework.",
+    "keywords": ["laravel", "framework"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^12.0",
+        "laravel/tinker": "^2.10.1"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "laravel/pail": "^1.2.2",
+        "laravel/pint": "^1.24",
+        "laravel/sail": "^1.41",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "phpunit/phpunit": "^11.5.50"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan migrate --force"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "php artisan serve"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi",
+            "@php artisan test"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
+
+// README.md
+
+
+// bootstrap/app.php
+<?php
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__.'/../routes/web.php',
+        commands: __DIR__.'/../routes/console.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware): void {
+        //
+    })
+    ->withExceptions(function (Exceptions $exceptions): void {
+        //
+    })->create();
+
+// bootstrap/providers.php
+<?php
+use App\Providers\AppServiceProvider;
+return [
+    AppServiceProvider::class,
+];
+
+// app/Http/Controllers/Controller.php
+<?php
+namespace App\Http\Controllers;
+abstract class Controller
+{
+    //
+}
+
+// app/Models/User.php
+<?php
+namespace App\Models;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+class User extends Authenticatable
+{
+    /** @use HasFactory<UserFactory> */
+    use HasFactory, Notifiable;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+}
+
+// app/Providers/AppServiceProvider.php
+<?php
+namespace App\Providers;
+use Illuminate\Support\ServiceProvider;
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
+    }
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        //
+    }
+}
+
+// routes/web.php
+<?php
+use Illuminate\Support\Facades\Route;
+/*
+|--------------------------------------------------------------------------
+| CUSTOM ROUTES (Độ ưu tiên cao nhất)
+|--------------------------------------------------------------------------
+| Setup các đường dẫn cụ thể theo ý muốn của bạn ở đây.
+*/
+// Trang chủ mặc định
+Route::get('/', function () {
+    return view('client.home.index');
+});
+// Ví dụ: Force /admin/users trỏ thẳng vào file edit.blade.php theo yêu cầu của bạn
+Route::get('/admin/users', function () {
+    return view('admin.users.edit');
+});
+/*
+|--------------------------------------------------------------------------
+| DYNAMIC FRONTEND ROUTES (Catch-all)
+|--------------------------------------------------------------------------
+| Tự động tìm kiếm file blade dựa theo URL.
+| Thích hợp cho giai đoạn phát triển Frontend/Cắt giao diện.
+*/
+Route::get('/{any}', function ($any) {
+    // Chuyển URL (dấu /) thành chuẩn cấu trúc thư mục view của Laravel (dấu .)
+    // VD: admin/dashboard -> admin.dashboard
+    $viewPath = str_replace('/', '.', $any);
+    // Danh sách các trường hợp view có thể xảy ra (Sắp xếp theo thứ tự ưu tiên)
+    $possibleViews = [
+        $viewPath,                         // 1. Trùng khớp hoàn toàn (VD: admin.users.edit)
+        $viewPath . '.index',              // 2. Tự thêm thư mục index (VD: admin.dashboard -> admin.dashboard.index)
+        'client.' . $viewPath,             // 3. Tự động tìm trong thư mục client (VD: home -> client.home)
+        'client.' . $viewPath . '.index'   // 4. Tự động tìm thư mục index trong client (VD: home -> client.home.index)
+    ];
+    // Duyệt qua danh sách, file blade nào tồn tại đầu tiên thì render ngay lập tức
+    foreach ($possibleViews as $view) {
+        if (view()->exists($view)) {
+            return view($view);
+        }
+    }
+    // Nếu đã quét hết mà không thấy file blade nào, trả về lỗi 404
+    abort(404, "Không tìm thấy file blade cho đường dẫn: /{$any}");
+})->where('any', '.*'); // Regex '.*' cho phép nhận mọi đường dẫn (kể cả có nhiều dấu /)
+
+// resources/views/client/contact/index.blade.php
+@extends('components.layouts.main-client')
+@section('title', 'Contact')
+@section('content')
+    @include('client.contact.partials.contact-main-section')
+    @include('components.clients.follow-section')
+@endsection
+
+// resources/views/client/contact/partials/contact-main-section.blade.php
+<section class="w-full bg-[#FAFAFA] flex items-center justify-center overflow-hidden py-12 lg:py-0 lg:mb-[50px]">
+    <!-- Container chính: max-width 1600px, padding hai bên 128px theo đúng thiết kế -->
+    <div
+        class="w-full max-w-[1600px] h-full mx-auto px-6 sm:px-12 lg:px-[128px] pb-[70px] flex flex-col lg:flex-row lg:gap-[74px] items-start">
+        <!-- ==========================================
+             CỘT TRÁI: CONTACT TITLE & MAIN IMAGE
+             ========================================== -->
+        <!-- Image width 613px theo thiết kế -->
+        <div class="w-full lg:w-[613px] flex-shrink-0 flex flex-col pt-0 lg:pt-[96px]">
+            <!-- Contact Title -->
+            <!-- Size 75px, Bold 700, Line-height 22px -->
+            <h1
+                class="font-be-vietnam font-bold text-[44px] sm:text-[60px] lg:text-[75px] text-black uppercase leading-none typing-effect">
+                contact
+            </h1>
+            <!-- Main Image -->
+            <!-- Image top là 205px. Title top là 96px + line-height 22px = 118px. Khoảng cách = 205 - 118 = 87px -->
+            <!-- Kích thước chuẩn: 613x460 -->
+            <div class="w-full h-auto lg:h-[460px] mt-8 lg:mt-[87px] overflow-hidden bg-gray-100 shadow-sm"
+                data-aos="zoom-out" data-aos-duration="1000">
+                <img src="{{ asset('client/assets/static/contact/contact-main-image.png') }}"
+                    alt="La Hieu Photography Contact Journey" class="w-full h-full object-cover" loading="lazy">
+            </div>
+        </div>
+        <!-- ==========================================
+             CỘT PHẢI: DESCRIPTION & INFO FIELDS
+             ========================================== -->
+        <!-- Right col width 645px. Bắt đầu từ toạ độ top 251px -->
+        <div class="w-full lg:w-[645px] flex-shrink-0 flex flex-col mt-10 lg:mt-0 pt-0 lg:pt-[251px]">
+            <!-- Description -->
+            <!-- Size 32px, Light 300 -->
+            <p
+                class="font-be-vietnam font-light text-[24px] sm:text-[28px] lg:text-[32px] text-black leading-snug sm:leading-normal typing-effect mt-[50px]">
+                I'm always ready for the next journey<br />
+                Let’s talk about yours
+            </p>
+            <!-- Đường kẻ ngang (Cách trên 50px, cách dưới 50px) -->
+            <div class="w-full h-[1px] bg-black/10 mt-8 mb-8 lg:mt-[50px] lg:mb-[50px]" data-aos="fade"></div>
+            <!-- ==========================================
+                 KHỐI THÔNG TIN (PHONE, EMAIL, SOCIAL)
+                 ========================================== -->
+            <div class="w-full flex flex-col sm:flex-row items-start relative" data-aos="fade-up" data-aos-delay="200">
+                <!-- NHÓM BÊN TRÁI: Phone & Email -->
+                <!-- Toạ độ cột trái là 815, cột phải là 1220 => Khoảng cách ngang bằng đúng 405px -->
+                <div class="w-full sm:w-[250px] lg:w-[405px] flex-shrink-0 flex flex-col gap-8 lg:gap-[50px]">
+                    <!-- Phone Number -->
+                    <div class="flex flex-col gap-2 lg:gap-[10px]">
+                        <h4
+                            class="font-be-vietnam font-semibold text-[18px] lg:text-[20px] text-black uppercase tracking-wide">
+                            Phone number
+                        </h4>
+                        <a href="tel:0902222876"
+                            class="font-be-vietnam font-light text-[15px] lg:text-[16px] text-black hover:opacity-70 transition-opacity w-max">
+                            090 2222 876
+                        </a>
+                    </div>
+                    <!-- Email -->
+                    <div class="flex flex-col gap-2 lg:gap-[10px]">
+                        <h4
+                            class="font-be-vietnam font-semibold text-[18px] lg:text-[20px] text-black uppercase tracking-wide">
+                            email
+                        </h4>
+                        <a href="mailto:pvduchieu@gmail.com"
+                            class="font-be-vietnam font-light text-[15px] lg:text-[16px] text-black hover:opacity-70 transition-opacity break-all w-max">
+                            pvduchieu@gmail.com
+                        </a>
+                    </div>
+                </div>
+                <!-- NHÓM BÊN PHẢI: Social Media & Logo -->
+                <div class="w-full mt-8 sm:mt-0 flex flex-col items-start">
+                    <!-- Social Media -->
+                    <div class="flex flex-col gap-2 lg:gap-[10px]">
+                        <h4
+                            class="font-be-vietnam font-semibold text-[18px] lg:text-[20px] text-black uppercase tracking-wide">
+                            social media
+                        </h4>
+                        <!-- Không có thẻ <a> trong yêu cầu nhưng bổ sung UX nếu cần. Nếu giữ nguyên string thì dùng thẻ span -->
+                        <span
+                            class="font-be-vietnam font-light text-[15px] lg:text-[16px] text-black cursor-pointer hover:opacity-70 transition-opacity">
+                            lahieuphotography
+                        </span>
+                    </div>
+                    <!-- Signature Logo -->
+                    <!-- Top của logo là 596px, Top của Email value cũng là 596px => mt-[105px] đảm bảo căn ngang tuyệt đối với dòng Email -->
+                    <!-- Size logo theo config là 184x92 -->
+                    <div class="mt-8 lg:mt-[105px]">
+                        <img src="{{ asset('client/assets/static/contact/logo.svg') }}" alt="La Hieu Signature"
+                            class="w-[120px] lg:w-[184px] h-auto lg:h-[92px] object-contain" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+// resources/views/client/faces-and-places/detail.blade.php
+@extends('components.layouts.main-client')
+@section('title', 'Faces And Places Detail')
+@section('content')
+    @include('client.faces-and-places.partials.detail-hero-section')
+    @include('client.faces-and-places.partials.detail-gallery-grid-section')
+@endsection
+
+// resources/views/client/faces-and-places/index.blade.php
+@extends('components.layouts.main-client')
+@section('title', 'Faces & Places')
+@section('content')
+    @include('client.faces-and-places.partials.hero-section')
+    @include('client.faces-and-places.partials.fap-gallery-contain-section')
+    @include('components.clients.follow-section')
+@endsection
+
+// resources/views/client/faces-and-places/partials/detail-gallery-grid-section.blade.php
+<section class="w-full bg-white px-4 md:px-[25px] py-10 md:py-[50px]">
+    <!-- Gallery Container -->
+    <div class="w-full flex flex-col gap-[15px]">
+        <!-- ==========================================
+             ROW 1: (Wide - Narrow - Wide - Narrow)
+             Chiều cao Desktop fix chuẩn 340px
+             ========================================== -->
+        <div class="flex flex-col sm:flex-row flex-wrap lg:flex-nowrap gap-[15px] w-full lg:h-[340px]" data-aos="fade-up">
+            <!-- Image 1 (Width ~500) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:500] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-1.png') }}" alt="Gallery Image 1"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 2 (Width ~242) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:242] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-2.png') }}" alt="Gallery Image 2"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 3 (Width ~497) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:497] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-3.png') }}" alt="Gallery Image 3"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 4 (Width ~242) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:242] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-4.png') }}" alt="Gallery Image 4"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+        </div>
+        <!-- ==========================================
+             ROW 2: (Narrow - Wide - Narrowest - Wide)
+             Chiều cao Desktop fix chuẩn 340px
+             ========================================== -->
+        <div class="flex flex-col sm:flex-row flex-wrap lg:flex-nowrap gap-[15px] w-full lg:h-[340px]" data-aos="fade-up" data-aos-delay="150">
+            <!-- Image 5 (Width ~218) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:218] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-5.png') }}" alt="Gallery Image 5"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 6 (Width ~502) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:502] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-6.png') }}" alt="Gallery Image 6"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 7 (Width ~183) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:183] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-7.png') }}" alt="Gallery Image 7"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 8 (Width ~497) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:497] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-8.png') }}" alt="Gallery Image 8"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+// resources/views/client/faces-and-places/partials/detail-hero-section.blade.php
+<section
+    class="relative w-full bg-white overflow-hidden pt-16 lg:pt-[80px] pb-12 lg:pb-[80px] flex flex-col items-center">
+    <!-- ==========================================
+         BACKGROUND LAYER (Chữ chìm SVG)
+         ========================================== -->
+    <!-- Căn giữa tuyệt đối, không cho phép click/bôi đen để tránh ảnh hưởng UX -->
+    <div
+        class="absolute top-[0px] lg:top-[0px] left-1/2 -translate-x-1/2 w-max flex items-center gap-[5px] lg:gap-[15px] z-0 pointer-events-none select-none opacity-80">
+        <!-- Chữ EVENT -->
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-e-1.svg') }}" alt="E"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-v.svg') }}" alt="V"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-e-2.svg') }}" alt="E"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-n.svg') }}" alt="N"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-t-1.svg') }}" alt="T"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <!-- Khoảng trắng giữa 2 chữ -->
+        <div class="w-[20px] lg:w-[40px]"></div>
+        <!-- Chữ PHOTOS -->
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-p.svg') }}" alt="P"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-h.svg') }}" alt="H"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-o.svg') }}" alt="O"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-t-2.svg') }}" alt="T"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-o.svg') }}" alt="O"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-s.svg') }}" alt="S"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+    </div>
+    <!-- ==========================================
+         FOREGROUND LAYER (Nội dung hiển thị)
+         ========================================== -->
+    <!-- mt-[50px] lg:mt-[100px] để đẩy nội dung chữ nổi xuống giữa khung background SVG cho cân đối (có thể tùy chỉnh lại theo mắt nhìn) -->
+    <div class="relative z-10 w-full px-4 flex flex-col items-center">
+        <!-- Heading Chính: 48px, Bold(700), Line-height 22px -->
+        <h1
+            class="font-be-vietnam font-bold text-[32px] md:text-[40px] lg:text-[48px] text-black uppercase text-center break-words typing-effect">
+            FACES AND PLACES
+        </h1>
+        <!-- Subtitle: 16px, Light(300), Line-height 22px -->
+        <p
+            class="font-be-vietnam font-light text-[14px] lg:text-[16px] text-black text-center leading-[22px] break-words" data-aos="fade-up" data-aos-delay="200">
+            16th June 2019
+        </p>
+    </div>
+</section>
+
+// resources/views/client/faces-and-places/partials/fap-gallery-contain-section.blade.php
+{{-- resources/views/client/faces-and-places/partials/fap-gallery-contain-section.blade.php --}}
+@php
+    $galleryAlbums = [
+        [
+            'title' => 'FLYCAM',
+            'viewAlbumUrl' => '#',
+            'description' =>
+                'Because a million or so die-hard Apple fanatics will buy anything Apple puts out, even if it is a brick on the contrary Apple is likely to respond with a calculated price cut for instance Apple’s sales have peaked, until Android’s already working on a rival to Siri’s digital assistant',
+            'images' => [
+                'faces-and-places-1.png',
+                'faces-and-places-2.png',
+                'faces-and-places-3.png',
+                'faces-and-places-4.png',
+                'faces-and-places-5.png',
+                'faces-and-places-6.png',
+                'faces-and-places-7.png',
+                'faces-and-places-8.png',
+                'faces-and-places-9.png',
+            ],
+        ],
+        [
+            'title' => 'NATURE & LANDSCAPE',
+            'viewAlbumUrl' => '#',
+            'description' =>
+                'Because a million or so die-hard Apple fanatics will buy anything Apple puts out, even if it is a brick on the contrary Apple is likely to respond with a calculated price cut for instance Apple’s sales have peaked, until Android’s already working on a rival to Siri’s digital assistant',
+            'images' => [
+                'faces-and-places-10.png',
+                'faces-and-places-11.png',
+                'faces-and-places-12.png',
+                'faces-and-places-13.png',
+                'faces-and-places-14.png',
+                'faces-and-places-15.png',
+                'faces-and-places-16.png',
+                'faces-and-places-17.png',
+                'faces-and-places-18.png',
+            ],
+        ],
+        [
+            'title' => 'FACES',
+            'viewAlbumUrl' => '#',
+            'description' =>
+                'Because a million or so die-hard Apple fanatics will buy anything Apple puts out, even if it is a brick on the contrary Apple is likely to respond with a calculated price cut for instance Apple’s sales have peaked, until Android’s already working on a rival to Siri’s digital assistant',
+            'images' => [
+                'faces-and-places-19.png',
+                'faces-and-places-1.png',
+                'faces-and-places-3.png',
+                'faces-and-places-5.png',
+                'faces-and-places-7.png',
+                'faces-and-places-9.png',
+                'faces-and-places-11.png',
+                'faces-and-places-13.png',
+                'faces-and-places-15.png',
+            ],
+        ],
+        [
+            'title' => 'ANIMALS',
+            'viewAlbumUrl' => '#',
+            'description' =>
+                'Because a million or so die-hard Apple fanatics will buy anything Apple puts out, even if it is a brick on the contrary Apple is likely to respond with a calculated price cut for instance Apple’s sales have peaked, until Android’s already working on a rival to Siri’s digital assistant',
+            'images' => [
+                'faces-and-places-2.png',
+                'faces-and-places-4.png',
+                'faces-and-places-6.png',
+                'faces-and-places-8.png',
+                'faces-and-places-10.png',
+                'faces-and-places-12.png',
+                'faces-and-places-14.png',
+                'faces-and-places-16.png',
+                'faces-and-places-18.png',
+            ],
+        ],
+    ];
+@endphp
+<section class="w-full bg-white px-4 pb-16 lg:pb-[100px] flex flex-col items-center">
+    <!-- Vòng lặp kết xuất từng album con thông qua component fap-gallery-item -->
+    <div class="w-full flex flex-col gap-12 lg:gap-[80px]">
+        @foreach ($galleryAlbums as $album)
+            @include('client.faces-and-places.partials.fap-gallery-item', [
+                'title' => $album['title'],
+                'viewAlbumUrl' => $album['viewAlbumUrl'],
+                'description' => $album['description'],
+                'images' => $album['images'],
+            ])
+        @endforeach
+    </div>
+</section>
+
+// resources/views/client/faces-and-places/partials/fap-gallery-item.blade.php
+{{-- resources/views/client/faces-and-places/partials/fap-gallery-item.blade.php --}}
+<div class="w-full flex flex-col items-center pb-12 lg:pb-[60px]">
+    <!-- ==========================================
+         ALBUM HEADER INFO
+         ========================================== -->
+    <div class="w-full max-w-[725px] flex flex-col items-center text-center mb-8 lg:mb-[50px]" data-aos="fade-up">
+        <!-- Title (36px, Be Vietnam, Bold) -->
+        <h2
+            class="font-be-vietnam font-extrabold text-[28px] lg:text-[36px] text-black uppercase tracking-[2.4px] leading-tight typing-effect">
+            {{ $title }}
+        </h2>
+        <!-- View Album Link (12px, Be Vietnam, Light, Underline) -->
+        <a href="{{ $viewAlbumUrl ?? '#' }}"
+            class="font-be-vietnam font-light text-[12px] text-black underline mt-2 hover:text-gray-500 transition-colors leading-[22px]">
+            View album
+        </a>
+        <!-- Description (16px, Be Vietnam, Light, Line-height 23px) -->
+        <

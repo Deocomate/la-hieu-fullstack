@@ -1,0 +1,530 @@
+# codebase | 52 files | 2026-05-20 16:25:17
+
+# Part 4/5
+
+
+            }
+        }
+        @media (max-width: 640px) {
+            .videography-swiper .swiper-slide {
+                width: 85% !important;
+            }
+        }
+        /* -------------------------------------
+                   LOGIC MÀU OVERLAY ĐÚNG CHUẨN DESIGN
+                   ------------------------------------- */
+        /* 1. Mặc định (Các slide phụ cấp 2 - xa nhất): Đen 60% */
+        .video-slide-overlay {
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.60) 100%);
+            opacity: 1;
+            transition: opacity 0.5s ease, background 0.5s ease;
+        }
+        /* 2. Slide phụ cấp 1 (Kề bên slide chính): Đen 40% */
+        .swiper-slide-prev .video-slide-overlay,
+        .swiper-slide-next .video-slide-overlay {
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%);
+        }
+        /* 3. Slide chính (Active giữa): Sáng hoàn toàn */
+        .swiper-slide-active .video-slide-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+        /* Hiệu ứng Nút Watch Now: Chỉ hiện ở slide Active */
+        .watch-now-btn {
+            opacity: 0;
+            visibility: hidden;
+            transform: translate(-50%, 20px);
+            transition: all 0.5s ease;
+        }
+        .swiper-slide-active .watch-now-btn {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, 0);
+        }
+    </style>
+@endpush
+<section class="w-full bg-black py-16 lg:pt-[56px] lg:pb-[100px] flex flex-col items-center">
+    <!-- Section Title -->
+    <h2
+        class="font-be-vietnam font-extrabold text-3xl lg:text-heading uppercase tracking-heading text-white text-center relative z-20 typing-effect">
+        Videography
+    </h2>
+    <!-- Swiper Container - Đã thiết lập max-w-1145px và cắt bỏ tràn -->
+    <div class="w-full max-w-[1145px] mt-8 lg:mt-[84px] mx-auto px-4 xl:px-0" data-aos="fade-up" data-aos-delay="200">
+        <!-- Bỏ class overflow-visible để slider tuân thủ giới hạn 1145px -->
+        <div class="swiper videography-swiper w-full rounded-lg">
+            <div class="swiper-wrapper">
+                @php
+                    $videos = [
+                        'videography-1.png',
+                        'videography-2.png',
+                        'videography-3.png',
+                        'videography-4.png',
+                        'videography-5.png',
+                    ];
+                @endphp
+                @foreach ($videos as $index => $video)
+                    <div class="swiper-slide relative overflow-hidden group shadow-2xl">
+                        <img src="{{ asset('client/assets/static/home/' . $video) }}"
+                            alt="Videography {{ $index + 1 }}" class="w-full h-full object-cover">
+                        <div class="video-slide-overlay absolute inset-0 z-10 pointer-events-none"></div>
+                        <div class="watch-now-btn absolute bottom-4 lg:bottom-[38px] left-1/2 z-40">
+                            <button
+                                class="w-[180px] lg:w-[231px] h-[36px] lg:h-[40px] bg-[#FFE0A4] flex items-center justify-center gap-3 hover:bg-[#ffcf70] transition-colors cursor-pointer">
+                                <span
+                                    class="font-be-vietnam font-extrabold text-base lg:text-[20px] uppercase tracking-[2px] text-black">
+                                    Watch Now
+                                </span>
+                                <img src="{{ asset('client/assets/static/home/videography-button.svg') }}"
+                                    alt="Play" class="w-[10px] lg:w-[13px] h-[14px] lg:h-[18px] object-contain">
+                            </button>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <!-- Section Description -->
+    <p
+        class="font-be-vietnam font-light text-base lg:text-desc tracking-desc text-white text-center max-w-[750px] mt-12 lg:mt-[65px] px-4" data-aos="fade-up" data-aos-delay="300">
+        Creating a moving video is about capturing moments that resonate deeply.<br class="hidden lg:inline" />
+        It highlights the beauty of real life, showing how genuine connections<br class="hidden lg:inline" />
+        and raw imperfections make a story truly perfect.
+    </p>
+</section>
+@push('scripts')
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const swiper = new Swiper('.videography-swiper', {
+                // Chuyển sang hiệu ứng Creative để tuỳ biến toạ độ chính xác 100%
+                effect: 'creative',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                loop: true,
+                initialSlide: 2,
+                // Toán học cho việc Lộ 100px:
+                // Slide 702px. Nếu ta dời (translate) slide phụ sang ngang 160px và thu nhỏ (scale) nó đi 0.85 lần
+                // Nó sẽ thụt vào gầm slide chính, và phần viền thò ra sẽ rơi vào đúng khoàng 100-110px.
+                creativeEffect: {
+                    limitProgress: 2, // Tính toán logic cho tối đa 2 slide hai bên (tổng cộng 5 slide hiển thị)
+                    prev: {
+                        translate: ['-160px', 0, -100], // Dời trái 160px, đẩy ra đằng sau (-100)
+                        scale: 0.85, // Thu nhỏ bằng đúng tỷ lệ ảnh 600/702 trong Figma
+                    },
+                    next: {
+                        translate: ['160px', 0, -100], // Dời phải 160px, đẩy ra đằng sau (-100)
+                        scale: 0.85,
+                    },
+                },
+                // Responsive Breakpoints: Phóng nhỏ khoảng cách đẩy đi ở trên màn hình nhỏ
+                breakpoints: {
+                    320: {
+                        creativeEffect: {
+                            limitProgress: 2,
+                            prev: {
+                                translate: ['-60%', 0, -100],
+                                scale: 0.85
+                            },
+                            next: {
+                                translate: ['60%', 0, -100],
+                                scale: 0.85
+                            },
+                        }
+                    },
+                    768: {
+                        creativeEffect: {
+                            limitProgress: 2,
+                            prev: {
+                                translate: ['-45%', 0, -100],
+                                scale: 0.85
+                            },
+                            next: {
+                                translate: ['45%', 0, -100],
+                                scale: 0.85
+                            },
+                        }
+                    },
+                    1024: {
+                        creativeEffect: {
+                            limitProgress: 2,
+                            // Desktop: Chốt cứng tham số pixel
+                            prev: {
+                                translate: ['-160px', 0, -100],
+                                scale: 0.85
+                            },
+                            next: {
+                                translate: ['160px', 0, -100],
+                                scale: 0.85
+                            },
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+@endpush
+
+// resources/views/client/home/index.blade.php
+@extends('components.layouts.main-client')
+@section('title', 'Home')
+@section('content')
+    @include('client.home.partials.hero-section')
+    @include('client.home.partials.event-photography-section')
+    @include('client.home.partials.photojournalism-section')
+    @include('client.home.partials.videography-section')
+    @include('client.home.partials.faces-and-places-section')
+    @include('client.home.partials.partners-section')
+    @include('components.clients.follow-section')
+@endsection
+
+// resources/views/client/about/partials/about-section.blade.php
+<section class="w-full bg-white pt-12 lg:pt-[78px] pb-16 lg:pb-[100px] px-4 flex flex-col items-center">
+    <!-- Main Container -->
+    <!-- Desktop giới hạn chính xác tổng width: 372 (ảnh) + 38 (gap) + 327 (text) = 737px -->
+    <div class="w-full max-w-[737px] flex flex-col md:flex-row gap-8 md:gap-[38px] items-start">
+        <!-- Left Side: Image -->
+        <!-- Rộng đúng 372px, cao 516px trên desktop -->
+        <div class="w-full md:w-[372px] flex-shrink-0" data-aos="zoom-out" data-aos-duration="1000">
+            <img src="{{ asset('client/assets/static/about/about.png') }}" alt="La Hieu Professional Photographer"
+                class="w-full h-auto md:h-[516px] object-cover shadow-sm" loading="lazy">
+        </div>
+        <!-- Right Side: Content -->
+        <!-- Rộng tối đa 327px trên desktop. Thụt xuống 32px so với đỉnh ảnh -->
+        <div class="w-full md:max-w-[327px] flex flex-col md:mt-[32px]">
+            <!-- Heading 1 -->
+            <h1 class="font-be-vietnam font-normal text-[36px] md:text-[40px] leading-[25px] text-black typing-effect">
+                Hello,
+            </h1>
+            <!-- Heading 2 -->
+            <!-- Cách Heading 1 là 32px. Dùng text-title (24px) có sẵn trong config -->
+            <h2 class="font-be-vietnam font-normal text-sub md:text-title text-black mt-6 md:mt-[32px] text-nowrap typing-effect">
+                I’m La Hieu,<br />
+                a professional photographer<br />
+                based in Hanoi.
+            </h2>
+            <!-- Paragraph -->
+            <!-- Cách Heading 2 là 38px. Dùng text-body (16px, line-height 22px, weight 300/light) có sẵn trong config -->
+            <p class="font-be-vietnam font-light text-base md:text-body text-black mt-6 md:mt-[38px]" data-aos="fade-up" data-aos-delay="200">
+                Rooted in my love for backpacking, I am naturally drawn to authentic connections. What truly drives my
+                lens is the people:<br class="hidden md:block" />
+                I am constantly seeking those candid moments - the unguarded joy in a crowd, the quiet focus of someone
+                hard at work, or the deep, unwritten stories etched into the faces of locals.
+            </p>
+            <!-- Signature Logo -->
+            <!-- Cách Paragraph 30px. Kích thước chuẩn từ thiết kế ~101x50px -->
+            <div class="mt-8 md:mt-[30px]" data-aos="fade-up" data-aos-delay="300">
+                <img src="{{ asset('client/assets/static/about/logo.svg') }}" alt="La Hieu Signature"
+                    class="w-[101px] h-auto object-contain">
+            </div>
+        </div>
+    </div> 
+</section>
+
+// resources/views/client/about/index.blade.php
+@extends('components.layouts.main-client')
+@section('title', 'About me')
+@section('content')
+    @include('client.about.partials.about-section')
+    @include('components.clients.follow-section')
+@endsection
+
+// resources/views/client/event-photos/partials/detail-gallery-grid-section.blade.php
+<section class="w-full bg-white px-4 md:px-[25px] py-10 md:py-[50px]">
+    <!-- Gallery Container -->
+    <div class="w-full flex flex-col gap-[15px]">
+        <!-- ==========================================
+             ROW 1: (Wide - Narrow - Wide - Narrow)
+             Chiều cao Desktop fix chuẩn 340px
+             ========================================== -->
+        <div class="flex flex-col sm:flex-row flex-wrap lg:flex-nowrap gap-[15px] w-full lg:h-[340px]" data-aos="fade-up">
+            <!-- Image 1 (Width ~500) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:500] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-1.png') }}" alt="Gallery Image 1"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 2 (Width ~242) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:242] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-2.png') }}" alt="Gallery Image 2"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 3 (Width ~497) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:497] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-3.png') }}" alt="Gallery Image 3"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 4 (Width ~242) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:242] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-4.png') }}" alt="Gallery Image 4"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+        </div>
+        <!-- ==========================================
+             ROW 2: (Narrow - Wide - Narrowest - Wide)
+             Chiều cao Desktop fix chuẩn 340px
+             ========================================== -->
+        <div class="flex flex-col sm:flex-row flex-wrap lg:flex-nowrap gap-[15px] w-full lg:h-[340px]" data-aos="fade-up" data-aos-delay="150">
+            <!-- Image 5 (Width ~218) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:218] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-5.png') }}" alt="Gallery Image 5"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 6 (Width ~502) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:502] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-6.png') }}" alt="Gallery Image 6"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 7 (Width ~183) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:183] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-7.png') }}" alt="Gallery Image 7"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+            <!-- Image 8 (Width ~497) -->
+            <div
+                class="w-full sm:w-[calc(50%-7.5px)] lg:w-auto lg:[flex:497] h-[300px] sm:h-[250px] lg:h-full overflow-hidden group relative cursor-pointer shadow-sm">
+                <img src="{{ asset('client/assets/static/event-photo/gallery-grid-8.png') }}" alt="Gallery Image 8"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy">
+                <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 pointer-events-none">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+// resources/views/client/event-photos/partials/detail-hero-section.blade.php
+<section
+    class="relative w-full bg-white overflow-hidden pt-16 lg:pt-[80px] pb-12 lg:pb-[80px] flex flex-col items-center">
+    <!-- ==========================================
+         BACKGROUND LAYER (Chữ chìm SVG)
+         ========================================== -->
+    <!-- Căn giữa tuyệt đối, không cho phép click/bôi đen để tránh ảnh hưởng UX -->
+    <div
+        class="absolute top-[0px] lg:top-[0px] left-1/2 -translate-x-1/2 w-max flex items-center gap-[5px] lg:gap-[15px] z-0 pointer-events-none select-none opacity-80">
+        <!-- Chữ EVENT -->
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-e-1.svg') }}" alt="E"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-v.svg') }}" alt="V"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-e-2.svg') }}" alt="E"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-n.svg') }}" alt="N"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-t-1.svg') }}" alt="T"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <!-- Khoảng trắng giữa 2 chữ -->
+        <div class="w-[20px] lg:w-[40px]"></div>
+        <!-- Chữ PHOTOS -->
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-p.svg') }}" alt="P"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-h.svg') }}" alt="H"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-o.svg') }}" alt="O"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-t-2.svg') }}" alt="T"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-o.svg') }}" alt="O"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-s.svg') }}" alt="S"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+    </div>
+    <!-- ==========================================
+         FOREGROUND LAYER (Nội dung hiển thị)
+         ========================================== -->
+    <!-- mt-[50px] lg:mt-[100px] để đẩy nội dung chữ nổi xuống giữa khung background SVG cho cân đối (có thể tùy chỉnh lại theo mắt nhìn) -->
+    <div class="relative z-10 w-full px-4 flex flex-col items-center">
+        <!-- Heading Chính: 48px, Bold(700), Line-height 22px -->
+        <h1
+            class="font-be-vietnam font-bold text-[32px] md:text-[40px] lg:text-[48px] text-black uppercase text-center break-words typing-effect">
+            P4G Vietnam Summit
+        </h1>
+        <!-- Subtitle: 16px, Light(300), Line-height 22px -->
+        <p
+            class="font-be-vietnam font-light text-[14px] lg:text-[16px] text-black text-center leading-[22px] break-words" data-aos="fade-up" data-aos-delay="200">
+            16th June 2019
+        </p>
+    </div>
+</section>
+
+// resources/views/client/event-photos/partials/gallery-section.blade.php
+@push('styles')
+    <style>
+        /* Ẩn thanh cuộn xấu xí trên Mobile cho menu */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Hiệu ứng chuyển đổi gallery */
+        #gallery-container {
+            transition: opacity 0.3s ease-in-out;
+        }
+        /* Hiệu ứng bay lên nhẹ cho từng ảnh khi load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+    </style>
+@endpush
+<section class="w-full bg-white pb-16 lg:pb-[100px] flex flex-col items-center">
+    <!-- Main Container: Max width 1145px -->
+    <div class="w-full max-w-[1145px] px-4 mx-auto flex flex-col lg:flex-row lg:items-start lg:gap-[172px]">
+        <!-- ==========================================
+             LEFT SIDEBAR (Navigation)
+             ========================================== -->
+        <aside class="w-full lg:w-max flex-shrink-0 mb-8 lg:mb-0 lg:sticky lg:top-[120px] z-20" data-aos="fade-right">
+            <ul class="flex flex-row lg:flex-col items-start gap-6 lg:gap-0 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 hide-scrollbar"
+                id="album-nav">
+                <!-- 1. P4G Vietnam Summit (Mặc định Active) -->
+                <!-- Thêm data-album="p4g" -->
+                <li class="album-nav-item relative whitespace-nowrap lg:whitespace-normal group" data-album="p4g">
+                    <h3
+                        class="album-title font-be-vietnam font-bold text-[16px] leading-[22px] text-black cursor-pointer hover:opacity-70 transition-opacity">
+                        P4G Vietnam Summit
+                    </h3>
+                    <a href="#"
+                        class="album-link font-be-vietnam font-light text-[12px] leading-[22px] text-black underline block lg:-mt-[2px] hover:text-gray-500 transition-colors">
+                        View album
+                    </a>
+                    <!-- Mid-line -->
+                    <div class="album-line hidden lg:block absolute top-[11px] left-[105%] ml-[15px]">
+                        <img src="{{ asset('client/assets/static/event-photo/gallery-mid-line.svg') }}" alt="Line"
+                            class="w-auto h-auto min-w-[120px] opacity-70">
+                    </div>
+                </li>
+                <!-- 2. Goeth: The Gem -->
+                <!-- Thêm data-album="goeth" -->
+                <li class="album-nav-item whitespace-nowrap lg:whitespace-normal lg:mt-[22px]" data-album="goeth">
+                    <h3
+                        class="album-title font-be-vietnam font-bold text-[16px] leading-[22px] text-gray-400 cursor-pointer hover:text-black transition-colors">
+                        Goeth: The Gem
+                    </h3>
+                    <!-- Ẩn mặc định bằng class hidden -->
+                    <a href="#"
+                        class="album-link hidden font-be-vietnam font-light text-[12px] leading-[22px] text-black underline lg:-mt-[2px] hover:text-gray-500 transition-colors">
+                        View album
+                    </a>
+                    <!-- Ẩn mặc định bằng class hidden -->
+                    <div class="album-line hidden absolute top-[11px] left-[105%] ml-[15px]">
+                        <img src="{{ asset('client/assets/static/event-photo/gallery-mid-line.svg') }}" alt="Line"
+                            class="w-auto h-auto min-w-[120px] opacity-70">
+                    </div>
+                </li>
+                <!-- 3. La Hieu Project -->
+                <!-- Thêm data-album="lahieu" -->
+                <li class="album-nav-item whitespace-nowrap lg:whitespace-normal lg:mt-[20px]" data-album="lahieu">
+                    <h3
+                        class="album-title font-be-vietnam font-bold text-[16px] leading-[22px] text-gray-400 cursor-pointer hover:text-black transition-colors">
+                        La Hieu Project
+                    </h3>
+                    <a href="#"
+                        class="album-link hidden font-be-vietnam font-light text-[12px] leading-[22px] text-black underline lg:-mt-[2px] hover:text-gray-500 transition-colors">
+                        View album
+                    </a>
+                    <div class="album-line hidden absolute top-[11px] left-[105%] ml-[15px]">
+                        <img src="{{ asset('client/assets/static/event-photo/gallery-mid-line.svg') }}" alt="Line"
+                            class="w-auto h-auto min-w-[120px] opacity-70">
+                    </div>
+                </li>
+            </ul>
+        </aside>
+        <!-- ==========================================
+             RIGHT GALLERY (Masonry Grid)
+             ========================================== -->
+        <!-- Đặt ID gallery-container để JS trỏ tới -->
+        <div id="gallery-container" class="flex-1 w-full columns-1 sm:columns-2 lg:columns-3 gap-[10px]">
+            <!-- Default Load (Album 1) -->
+            @php
+                $defaultImages = [1, 2, 3, 4, 5, 6, 7, 8];
+            @endphp
+            @foreach ($defaultImages as $i)
+                <div class="w-full mb-[10px] break-inside-avoid overflow-hidden bg-gray-100 group cursor-pointer relative shadow-[0_2px_8px_rgba(0,0,0,0.05)] animate-fade-in-up"
+                    style="animation-delay: {{ $loop->index * 0.1 }}s">
+                    <img src="{{ asset('client/assets/static/event-photo/gallery-' . $i . '.png') }}"
+                        alt="Gallery Image {{ $i }}"
+                        class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                        loading="lazy">
+                    <div
+                        class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none">
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@push('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // --- 1. DATA CỦA CÁC ALBUM (Mô phỏng Backend) ---
+            // Chia 19 bức ảnh ra làm 3 albums
+            const albumsData = {
+                'p4g': [1, 2, 3, 4, 5, 6, 7, 8],
+                'goeth': [9, 10, 11, 12, 13, 14, 15],
+                'lahieu': [16, 17, 18, 19, 1, 3, 6] // Lấy ảnh 16-19 và mix lại một số ảnh cho đủ lưới
+            };
+            const assetBaseUrl = "{{ asset('client/assets/static/event-photo/gallery-') }}";
+            const navItems = document.querySelectorAll('.album-nav-item');
+            const galleryContainer = document.getElementById('gallery-container');
+            // --- 2. SỰ KIỆN CLICK MENU ---
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Nếu click vào thẻ A (View Album) thì không chạy hàm render ảnh
+                    if (e.target.tagName.toLowerCase() === 'a') return;
+                    const albumKey = this.getAttribute('data-album');
+                    // A. Xóa trạng thái Active của tất cả các Nav Items
+                    navItems.forEach(nav => {
+                        nav.classList.remove('relative');
+                        // Reset tiêu đề về xám
+                        const title = nav.querySelector('.album-title');
+                        title.classList.remove('text-black');
+                 

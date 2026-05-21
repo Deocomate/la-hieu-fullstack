@@ -1,4 +1,4 @@
-<section class="w-full bg-white  pb-16 lg:pb-[98px] px-4 lg:px-[30px] flex flex-col items-center">
+<section class="w-full bg-white  pb-10 lg:pb-[100px] px-4 lg:px-[30px] flex flex-col items-center">
 
     <!-- Section Title -->
     <!-- Font size 24px, weight 800 (extrabold), tracking 2.4px -->
@@ -8,8 +8,7 @@
     </h2>
 
     <!-- Instagram Images Container -->
-    <!-- Dùng Flexbox. mt-[87px] theo đúng thiết kế -->
-    <div class="w-full mt-10 lg:mt-[87px] flex flex-wrap md:flex-nowrap">
+    <div class="w-full mt-[80px] lg:mt-[80px] flex flex-wrap md:flex-nowrap">
 
         @for ($i = 1; $i <= 5; $i++)
             <!-- Image Item -->
@@ -19,8 +18,8 @@
                 aspect-square: Bắt buộc thẻ div này luôn là hình vuông (Width = Height)
             -->
             <a href="#" target="_blank" rel="noopener noreferrer"
-                class="w-1/2 md:w-1/5 aspect-square relative group overflow-hidden block"
-                data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
+                class="w-1/2 md:w-1/5 aspect-square relative group overflow-hidden block" data-aos="fade-up"
+                data-aos-delay="{{ $i * 100 }}">
 
                 <img src="{{ asset('client/assets/static/home/follow-me-' . $i . '.png') }}"
                     alt="Instagram Feed {{ $i }}"

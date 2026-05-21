@@ -185,11 +185,11 @@
                             limitProgress: 2,
                             // Desktop: Chốt cứng tham số pixel
                             prev: {
-                                translate: ['-160px', 0, -100],
+                                translate: ['-200px', 0, -100],
                                 scale: 0.85
                             },
                             next: {
-                                translate: ['160px', 0, -100],
+                                translate: ['200px', 0, -100],
                                 scale: 0.85
                             },
                         }

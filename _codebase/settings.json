@@ -101,7 +101,7 @@
   "custom_ignore_patterns": [],
   "attention_patterns": [],
   "split_config": {
-    "enabled": false,
+    "enabled": true,
     "split_count": 5,
     "token_threshold": 40000
   },
@@ -109,7 +109,7 @@
     "selected_formats": [
       "txt"
     ],
-    "split_enabled": false,
+    "split_enabled": true,
     "split_count": 5
   },
   "instructions": {

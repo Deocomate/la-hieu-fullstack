@@ -1,0 +1,626 @@
+# codebase | 52 files | 2026-05-20 16:25:17
+
+# Part 5/5
+
+       title.classList.add('text-gray-400');
+                        // Ẩn Link & Đường Line
+                        nav.querySelector('.album-link').classList.add('hidden');
+                        nav.querySelector('.album-link').classList.remove('block');
+                        nav.querySelector('.album-line').classList.add('hidden');
+                        nav.querySelector('.album-line').classList.remove('lg:block');
+                    });
+                    // B. Kích hoạt trạng thái Active cho Item được Click
+                    this.classList.add('relative');
+                    const activeTitle = this.querySelector('.album-title');
+                    activeTitle.classList.remove('text-gray-400');
+                    activeTitle.classList.add('text-black');
+                    // Hiện Link & Đường Line
+                    this.querySelector('.album-link').classList.remove('hidden');
+                    this.querySelector('.album-link').classList.add('block');
+                    this.querySelector('.album-line').classList.remove('hidden');
+                    this.querySelector('.album-line').classList.add('lg:block');
+                    // C. Render Gallery
+                    renderGallery(albumKey);
+                });
+            });
+            // --- 3. HÀM RENDER HTML GALLERY ---
+            function renderGallery(albumKey) {
+                const images = albumsData[albumKey];
+                // Làm mờ gallery hiện tại để chuẩn bị đổi
+                galleryContainer.style.opacity = '0';
+                // Đợi 300ms (Bằng thời gian mờ đi) rồi mới chèn DOM mới
+                setTimeout(() => {
+                    galleryContainer.innerHTML = '';
+                    let htmlContent = '';
+                    images.forEach((imgNumber, index) => {
+                        const delay = index * 0.1; // Tạo độ trễ xếp tầng cho mượt
+                        htmlContent += `
+                        <div class="w-full mb-[10px] break-inside-avoid overflow-hidden bg-gray-100 group cursor-pointer relative shadow-[0_2px_8px_rgba(0,0,0,0.05)] animate-fade-in-up" style="animation-delay: ${delay}s">
+                            <img 
+                                src="${assetBaseUrl}${imgNumber}.png" 
+                                alt="Gallery Image ${imgNumber}" 
+                                class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" 
+                                loading="lazy"
+                            >
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none"></div>
+                        </div>
+                    `;
+                    });
+                    galleryContainer.innerHTML = htmlContent;
+                    // Hiển thị lại container
+                    galleryContainer.style.opacity = '1';
+                }, 300);
+            }
+        });
+    </script>
+@endpush
+
+// resources/views/client/event-photos/partials/hero-section.blade.php
+<section
+    class="relative w-full bg-white overflow-hidden pt-16 lg:pt-[80px] pb-12 lg:pb-[80px] flex flex-col items-center">
+    <!-- ==========================================
+         BACKGROUND LAYER (Chữ chìm SVG)
+         ========================================== -->
+    <!-- Căn giữa tuyệt đối, không cho phép click/bôi đen để tránh ảnh hưởng UX -->
+    <div
+        class="absolute top-[0px] lg:top-[0px] left-1/2 -translate-x-1/2 w-max flex items-center gap-[5px] lg:gap-[15px] z-0 pointer-events-none select-none opacity-80">
+        <!-- Chữ EVENT -->
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-e-1.svg') }}" alt="E"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-v.svg') }}" alt="V"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-e-2.svg') }}" alt="E"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-n.svg') }}" alt="N"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-t-1.svg') }}" alt="T"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <!-- Khoảng trắng giữa 2 chữ -->
+        <div class="w-[20px] lg:w-[40px]"></div>
+        <!-- Chữ PHOTOS (Dùng lại chữ O vì trong thư mục chỉ có 1 file O) -->
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-p.svg') }}" alt="P"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-h.svg') }}" alt="H"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-o.svg') }}" alt="O"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-t-2.svg') }}" alt="T"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-o.svg') }}" alt="O"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+        <img src="{{ asset('client/assets/static/event-photo/hero-character-s.svg') }}" alt="S"
+            class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
+    </div>
+    <!-- ==========================================
+         FOREGROUND LAYER (Nội dung hiển thị)
+         ========================================== -->
+    <div class="relative z-10 w-full px-4 flex flex-col items-center">
+        <!-- Heading Chính -->
+        <h1
+            class="font-be-vietnam font-extrabold text-[44px] md:text-[60px] lg:text-[75px] text-black uppercase text-center leading-none tracking-tight typing-effect">
+            Event Photos
+        </h1>
+        <!-- Subtitle -->
+        <!-- mt-[32px] dựa theo tính toán khoảng cách từ bottom của H1 xuống Subtitle -->
+        <p
+            class="font-be-vietnam font-light text-[14px] lg:text-[16px] text-black text-center mt-6 lg:mt-[15px] leading-[22px]" data-aos="fade-up" data-aos-delay="200">
+            Unposed emotions. The true pulse of the event
+        </p>
+        <!-- Vertical Divider (Đường kẻ màu vàng/nâu nhạt) -->
+        <!-- Logic 84.43px tổng gap: line cao 38px, cách trên 22px, cách dưới 24px => 22 + 38 + 24.43 = ~84.43px -->
+        <div class="w-[2px] h-[38px] bg-[#C5AA82] mt-[22px]" data-aos="fade-up" data-aos-delay="300"></div>
+        <!-- Đoạn văn bản mô tả -->
+        <!-- Chiều rộng giới hạn 430px theo design context -->
+        <p
+            class="font-be-vietnam font-light text-[14px] text-black text-center leading-[22px] max-w-[430px] mt-[24.43px] mb-8 lg:mb-[47px]" data-aos="fade-up" data-aos-delay="400">
+            Even in the middle of a vibrant crowd, I am always looking for the same thing: the raw, genuine moments that
+            define the true character of the event
+        </p>
+    </div>
+</section>
+
+// resources/views/client/event-photos/detail.blade.php
+@extends('components.layouts.main-client')
+@section('title', 'Event Photo Detail')
+@section('content')
+    @include('client.event-photos.partials.detail-hero-section')
+    @include('client.event-photos.partials.detail-gallery-grid-section')
+@endsection
+
+// resources/views/client/event-photos/index.blade.php
+@extends('components.layouts.main-client')
+@section('title', 'Event Photos')
+@section('content')
+    @include('client.event-photos.partials.hero-section')
+    @include('client.event-photos.partials.gallery-section')
+    @include('components.clients.follow-section')
+@endsection
+
+// resources/views/components/clients/pagination.blade.php
+<!-- resources/views/components/clients/pagination.blade.php -->
+<nav class="flex items-center justify-center gap-[30px] lg:gap-[52px] w-full">
+    <!-- Previous Button (40x40px) -->
+    <a href="#"
+        class="w-[40px] h-[40px] rounded-full border border-black/20 flex items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer flex-shrink-0 group">
+        <img src="{{ asset('client/assets/static/components/prev-buttom.svg') }}" alt="Previous"
+            class="w-[40px] h-[40px] object-contain opacity-40 group-hover:opacity-100 transition-opacity">
+    </a>
+    <!-- Page Numbers Container (Gap 20px) -->
+    <div class="flex items-center gap-[15px] lg:gap-[20px]">
+        <!-- Active Page (1) -->
+        <!-- Line-height 25.5px, border-bottom 2.5px solid black -->
+        <a href="#" class="text-[17px] font-bold text-black leading-[25.5px] border-b-[2.5px] border-black pb-[2px]"
+            style="font-family: 'Archivo', sans-serif;">
+            1
+        </a>
+        <!-- Inactive Page (2) -->
+        <a href="#"
+            class="text-[17px] font-bold text-black/40 leading-[25.5px] hover:text-black transition-colors"
+            style="font-family: 'Archivo', sans-serif;">
+            2
+        </a>
+        <!-- Inactive Page (3) -->
+        <a href="#"
+            class="text-[17px] font-bold text-black/40 leading-[25.5px] hover:text-black transition-colors"
+            style="font-family: 'Archivo', sans-serif;">
+            3
+        </a>
+        <!-- Dots (...) -->
+        <!-- Letter-spacing 1.7px -->
+        <span class="text-[17px] font-bold text-black/40 leading-[25.5px] tracking-[1.7px]"
+            style="font-family: 'Archivo', sans-serif;">
+            ...
+        </span>
+        <!-- Inactive Page (9) -->
+        <a href="#"
+            class="text-[17px] font-bold text-black/40 leading-[25.5px] hover:text-black transition-colors"
+            style="font-family: 'Archivo', sans-serif;">
+            9
+        </a>
+    </div>
+    <!-- Next Button (40x40px) -->
+    <a href="#"
+        class="w-[40px] h-[40px] rounded-full border border-black/20 flex items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer flex-shrink-0 group">
+        <img src="{{ asset('client/assets/static/components/next-buttom.svg') }}" alt="Next"
+            class="w-[40px] h-[40px] object-contain opacity-40 group-hover:opacity-100 transition-opacity">
+    </a>
+</nav>
+
+// resources/views/components/clients/footer.blade.php
+<footer class="relative w-full min-h-[535px] flex flex-col lg:flex-row overflow-hidden">
+    <!-- Ảnh Background (Hiển thị 100% width/height ở layer dưới cùng) -->
+    <div class="absolute inset-0 z-0">
+        <img src="{{ asset('client/assets/static/footer/background.png') }}" alt="La Hieu Footer Background"
+            class="w-full h-full object-cover object-center" loading="lazy">
+    </div>
+    <!-- Khung chia 50% bên trái (Chỉ hiển thị trên Desktop để lộ ảnh gốc) -->
+    <div class="hidden lg:block lg:w-1/2 relative z-10"></div>
+    <!-- Khung chia 50% bên phải (Chứa nội dung và Overlay bg-black/80 đè lên ảnh) -->
+    <!-- Trên Mobile/Tablet (<1024px) sẽ chiếm 100% width để chữ luôn dễ đọc -->
+    <div
+        class="w-full lg:w-1/2 relative z-10 bg-black/80 flex flex-col justify-center px-6 py-12 md:px-16 lg:px-[103px] min-h-[535px]">
+        <!-- 1. Logo -->
+        <a href="{{ url('/') }}" class="inline-block" data-aos="fade-right">
+            <img src="{{ asset('client/assets/static/footer/logo.svg') }}" alt="La Hieu Logo"
+                class="w-[180px] md:w-[224px] h-auto object-contain">
+        </a>
+        <!-- 2. Tên tác giả -->
+        <!-- font-size: 24px, weight: 600 (semibold), uppercase, tracking: 1.2px -->
+        <h3 class="font-be-vietnam font-semibold text-[20px] md:text-[24px] text-white uppercase tracking-[1.2px] typing-effect">
+            Nguyễn Đức Hiếu
+        </h3>
+        <!-- 3. Quote -->
+        <!-- font-size: 24px, weight: 600, italic, tracking: 1.2px -->
+        <p
+            class="font-be-vietnam font-semibold italic text-[20px] md:text-[24px] text-white tracking-[1.2px] mt-6 lg:mt-[45px] leading-snug typing-effect">
+            I'm always ready for the next journey<br class="hidden sm:block" />
+            Let’s talk about yours
+        </p>
+        <!-- 4. Thông tin liên hệ -->
+        <div class="flex flex-col gap-4 mt-8 lg:mt-[40px]" data-aos="fade-up" data-aos-delay="200">
+            <!-- Số điện thoại -->
+            <a href="tel:0902222876" class="flex items-center gap-4 hover:opacity-80 transition-opacity w-max">
+                <img src="{{ asset('client/assets/static/footer/phone.svg') }}" alt="Phone Icon"
+                    class="w-[20px] h-[20px] object-contain flex-shrink-0 md:mx-[50px]">
+                <span class="font-be-vietnam font-normal text-[20px] md:text-[24px] text-white tracking-[1.2px]">
+                    090 2222 876
+                </span>
+            </a>
+            <!-- Email -->
+            <a href="mailto:pvduchieu@gmail.com"
+                class="flex items-center gap-4 hover:opacity-80 transition-opacity w-max">
+                <img src="{{ asset('client/assets/static/footer/mail.svg') }}" alt="Mail Icon"
+                    class="w-[26px] h-[20px] object-contain flex-shrink-0 md:mx-[47.5px]">
+                <span class="font-be-vietnam font-normal text-[20px] md:text-[24px] text-white tracking-[1.2px]">
+                    pvduchieu@gmail.com
+                </span>
+            </a>
+        </div>
+    </div>
+</footer>
+
+// resources/views/components/clients/header.blade.php
+<header class="w-full h-[56px] bg-white sticky top-0 z-50 shadow-sm" data-aos="fade-down">
+    <!-- Container giới hạn 1200px và căn giữa -->
+    <div class="max-w-[1200px] w-full h-full mx-auto px-4 xl:px-0 flex items-center justify-between">
+        <!-- Logo bên trái -->
+        <a href="{{ url('/') }}" class="flex-shrink-0 flex items-center h-full hover:opacity-80 transition-opacity">
+            <img src="{{ asset('client/assets/static/header/logo.svg') }}" alt="La Hieu Logo"
+                class="h-[40px] w-auto object-contain">
+        </a>
+        <!-- Menu ở giữa -->
+        <nav class="hidden lg:flex items-center gap-8 xl:gap-12">
+            <a href="{{ url('about') }}"
+                class="font-oswald text-nav uppercase tracking-nav transition-colors 
+                {{ request()->is('about') ? 'text-gray-400 font-semibold' : 'text-black font-normal hover:text-gray-500' }}">
+                About
+            </a>
+            <a href="{{ url('event-photos') }}"
+                class="font-oswald text-nav uppercase tracking-nav transition-colors 
+                {{ request()->is('event-photos*') ? 'text-gray-400 font-semibold' : 'text-black font-normal hover:text-gray-500' }}">
+                Event Photo
+            </a>
+            <a href="{{ url('photojournalism') }}"
+                class="font-oswald text-nav uppercase tracking-nav transition-colors 
+                {{ request()->is('photojournalism*') ? 'text-gray-400 font-semibold' : 'text-black font-normal hover:text-gray-500' }}">
+                Photojournalism
+            </a>
+            <!-- Lưu ý: Trong thư mục hiện tại của bạn phần videography chưa có index.blade.php, URL này đã được đặt sẵn chờ bạn tạo file -->
+            <a href="{{ url('videography/detail') }}"
+                class="font-oswald text-nav uppercase tracking-nav transition-colors 
+                {{ request()->is('videography*') ? 'text-gray-400 font-semibold' : 'text-black font-normal hover:text-gray-500' }}">
+                Videography
+            </a>
+            <a href="{{ url('faces-and-places') }}"
+                class="font-oswald text-nav uppercase tracking-nav transition-colors 
+                {{ request()->is('faces-and-places*') ? 'text-gray-400 font-semibold' : 'text-black font-normal hover:text-gray-500' }}">
+                Faces & Places
+            </a>
+            <a href="{{ url('contact') }}"
+                class="font-oswald text-nav uppercase tracking-nav transition-colors 
+                {{ request()->is('contact') ? 'text-gray-400 font-semibold' : 'text-black font-normal hover:text-gray-500' }}">
+                Contact
+            </a>
+        </nav>
+        <!-- Icon Search bên phải -->
+        <button class="flex-shrink-0 flex items-center justify-center p-2 hover:opacity-70 transition-opacity">
+            <img src="{{ asset('client/assets/static/header/search.svg') }}" alt="Search"
+                class="w-[18px] h-[18px] object-contain">
+        </button>
+    </div>
+</header>
+
+// resources/views/components/clients/scripts.blade.php
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const prefersReducedMotion = window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (window.AOS) {
+            window.AOS.init({
+                duration: prefersReducedMotion ? 0 : 800,
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 50,
+                disable: prefersReducedMotion,
+            });
+        }
+        const typingElements = document.querySelectorAll('.typing-effect');
+        function wrapTextNode(textNode) {
+            const fragment = document.createDocumentFragment();
+            const parts = textNode.nodeValue.match(/(\s+|[^\s]+)/g) || [];
+            parts.forEach((part) => {
+                if (/^\s+$/.test(part)) {
+                    fragment.appendChild(document.createTextNode(part));
+                    return;
+                }
+                const word = document.createElement('span');
+                word.className = 'typing-word';
+                word.textContent = part;
+                fragment.appendChild(word);
+            });
+            textNode.parentNode.replaceChild(fragment, textNode);
+        }
+        function prepareTypingElement(element) {
+            if (element.dataset.typingReady === 'true') {
+                return;
+            }
+            const walker = document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT, {
+                    acceptNode(node) {
+                        const parent = node.parentElement;
+                        if (!node.nodeValue.trim() || !parent) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        if (parent.closest('.typing-word') || parent.closest('script, style, noscript')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        return NodeFilter.FILTER_ACCEPT;
+                    },
+                }
+            );
+            const textNodes = [];
+            while (walker.nextNode()) {
+                textNodes.push(walker.currentNode);
+            }
+            textNodes.forEach(wrapTextNode);
+            element.dataset.typingReady = 'true';
+        }
+        typingElements.forEach(prepareTypingElement);
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+            document.querySelectorAll('.typing-word').forEach((word) => {
+                word.classList.add('is-visible');
+            });
+            return;
+        }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                const words = entry.target.querySelectorAll('.typing-word');
+                words.forEach((word, index) => {
+                    window.setTimeout(() => {
+                        word.classList.add('is-visible');
+                    }, index * 50);
+                });
+                observer.unobserve(entry.target);
+            });
+        }, {
+            threshold: 0.1,
+        });
+        typingElements.forEach((element) => observer.observe(element));
+    });
+</script>
+
+// resources/views/components/clients/styles.blade.php
+<!-- Cấu hình thư viện AOS (Animation) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<!-- Nhúng Tailwind CSS qua CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    /* ==========================================
+       1. IMPORT BE VIETNAM (TỪ LOCAL CỦA FIGMA)
+       ========================================== */
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-Thin_1.ttf') }}") format('truetype');
+        font-weight: 100;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-Light_1.ttf') }}") format('truetype');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-Regular_1.ttf') }}") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-Medium_1.ttf') }}") format('truetype');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-SemiBold_1.ttf') }}") format('truetype');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-SemiBoldItalic_1.ttf') }}") format('truetype');
+        font-weight: 600;
+        font-style: italic;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-Bold_1.ttf') }}") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-ExtraBold_1.ttf') }}") format('truetype');
+        font-weight: 800;
+        font-style: normal;
+        font-display: swap;
+    }
+    /* ==========================================
+       2. IMPORT OSWALD & ARCHIVO (TỪ LOCAL)
+       ========================================== */
+    @font-face {
+        font-family: 'Oswald Local';
+        src: url("{{ asset('client/assets/fonts/Oswald_wght__2.ttf') }}") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo_wdth_wght__1.ttf') }}") format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+    }
+    /* ==========================================
+       3. RESET CSS HIỂN THỊ FONT
+       ========================================== */
+    body {
+        /* Bắt buộc dùng subpixel-antialiased để nét chữ hiển thị dày, đều và đẹp hệt như trong phần mềm thiết kế */
+        -webkit-font-smoothing: subpixel-antialiased;
+        -moz-osx-font-smoothing: auto;
+        overflow-x: hidden;
+    }
+    .text-shadow-image {
+        text-shadow: 2px 4px 5px rgba(0, 0, 0, 0.10);
+    }
+    .typing-effect {
+        opacity: 1;
+    }
+    .typing-word {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        will-change: opacity, transform;
+    }
+    .typing-word.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        [data-aos],
+        .typing-word {
+            transition: none !important;
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
+</style>
+<!-- ==========================================
+     4. CẤU HÌNH TAILWIND
+     ========================================== -->
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#1d4ed8',
+                },
+                fontFamily: {
+                    /* Ánh xạ tên Font y hệt trong phần @font-face */
+                    'sans': ['"Be Vietnam"', 'sans-serif'],
+                    'be-vietnam': ['"Be Vietnam"', 'sans-serif'],
+                    'oswald': ['"Oswald Local"', 'sans-serif'],
+                    'archivo': ['"Archivo Local"', 'sans-serif'],
+                },
+                fontSize: {
+                    'nav': ['12px', {
+                        lineHeight: 'normal',
+                        letterSpacing: '1.20px'
+                    }],
+                    'body': ['16px', {
+                        lineHeight: '22px'
+                    }],
+                    'desc': ['18px', {
+                        lineHeight: 'normal',
+                        letterSpacing: '0.90px'
+                    }],
+                    'sub': ['20px', {
+                        lineHeight: 'normal',
+                        letterSpacing: '2.40px'
+                    }],
+                    'title': ['24px', {
+                        lineHeight: '25px'
+                    }],
+                    'heading': ['44px', {
+                        lineHeight: 'normal',
+                        letterSpacing: '4.40px'
+                    }],
+                },
+                fontWeight: {
+                    'thin': '100',
+                    'light': '300',
+                    'normal': '400',
+                    'medium': '500',
+                    'semibold': '600',
+                    'bold': '700',
+                    'extrabold': '800',
+                    'black': '900',
+                }
+            }
+        }
+    }
+</script>
+
+// resources/views/components/clients/follow-section.blade.php
+<section class="w-full bg-white  pb-10 lg:pb-[100px] px-4 lg:px-[30px] flex flex-col items-center">
+    <!-- Section Title -->
+    <!-- Font size 24px, weight 800 (extrabold), tracking 2.4px -->
+    <h2
+        class="font-be-vietnam font-extrabold text-[20px] md:text-[24px] uppercase tracking-[2.4px] text-black text-center typing-effect">
+        Follow me on instagram
+    </h2>
+    <!-- Instagram Images Container -->
+    <div class="w-full mt-[80px] lg:mt-[80px] flex flex-wrap md:flex-nowrap">
+        @for ($i = 1; $i <= 5; $i++)
+            <!-- Image Item -->
+            <!--
+                Desktop (md trở lên): w-1/5 (20%) -> Xếp đúng 5 ảnh trên 1 hàng
+                Mobile (< md): w-1/2 (50%) -> Rớt dòng 2 ảnh 1 hàng để tránh ảnh quá nhỏ
+                aspect-square: Bắt buộc thẻ div này luôn là hình vuông (Width = Height)
+            -->
+            <a href="#" target="_blank" rel="noopener noreferrer"
+                class="w-1/2 md:w-1/5 aspect-square relative group overflow-hidden block" data-aos="fade-up"
+                data-aos-delay="{{ $i * 100 }}">
+                <img src="{{ asset('client/assets/static/home/follow-me-' . $i . '.png') }}"
+                    alt="Instagram Feed {{ $i }}"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy">
+                <!-- Overlay đen nhẹ hiện ra khi di chuột (Hiệu ứng tương tác UI) -->
+                <div
+                    class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                </div>
+            </a>
+        @endfor
+    </div>
+</section>
+
+// resources/views/components/layouts/main-client.blade.php
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Là Hiếu - @yield('title')</title>
+    <!-- Gọi file styles chứa Tailwind CDN -->
+    @include('components.clients.styles')
+    @stack('styles')
+</head>
+<!-- Thêm class font-sans để áp dụng Be Vietnam Pro làm mặc định -->
+<body class="font-sans text-black bg-white">
+    @include('components.clients.header')
+    <main>
+        @yield('content')
+    </main>
+    @include('components.clients.footer')
+    @include('components.clients.scripts')
+    @stack('scripts')
+</body>
+</html>
+
+// .htaccess
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ /public/$1 [L,QSA]
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+

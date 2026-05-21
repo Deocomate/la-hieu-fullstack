@@ -45,7 +45,7 @@
                 </h3>
 
                 <!-- Divider Line (Cách top 22px, lấy line màu nâu nhạt chung của website) -->
-                <div class="w-[40px] h-[1px] bg-[#C5AA82] mt-4 lg:mt-[22px]"></div>
+                <div class="w-[40px] h-[2px] bg-[#C5AA82] mt-4 lg:mt-[22px]"></div>
 
                 <!-- Description (14px, weight 300, max-width 642px, cách line 18px) -->
                 <p
