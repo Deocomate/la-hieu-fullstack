@@ -1,7 +1,13 @@
 {
   "schema_version": 11,
   "included_paths": [
-    "routes"
+    "routes",
+    "resources/views/client/about",
+    "resources/views/client/event-photos",
+    "resources/views/client/contact",
+    "resources/views/client/faces-and-places",
+    "resources/views/client/photojournalism",
+    "resources/views/client/videography"
   ],
   "excluded_paths": [
     ".agents",
@@ -23,7 +29,8 @@
     "prompts",
     "resources/views/admin",
     "resources/views/components/admin",
-    "resources/views/components/layouts/main-admin.blade.php"
+    "resources/views/components/layouts/main-admin.blade.php",
+    ".htaccess"
   ],
   "priority_roots": [
     "composer.json",

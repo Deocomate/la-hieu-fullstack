@@ -1,15 +1,21 @@
 <!-- Cấu hình thư viện AOS (Animation) -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<!-- Import Font Oswald từ Google Fonts do không có trong thư mục local -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+
 <!-- Nhúng Tailwind CSS qua CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
     /* ==========================================
-       1. IMPORT BE VIETNAM (TỪ LOCAL CỦA FIGMA)
+       1. IMPORT BE VIETNAM (TỪ LOCAL)
        ========================================== */
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-Thin_1.ttf') }}") format('truetype');
+        src: url("{{ asset('client/assets/fonts/BeVietnam-Thin.ttf') }}") format('truetype');
         font-weight: 100;
         font-style: normal;
         font-display: swap;
@@ -17,7 +23,15 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-Light_1.ttf') }}") format('truetype');
+        src: url("{{ asset('client/assets/fonts/BeVietnam-ThinItalic.ttf') }}") format('truetype');
+        font-weight: 100;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-Light.ttf') }}") format('truetype');
         font-weight: 300;
         font-style: normal;
         font-display: swap;
@@ -25,7 +39,15 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-Regular_1.ttf') }}") format('truetype');
+        src: url("{{ asset('client/assets/fonts/BeVietnam-LightItalic.ttf') }}") format('truetype');
+        font-weight: 300;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-Regular.ttf') }}") format('truetype');
         font-weight: 400;
         font-style: normal;
         font-display: swap;
@@ -33,7 +55,15 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-Medium_1.ttf') }}") format('truetype');
+        src: url("{{ asset('client/assets/fonts/BeVietnam-Italic.ttf') }}") format('truetype');
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-Medium.ttf') }}") format('truetype');
         font-weight: 500;
         font-style: normal;
         font-display: swap;
@@ -41,7 +71,15 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-SemiBold_1.ttf') }}") format('truetype');
+        src: url("{{ asset('client/assets/fonts/BeVietnam-MediumItalic.ttf') }}") format('truetype');
+        font-weight: 500;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-SemiBold.ttf') }}") format('truetype');
         font-weight: 600;
         font-style: normal;
         font-display: swap;
@@ -49,7 +87,7 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-SemiBoldItalic_1.ttf') }}") format('truetype');
+        src: url("{{ asset('client/assets/fonts/BeVietnam-SemiBoldItalic.ttf') }}") format('truetype');
         font-weight: 600;
         font-style: italic;
         font-display: swap;
@@ -57,7 +95,7 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-Bold_1.ttf') }}") format('truetype');
+        src: url("{{ asset('client/assets/fonts/BeVietnam-Bold.ttf') }}") format('truetype');
         font-weight: 700;
         font-style: normal;
         font-display: swap;
@@ -65,28 +103,172 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-ExtraBold_1.ttf') }}") format('truetype');
+        src: url("{{ asset('client/assets/fonts/BeVietnam-BoldItalic.ttf') }}") format('truetype');
+        font-weight: 700;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-ExtraBold.ttf') }}") format('truetype');
         font-weight: 800;
         font-style: normal;
         font-display: swap;
     }
 
+    @font-face {
+        font-family: 'Be Vietnam';
+        src: url("{{ asset('client/assets/fonts/BeVietnam-ExtraBoldItalic.ttf') }}") format('truetype');
+        font-weight: 800;
+        font-style: italic;
+        font-display: swap;
+    }
+
     /* ==========================================
-       2. IMPORT OSWALD & ARCHIVO (TỪ LOCAL)
+       2. IMPORT ARCHIVO (TỪ LOCAL)
        ========================================== */
     @font-face {
-        font-family: 'Oswald Local';
-        src: url("{{ asset('client/assets/fonts/Oswald_wght__2.ttf') }}") format('truetype');
-        font-weight: 100 900;
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-Thin.ttf') }}") format('truetype');
+        font-weight: 100;
         font-style: normal;
         font-display: swap;
     }
 
     @font-face {
         font-family: 'Archivo Local';
-        src: url("{{ asset('client/assets/fonts/Archivo_wdth_wght__1.ttf') }}") format('truetype');
-        font-weight: 100 900;
+        src: url("{{ asset('client/assets/fonts/Archivo-ThinItalic.ttf') }}") format('truetype');
+        font-weight: 100;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-ExtraLight.ttf') }}") format('truetype');
+        font-weight: 200;
         font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-ExtraLightItalic.ttf') }}") format('truetype');
+        font-weight: 200;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-Light.ttf') }}") format('truetype');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-LightItalic.ttf') }}") format('truetype');
+        font-weight: 300;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-Regular.ttf') }}") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-Italic.ttf') }}") format('truetype');
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-Medium.ttf') }}") format('truetype');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-MediumItalic.ttf') }}") format('truetype');
+        font-weight: 500;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-SemiBold.ttf') }}") format('truetype');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-SemiBoldItalic.ttf') }}") format('truetype');
+        font-weight: 600;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-Bold.ttf') }}") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-BoldItalic.ttf') }}") format('truetype');
+        font-weight: 700;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-ExtraBold.ttf') }}") format('truetype');
+        font-weight: 800;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-ExtraBoldItalic.ttf') }}") format('truetype');
+        font-weight: 800;
+        font-style: italic;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-Black.ttf') }}") format('truetype');
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Archivo Local';
+        src: url("{{ asset('client/assets/fonts/Archivo-BlackItalic.ttf') }}") format('truetype');
+        font-weight: 900;
+        font-style: italic;
         font-display: swap;
     }
 
@@ -94,8 +276,6 @@
        3. RESET CSS HIỂN THỊ FONT
        ========================================== */
     body {
-        /* -webkit-font-smoothing: antialiased; */
-        /* -moz-osx-font-smoothing: grayscale; */
         overflow-x: hidden;
     }
 
@@ -143,10 +323,10 @@
                     primary: '#1d4ed8',
                 },
                 fontFamily: {
-                    /* Ánh xạ tên Font y hệt trong phần @font-face */
                     'sans': ['"Be Vietnam"', 'sans-serif'],
                     'be-vietnam': ['"Be Vietnam"', 'sans-serif'],
-                    'oswald': ['"Oswald Local"', 'sans-serif'],
+                    'oswald': ['"Oswald"', 'sans-serif'],
+                    /* Đã đổi sang Oswald từ Google Fonts */
                     'archivo': ['"Archivo Local"', 'sans-serif'],
                 },
                 fontSize: {
@@ -175,6 +355,8 @@
                 },
                 fontWeight: {
                     'thin': '100',
+                    'extralight': '200',
+                    /* Bổ sung Extra Light cho chuẩn Archivo */
                     'light': '300',
                     'normal': '400',
                     'medium': '500',

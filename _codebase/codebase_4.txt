@@ -1,8 +1,19 @@
-# codebase | 52 files | 2026-05-20 16:25:17
+# codebase | 51 files | 2026-05-21 03:47:39
 
 # Part 4/5
 
-
+       /* Tùy chỉnh kích thước cố định của slide THEO ĐÚNG ẢNH MAIN (702x395) */
+        .videography-swiper .swiper-slide {
+            width: 702px !important;
+            height: 395px;
+            transition: all 0.3s ease;
+        }
+        /* Responsive cho tablet & mobile */
+        @media (max-width: 1024px) {
+            .videography-swiper .swiper-slide {
+                width: 65% !important;
+                height: auto;
+                aspect-ratio: 16/9;
             }
         }
         @media (max-width: 640px) {
@@ -152,11 +163,11 @@
                             limitProgress: 2,
                             // Desktop: Chốt cứng tham số pixel
                             prev: {
-                                translate: ['-160px', 0, -100],
+                                translate: ['-200px', 0, -100],
                                 scale: 0.85
                             },
                             next: {
-                                translate: ['160px', 0, -100],
+                                translate: ['200px', 0, -100],
                                 scale: 0.85
                             },
                         }
@@ -517,14 +528,4 @@
             const galleryContainer = document.getElementById('gallery-container');
             // --- 2. SỰ KIỆN CLICK MENU ---
             navItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    // Nếu click vào thẻ A (View Album) thì không chạy hàm render ảnh
-                    if (e.target.tagName.toLowerCase() === 'a') return;
-                    const albumKey = this.getAttribute('data-album');
-                    // A. Xóa trạng thái Active của tất cả các Nav Items
-                    navItems.forEach(nav => {
-                        nav.classList.remove('relative');
-                        // Reset tiêu đề về xám
-                        const title = nav.querySelector('.album-title');
-                        title.classList.remove('text-black');
-                 
+                item.addE

@@ -1,8 +1,17 @@
-# codebase | 52 files | 2026-05-20 16:25:17
+# codebase | 51 files | 2026-05-21 03:47:39
 
 # Part 3/5
 
-ection('content')
+ách List Card -->
+    <div class="w-full flex justify-center mt-12 lg:mt-16 px-4" data-aos="fade-up">
+        @include('components.clients.pagination')
+    </div>
+</section>
+
+// resources/views/client/videography/detail.blade.php
+@extends('components.layouts.main-client')
+@section('title', 'Videography  detail')
+@section('content')
     @include('client.videography.partials.detail-hero-slider-section')
     @include('client.videography.partials.detail-heading-section')
     @include('client.videography.partials.detail-content-section')
@@ -484,15 +493,4 @@ ection('content')
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        /* Tùy chỉnh kích thước cố định của slide THEO ĐÚNG ẢNH MAIN (702x395) */
-        .videography-swiper .swiper-slide {
-            width: 702px !important;
-            height: 395px;
-            transition: all 0.3s ease;
-        }
-        /* Responsive cho tablet & mobile */
-        @media (max-width: 1024px) {
-            .videography-swiper .swiper-slide {
-                width: 65% !important;
-                height: auto;
-                aspect-ratio: 16/9;
+ 

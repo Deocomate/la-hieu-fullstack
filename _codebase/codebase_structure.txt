@@ -1,4 +1,4 @@
-# la-hieu-fullstack | Structure | 2026-05-20 16:25:17
+# la-hieu-fullstack | Structure | 2026-05-21 03:47:39
 
 .
 ├── app/
@@ -46,17 +46,17 @@
 │   ├── client/
 │   │   └── assets/
 │   │       ├── fonts/
-│   │       │   ├── Archivo_wdth_wght__1.ttf
-│   │       │   ├── Arima_wght__1.ttf
-│   │       │   ├── BeVietnam-Bold_1.ttf
-│   │       │   ├── BeVietnam-ExtraBold_1.ttf
-│   │       │   ├── BeVietnam-Light_1.ttf
-│   │       │   ├── BeVietnam-Medium_1.ttf
-│   │       │   ├── BeVietnam-Regular_1.ttf
-│   │       │   ├── BeVietnam-SemiBold_1.ttf
-│   │       │   ├── BeVietnam-SemiBoldItalic_1.ttf
-│   │       │   ├── BeVietnam-Thin_1.ttf
-│   │       │   └── ... (+7 more)
+│   │       │   ├── Archivo_Condensed-Black.ttf
+│   │       │   ├── Archivo_Condensed-BlackItalic.ttf
+│   │       │   ├── Archivo_Condensed-Bold.ttf
+│   │       │   ├── Archivo_Condensed-BoldItalic.ttf
+│   │       │   ├── Archivo_Condensed-ExtraBold.ttf
+│   │       │   ├── Archivo_Condensed-ExtraBoldItalic.ttf
+│   │       │   ├── Archivo_Condensed-ExtraLight.ttf
+│   │       │   ├── Archivo_Condensed-ExtraLightItalic.ttf
+│   │       │   ├── Archivo_Condensed-Italic.ttf
+│   │       │   ├── Archivo_Condensed-Light.ttf
+│   │       │   └── ... (+114 more)
 │   │       └── static/
 │   │           ├── about/
 │   │           │   ├── about.png

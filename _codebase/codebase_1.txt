@@ -1,4 +1,4 @@
-# codebase | 52 files | 2026-05-20 16:25:17
+# codebase | 51 files | 2026-05-21 03:47:39
 
 # Part 1/5
 
@@ -612,8 +612,4 @@ Route::get('/{any}', function ($any) {
         </h2>
         <!-- View Album Link (12px, Be Vietnam, Light, Underline) -->
         <a href="{{ $viewAlbumUrl ?? '#' }}"
-            class="font-be-vietnam font-light text-[12px] text-black underline mt-2 hover:text-gray-500 transition-colors leading-[22px]">
-            View album
-        </a>
-        <!-- Description (16px, Be Vietnam, Light, Line-height 23px) -->
-        <
+            class="font-be-vietnam font-light text-[12px] text-black underline mt-2 hover:text-gray-

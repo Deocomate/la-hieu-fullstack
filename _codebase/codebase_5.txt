@@ -1,8 +1,18 @@
-# codebase | 52 files | 2026-05-20 16:25:17
+# codebase | 51 files | 2026-05-21 03:47:39
 
 # Part 5/5
 
-       title.classList.add('text-gray-400');
+ventListener('click', function(e) {
+                    // Nếu click vào thẻ A (View Album) thì không chạy hàm render ảnh
+                    if (e.target.tagName.toLowerCase() === 'a') return;
+                    const albumKey = this.getAttribute('data-album');
+                    // A. Xóa trạng thái Active của tất cả các Nav Items
+                    navItems.forEach(nav => {
+                        nav.classList.remove('relative');
+                        // Reset tiêu đề về xám
+                        const title = nav.querySelector('.album-title');
+                        title.classList.remove('text-black');
+                        title.classList.add('text-gray-400');
                         // Ẩn Link & Đường Line
                         nav.querySelector('.album-link').classList.add('hidden');
                         nav.querySelector('.album-link').classList.remove('block');
@@ -460,9 +470,8 @@
        3. RESET CSS HIỂN THỊ FONT
        ========================================== */
     body {
-        /* Bắt buộc dùng subpixel-antialiased để nét chữ hiển thị dày, đều và đẹp hệt như trong phần mềm thiết kế */
-        -webkit-font-smoothing: subpixel-antialiased;
-        -moz-osx-font-smoothing: auto;
+        /* -webkit-font-smoothing: antialiased; */
+        /* -moz-osx-font-smoothing: grayscale; */
         overflow-x: hidden;
     }
     .text-shadow-image {
@@ -603,24 +612,4 @@
     @stack('scripts')
 </body>
 </html>
-
-// .htaccess
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{REQUEST_URI} !^/public/
-    RewriteRule ^(.*)$ /public/$1 [L,QSA]
-    RewriteCond %{HTTPS} !=on
-    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
-    # Send Requests To Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
-</IfModule>
 
