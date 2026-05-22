@@ -1,6 +1,7 @@
 <section
     class="relative w-full pt-[250px] pb-[90px] md:pt-16 md:pb-16 lg:pt-[188px] lg:pb-[92px] flex flex-col items-center overflow-hidden">
 
+    <!-- Background Desktop -->
     <div class="absolute inset-0 z-0 hidden md:block">
         <img src="{{ asset('client/assets/static/home/photojournalism-background.png') }}"
             alt="Photojournalism Background" class="w-full h-full object-cover">
@@ -9,23 +10,28 @@
         </div>
     </div>
 
+    <!-- Background Mobile (Có hiệu ứng trượt/fade hình nền) -->
     <div class="absolute inset-0 z-0 md:hidden bg-black overflow-hidden">
+        <!-- Slide mặc định -->
         <img src="{{ asset('client/assets/static/home/photojournalism-background.png') }}"
             class="pj-bg-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100"
             loading="lazy">
 
+        <!-- Các slide bổ sung -->
         @for ($i = 1; $i <= 5; $i++)
             <img src="{{ asset('client/assets/static/home/photojournalism-image-' . $i . '.png') }}"
                 class="pj-bg-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0"
                 loading="lazy">
         @endfor
 
-        <div class="absolute inset-0 pointer-events-none"
+        <!-- Lớp phủ Gradient bảo lưu theo yêu cầu -->
+        <div class="absolute inset-0 pointer-events-none z-10"
             style="background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 35%, #000000 65%, #000000 100%);">
         </div>
     </div>
 
-    <div class="absolute top-[18px] left-[18px] z-20 md:hidden cursor-pointer" id="pj-controller">
+    <!-- Controller Nút Play/Pause trên Mobile -->
+    <div class="absolute top-[18px] left-[18px] z-20 md:hidden cursor-pointer animate-fade-in" id="pj-controller">
         <img src="{{ asset('client/assets/static/home/mobile-pause-button.svg') }}" id="pj-pause-icon" alt="Pause"
             class="w-[36px] h-[36px] object-contain">
         <img src="{{ asset('client/assets/static/home/mobile-play-button.svg') }}" id="pj-play-icon" alt="Play"
@@ -47,7 +53,6 @@
     </div>
 
     @php
-        // Cấu hình class đặc thù cho từng ảnh để đảm bảo layout hiển thị chính xác như bản gốc
         $galleryItems = [
             1 => ['wrapper' => '', 'img' => 'h-full aspect-[172/258]'],
             2 => ['wrapper' => '', 'img' => 'aspect-[172/258]'],
@@ -73,3 +78,80 @@
         @endforeach
     </div>
 </section>
+
+@push('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const slides = document.querySelectorAll('.pj-bg-slide');
+            const controller = document.getElementById('pj-controller');
+            const pauseIcon = document.getElementById('pj-pause-icon');
+            const playIcon = document.getElementById('pj-play-icon');
+
+            if (slides.length === 0) return;
+
+            let currentIndex = 0;
+            let slideInterval = null;
+            let isPlaying = true;
+            const intervalTime = 4000; // Thời gian chuyển ảnh (4 giây)
+
+            // Hàm thay đổi class hiển thị ảnh bằng hiệu ứng chuyển đổi opacity
+            function nextSlide() {
+                // Ẩn ảnh hiện tại
+                slides[currentIndex].classList.remove('opacity-100');
+                slides[currentIndex].classList.add('opacity-0');
+
+                // Cập nhật chỉ số tiếp theo
+                currentIndex = (currentIndex + 1) % slides.length;
+
+                // Hiển thị ảnh kế tiếp
+                slides[currentIndex].classList.remove('opacity-0');
+                slides[currentIndex].classList.add('opacity-100');
+            }
+
+            // Khởi tạo vòng lặp tự động thay đổi nền
+            function startSlideshow() {
+                if (!slideInterval) {
+                    slideInterval = setInterval(nextSlide, intervalTime);
+                }
+            }
+
+            // Tạm dừng vòng lặp tự động thay đổi nền
+            function stopSlideshow() {
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                    slideInterval = null;
+                }
+            }
+
+            // Xử lý sự kiện nhấn vào nút điều khiển
+            if (controller && pauseIcon && playIcon) {
+                controller.addEventListener('click', function() {
+                    if (isPlaying) {
+                        stopSlideshow();
+                        pauseIcon.classList.add('hidden');
+                        playIcon.classList.remove('hidden');
+                    } else {
+                        startSlideshow();
+                        playIcon.classList.add('hidden');
+                        pauseIcon.classList.remove('hidden');
+                    }
+                    isPlaying = !isPlaying;
+                });
+            }
+
+            // Tự động kích hoạt slideshow khi tải trang trên mobile
+            if (window.innerWidth < 768) {
+                startSlideshow();
+            }
+
+            // Tối ưu hiệu năng: dừng hiệu ứng khi người dùng chuyển tab trình duyệt
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    stopSlideshow();
+                } else if (isPlaying && window.innerWidth < 768) {
+                    startSlideshow();
+                }
+            });
+        });
+    </script>
+@endpush
