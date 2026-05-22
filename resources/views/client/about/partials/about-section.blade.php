@@ -1,4 +1,4 @@
-<section class="w-full bg-white pt-12 lg:pt-[78px] pb-16 lg:pb-[100px] px-4 flex flex-col items-center">
+<section class="w-full bg-white md:pt-12 lg:pt-[78px] pb-[50px] lg:pb-[100px] px-[29px] md:px-4 flex flex-col items-center">
     <!-- Main Container -->
     <!-- Desktop giới hạn chính xác tổng width: 372 (ảnh) + 38 (gap) + 327 (text) = 737px -->
     <div class="w-full max-w-[737px] flex flex-col md:flex-row gap-8 md:gap-[38px] items-start">
@@ -15,21 +15,23 @@
         <div class="w-full md:max-w-[327px] flex flex-col md:mt-[32px]">
 
             <!-- Heading 1 -->
-            <h1 class="font-be-vietnam font-normal text-[36px] md:text-[40px] leading-[25px] text-black typing-effect">
+            <h1 class="font-be-vietnam text-h-hello font-semibold md:font-normal text-black typing-effect">
                 Hello,
             </h1>
 
             <!-- Heading 2 -->
-            <!-- Cách Heading 1 là 32px. Dùng text-title (24px) có sẵn trong config -->
-            <h2 class="font-be-vietnam font-normal text-sub md:text-title text-black mt-6 md:mt-[32px] text-nowrap typing-effect">
+            <!-- Cách Heading 1 là 32px. Dùng text-h-sub-24-norm (24px) có sẵn trong config -->
+            <h2
+                class="font-be-vietnam text-h-sub-24-norm leading-[35px] font-normal text-black mt-6 md:mt-[32px] text-nowrap typing-effect">
                 I’m La Hieu,<br />
                 a professional photographer<br />
                 based in Hanoi.
             </h2>
 
             <!-- Paragraph -->
-            <!-- Cách Heading 2 là 38px. Dùng text-body (16px, line-height 22px, weight 300/light) có sẵn trong config -->
-            <p class="font-be-vietnam font-light text-base md:text-body text-black mt-6 md:mt-[38px]" data-aos="fade-up" data-aos-delay="200">
+            <!-- Cách Heading 2 là 38px. Dùng text-body-16-norm (16px, line-height 22px, weight 300/light) có sẵn trong config -->
+            <p class="font-be-vietnam text-body-16-norm font-light text-black mt-6 md:mt-[38px]" data-aos="fade-up"
+                data-aos-delay="200">
                 Rooted in my love for backpacking, I am naturally drawn to authentic connections. What truly drives my
                 lens is the people:<br class="hidden md:block" />
                 I am constantly seeking those candid moments - the unguarded joy in a crowd, the quiet focus of someone
@@ -44,5 +46,5 @@
             </div>
 
         </div>
-    </div> 
+    </div>
 </section>

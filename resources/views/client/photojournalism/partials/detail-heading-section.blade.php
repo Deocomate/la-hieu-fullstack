@@ -1,5 +1,5 @@
 <section
-    class="relative w-full bg-white overflow-hidden pt-16 lg:pt-[80px] pb-10 lg:pb-[60px] flex flex-col items-center">
+    class="relative w-full bg-white overflow-hidden pt-[45px] lg:pt-[80px] pb-[20px] lg:pb-[60px] flex flex-col items-center">
 
     <!-- ==========================================
          BACKGROUND LAYER (Chữ chìm SVG)
@@ -20,15 +20,15 @@
 
         <!-- Heading Chính -->
         <h1
-            class="font-be-vietnam font-extrabold text-[25px] md:text-[30px] lg:text-[48px] text-black uppercase text-center leading-none tracking-tight typing-effect">
+            class="font-be-vietnam text-[24px] md:text-hero-md font-extrabold tracking-[1.2px] md:tracking-normal text-black uppercase text-center typing-effect">
             Morden trendy & design app
         </h1>
 
         <!-- Subtitle -->
         <!-- mt-[32px] dựa theo tính toán khoảng cách từ bottom của H1 xuống Subtitle -->
         <p
-            class="font-be-vietnam font-light text-[14px] lg:text-[16px] text-black text-center mt-6 lg:mt-[15px] leading-[22px]" data-aos="fade-up" data-aos-delay="200">
-            Unposed emotions. The true pulse of the event
+            class="font-be-vietnam text-body-16-norm font-light text-black text-center md:mt-6 lg:mt-[15px]" data-aos="fade-up" data-aos-delay="200">
+            August 8, 2020
         </p>
 
         <!-- Vertical Divider (Đường kẻ màu vàng/nâu nhạt) -->

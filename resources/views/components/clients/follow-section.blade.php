@@ -1,32 +1,36 @@
-<section class="w-full bg-white  pb-10 lg:pb-[100px] px-4 lg:px-[30px] flex flex-col items-center">
-
+<section
+    class="w-full bg-white md:pt-16 pb-[50.2px] md:pb-[100px] px-0 md:px-4 lg:px-[30px] flex flex-col items-center overflow-hidden">
     <!-- Section Title -->
-    <!-- Font size 24px, weight 800 (extrabold), tracking 2.4px -->
+    <!-- Căn giữa tuyệt đối, bổ sung padding 2 bên trên mobile để tránh sát mép màn hình -->
     <h2
-        class="font-be-vietnam font-extrabold text-[20px] md:text-[24px] uppercase tracking-[2.4px] text-black text-center typing-effect">
+        class="font-be-vietnam text-[18px] md:text-h-sub-24-wide font-extrabold tracking-[0.9px] md:tracking-[2.4px] uppercase text-black text-center typing-effect px-[30px] md:px-0">
         Follow me on instagram
     </h2>
 
     <!-- Instagram Images Container -->
-    <div class="w-full mt-[80px] lg:mt-[80px] flex flex-wrap md:flex-nowrap">
+    <!--
+        Mobile (< md): Cuộn ngang (overflow-x-auto), loại bỏ khoảng trống (gap-0), ẩn thanh cuộn.
+        Desktop (>= md): Quay lại hiển thị flex-row không wrap, căn chỉnh theo thiết lập ban đầu.
+    -->
+    <div
+        class="w-full mt-[50px] md:mt-[80px] flex flex-row md:flex-nowrap overflow-x-auto md:overflow-visible snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 
         @for ($i = 1; $i <= 5; $i++)
             <!-- Image Item -->
             <!--
-                Desktop (md trở lên): w-1/5 (20%) -> Xếp đúng 5 ảnh trên 1 hàng
-                Mobile (< md): w-1/2 (50%) -> Rớt dòng 2 ảnh 1 hàng để tránh ảnh quá nhỏ
-                aspect-square: Bắt buộc thẻ div này luôn là hình vuông (Width = Height)
+                Mobile (< md): Kích thước cố định 307.8px x 307.8px, sát mép nhau (gap-0), hỗ trợ snap scroll.
+                Desktop (>= md): Chia đều 1/5 chiều rộng (20%), tỉ lệ khung hình vuông (aspect-square).
             -->
             <a href="#" target="_blank" rel="noopener noreferrer"
-                class="w-1/2 md:w-1/5 aspect-square relative group overflow-hidden block" data-aos="fade-up"
-                data-aos-delay="{{ $i * 100 }}">
+                class="w-[307.8px] h-[307.8px] md:w-1/5 md:h-auto md:aspect-square relative group overflow-hidden block flex-shrink-0 snap-start"
+                data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
 
                 <img src="{{ asset('client/assets/static/home/follow-me-' . $i . '.png') }}"
                     alt="Instagram Feed {{ $i }}"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy">
 
-                <!-- Overlay đen nhẹ hiện ra khi di chuột (Hiệu ứng tương tác UI) -->
+                <!-- Overlay đen nhẹ hiện ra khi di chuột -->
                 <div
                     class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                 </div>
@@ -35,5 +39,4 @@
         @endfor
 
     </div>
-
 </section>

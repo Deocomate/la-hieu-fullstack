@@ -1,5 +1,5 @@
 <section
-    class="relative w-full bg-white overflow-hidden pt-16 lg:pt-[80px] pb-12 lg:pb-[80px] flex flex-col items-center">
+    class="relative w-full bg-white overflow-hidden pt-[35px] lg:pt-[80px] pb-[30px] lg:pb-[80px] flex flex-col items-center">
 
     <!-- ==========================================
          BACKGROUND LAYER (Chữ chìm SVG)
@@ -47,15 +47,17 @@
 
         <!-- Heading Chính: 48px, Bold(700), Line-height 22px -->
         <h1
-            class="font-be-vietnam font-bold text-[32px] md:text-[40px] lg:text-[48px] text-black uppercase text-center break-words typing-effect">
+            class="font-be-vietnam text-[24px] md:text-hero-md font-extrabold md:font-bold tracking-[1.2px] md:tracking-normal text-black uppercase text-center break-words typing-effect">
             P4G Vietnam Summit
         </h1>
 
         <!-- Subtitle: 16px, Light(300), Line-height 22px -->
-        <p
-            class="font-be-vietnam font-light text-[14px] lg:text-[16px] text-black text-center leading-[22px] break-words" data-aos="fade-up" data-aos-delay="200">
+        <p class="font-be-vietnam text-[14px] md:text-body-16-norm font-normal md:font-light text-black text-center break-words"
+            data-aos="fade-up" data-aos-delay="200">
             16th June 2019
         </p>
+
+        <div class="w-[2px] h-[38px] bg-[#C5AA82] mt-[22px]" data-aos="fade-up" data-aos-delay="300"></div>
 
     </div>
 </section>

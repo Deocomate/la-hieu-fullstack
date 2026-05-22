@@ -25,13 +25,14 @@
         ],
         [
             'type' => 'link',
-            'text' => 'Learn more about the project here',
+            'text' => 'Learn more about the project',
+            'link_text' => 'here', // Tách riêng chữ "here" để tạo link
             'url' => '#',
         ],
     ];
 @endphp
 
-<section class="w-full bg-white px-4 py-12 lg:pt-0 lg:pb-[50px] flex flex-col items-center">
+<section class="w-full bg-white px-[30px] md:px-4 pb-[50px] md:py-12 lg:pt-0 lg:pb-[50px] flex flex-col items-center">
     <!-- Container giới hạn chuẩn 700px theo thiết kế -->
     <div class="w-full max-w-[700px] flex flex-col">
 
@@ -39,11 +40,12 @@
         @foreach ($contentBlocks as $block)
             @switch($block['type'])
                 @case('dropcap_paragraph')
-                    <div class="w-full relative @if (!$loop->first) mt-[50px] @endif" data-aos="fade-up">
-                        <p class="font-be-vietnam font-light text-[16px] leading-[23px] text-black">
+                    <div class="w-full relative @if (!$loop->first) mt-[20px] md:mt-[47px] @endif" data-aos="fade-up">
+                        <p class="font-be-vietnam text-body-16-tall font-light text-black">
                             <!-- Chữ cái Dropcap: 78px, weight 400. Dùng float-left để text tự động bao quanh -->
+                            <!-- Ghi đè leading thành 68px để float box có chiều cao bằng đúng 3 dòng text (~69px), căn chỉnh mt-[4px] khớp dòng kẻ đầu -->
                             <span
-                                class="float-left font-be-vietnam font-normal text-[78px] leading-[60px] pt-[6px] pr-[10px] text-black">
+                                class="float-left font-be-vietnam text-[78px] leading-[50px] -mr-[4px] -translate-x-[6px] font-normal mt-[4px] text-black">
                                 {{ $block['dropcap'] }}
                             </span>
                             {{ $block['text'] }}
@@ -53,26 +55,31 @@
 
                 @case('heading')
                     <!-- Khoảng cách margin-top 47px theo design measure -->
-                    <h2
-                        class="font-be-vietnam font-extrabold text-[28px] md:text-[36px] uppercase text-black text-center mt-[47px] break-words typing-effect" data-aos="fade-up">
+                    <h2 class="font-be-vietnam font-extrabold text-[20px] md:text-[36px] tracking-[1.6px] md:tracking-normal leading-normal md:leading-normal uppercase text-black text-center mt-[20px] md:mt-[47px] break-words typing-effect"
+                        data-aos="fade-up">
                         {{ $block['text'] }}
                     </h2>
                 @break
 
                 @case('paragraph')
                     <!-- Khoảng cách margin-top 50px theo design measure -->
-                    <p class="font-be-vietnam font-light text-[16px] leading-[23px] text-black mt-[50px]" data-aos="fade-up">
+                    <p class="font-be-vietnam text-body-16-tall font-light text-black mt-[20px] md:mt-[47px]" data-aos="fade-up">
                         {{ $block['text'] }}
                     </p>
                 @break
 
                 @case('link')
                     <!-- Khoảng cách margin-top 50px theo design measure -->
-                    <div class="w-full flex justify-center mt-[50px]" data-aos="fade-up">
-                        <a href="{{ $block['url'] }}"
-                            class="font-be-vietnam font-normal text-[16px] leading-[23px] text-black text-center hover:text-gray-500 transition-colors hover:underline">
+                    <div class="w-full flex justify-center mt-[20px] md:mt-[47px]" data-aos="fade-up">
+                        <p class="font-be-vietnam text-body-16-tall font-normal text-black text-center">
                             {{ $block['text'] }}
-                        </a>
+                            @if (isset($block['link_text']))
+                                <a href="{{ $block['url'] }}"
+                                    class="text-[#0078B4] underline hover:opacity-70 transition-opacity">
+                                    {{ $block['link_text'] }}
+                                </a>
+                            @endif
+                        </p>
                     </div>
                 @break
             @endswitch

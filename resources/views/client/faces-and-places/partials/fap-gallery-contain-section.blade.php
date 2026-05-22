@@ -72,9 +72,9 @@
     ];
 @endphp
 
-<section class="w-full bg-white px-4 pb-16 lg:pb-[100px] flex flex-col items-center">
+<section class="w-full bg-white px-[30px] md:px-4 pb-[50px] lg:pb-[100px] flex flex-col items-center">
     <!-- Vòng lặp kết xuất từng album con thông qua component fap-gallery-item -->
-    <div class="w-full flex flex-col gap-12 lg:gap-[80px]">
+    <div class="w-full flex flex-col gap-[50px] lg:gap-[80px]">
         @foreach ($galleryAlbums as $album)
             @include('client.faces-and-places.partials.fap-gallery-item', [
                 'title' => $album['title'],

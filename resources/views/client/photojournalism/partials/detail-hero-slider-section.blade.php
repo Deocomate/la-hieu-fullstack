@@ -8,7 +8,7 @@
         /* Tùy chỉnh kích thước cố định của slide theo yêu cầu (1096x800) */
         .photojournalism-detail-swiper .swiper-slide {
             width: 1096px !important;
-            height: 800px;
+            height: 685px;
             transition: opacity 0.5s ease;
         }
 
@@ -27,7 +27,7 @@
                 width: 85vw !important;
                 height: 60vw;
                 /* Giữ tỷ lệ khung hình tương đối */
-                max-height: 800px;
+                max-height: 685px;
             }
         }
 
@@ -48,7 +48,7 @@
 @endpush
 
 <!-- Padding bottom 37px theo chuẩn thiết kế. Thêm padding top để cách header -->
-<section class="w-full bg-white pb-[37px] overflow-hidden" data-aos="fade-up">
+<section class="w-full bg-white md:pb-[37px] overflow-hidden" data-aos="fade-up">
     <!-- Swiper Container: Full Width -->
     <div class="swiper photojournalism-detail-swiper w-full">
         <div class="swiper-wrapper">
@@ -67,7 +67,8 @@
                 <div class="swiper-slide overflow-hidden shadow-sm">
                     <!-- Ảnh full width và height của thẻ bọc 1096x800, object-cover tránh méo ảnh -->
                     <img src="{{ asset('client/assets/static/photojournalism/' . $image) }}"
-                        alt="Photojournalism Detail Slide {{ $index + 1 }}" class="w-full h-full object-cover">
+                        alt="Photojournalism Detail Slide {{ $index + 1 }}"
+                        class="w-full h-full max-h-[685px] object-cover">
                 </div>
             @endforeach
         </div>

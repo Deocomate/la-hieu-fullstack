@@ -1,5 +1,5 @@
 <section
-    class="relative w-full bg-white overflow-hidden pt-16 lg:pt-[50px] pb-10 lg:pb-[60px] flex flex-col items-center">
+    class="relative w-full bg-white overflow-hidden pt-[33px] lg:pt-[80px] pb-[20px] lg:pb-[60px] flex flex-col items-center">
 
     <!-- ==========================================
          BACKGROUND LAYER (Chữ chìm SVG)
@@ -9,7 +9,7 @@
         class="absolute top-[0px] lg:top-[0px] left-1/2 -translate-x-1/2 w-max flex items-center gap-[5px] lg:gap-[15px] z-0 pointer-events-none select-none opacity-80">
 
         <!-- Chữ EVENT -->
-        <img src="{{ asset('client/assets/static/videography/videography-hero-background-text.svg') }}"
+        <img src="{{ asset('client/assets/static/photojournalism/photojournalism-hero-background-text.svg') }}"
             alt="E" class="h-[120px] md:h-[180px] lg:h-[221px] w-auto">
     </div>
 
@@ -20,15 +20,15 @@
 
         <!-- Heading Chính -->
         <h1
-            class="font-be-vietnam font-extrabold text-[25px] md:text-[30px] lg:text-[48px] text-black uppercase text-center leading-none tracking-tight typing-effect">
-            Videography
+            class="font-be-vietnam text-[24px] md:text-hero-md font-extrabold tracking-[1.2px] md:tracking-normal text-black uppercase text-center typing-effect">
+            Morden trendy & design app
         </h1>
 
         <!-- Subtitle -->
         <!-- mt-[32px] dựa theo tính toán khoảng cách từ bottom của H1 xuống Subtitle -->
         <p
-            class="font-be-vietnam font-light text-[14px] lg:text-[16px] text-black text-center mt-6 lg:mt-[15px] leading-[22px]" data-aos="fade-up" data-aos-delay="200">
-            Unposed emotions. The true pulse of the event
+            class="font-be-vietnam text-body-16-norm font-light text-black text-center md:mt-6 lg:mt-[15px]" data-aos="fade-up" data-aos-delay="200">
+            August 8, 2020
         </p>
 
         <!-- Vertical Divider (Đường kẻ màu vàng/nâu nhạt) -->

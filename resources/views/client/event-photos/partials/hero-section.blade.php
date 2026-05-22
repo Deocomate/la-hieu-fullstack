@@ -1,5 +1,5 @@
 <section
-    class="relative w-full bg-white overflow-hidden pt-16 lg:pt-[80px] pb-12 lg:pb-[80px] flex flex-col items-center">
+    class="relative w-full bg-white overflow-hidden pt-[40px] lg:pt-[80px] pb-[30px] lg:pb-[80px] flex flex-col items-center">
 
     <!-- ==========================================
          BACKGROUND LAYER (Chữ chìm SVG)
@@ -42,18 +42,17 @@
     <!-- ==========================================
          FOREGROUND LAYER (Nội dung hiển thị)
          ========================================== -->
-    <div class="relative z-10 w-full px-4 flex flex-col items-center">
+    <div class="relative z-10 w-full px-[35px] flex flex-col items-center">
 
         <!-- Heading Chính -->
         <h1
-            class="font-be-vietnam font-extrabold text-[44px] md:text-[60px] lg:text-[75px] text-black uppercase text-center leading-none tracking-tight typing-effect">
+            class="font-be-vietnam text-[36px] md:text-hero-lg font-extrabold tracking-[1.8px] md:tracking-normal text-black uppercase text-center typing-effect">
             Event Photos
         </h1>
 
         <!-- Subtitle -->
-        <!-- mt-[32px] dựa theo tính toán khoảng cách từ bottom của H1 xuống Subtitle -->
-        <p
-            class="font-be-vietnam font-light text-[14px] lg:text-[16px] text-black text-center mt-6 lg:mt-[15px] leading-[22px]" data-aos="fade-up" data-aos-delay="200">
+        <p class="font-be-vietnam text-body-16-norm font-thin text-black text-center mt-[5px] lg:mt-[15px]"
+            data-aos="fade-up" data-aos-delay="200">
             Unposed emotions. The true pulse of the event
         </p>
 
@@ -63,8 +62,8 @@
 
         <!-- Đoạn văn bản mô tả -->
         <!-- Chiều rộng giới hạn 430px theo design context -->
-        <p
-            class="font-be-vietnam font-light text-[14px] text-black text-center leading-[22px] max-w-[430px] mt-[24.43px] mb-8 lg:mb-[47px]" data-aos="fade-up" data-aos-delay="400">
+        <p class="font-be-vietnam font-light text-[14px] text-black text-center leading-[22px] max-w-[430px] mt-[24.43px] mb-8 lg:mb-[47px]"
+            data-aos="fade-up" data-aos-delay="400">
             Even in the middle of a vibrant crowd, I am always looking for the same thing: the raw, genuine moments that
             define the true character of the event
         </p>

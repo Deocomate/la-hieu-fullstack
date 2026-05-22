@@ -1,5 +1,5 @@
 <section
-    class="relative w-full bg-white overflow-hidden pt-16 lg:pt-[80px] pb-12 lg:pb-[50px] flex flex-col items-center">
+    class="relative w-full bg-white overflow-hidden pt-[33px] lg:pt-[80px] pb-[20px] lg:pb-[50px] flex flex-col items-center">
 
     <!-- ==========================================
          BACKGROUND LAYER (Chữ chìm SVG)
@@ -20,14 +20,14 @@
 
         <!-- Heading Chính -->
         <h1
-            class="font-be-vietnam font-extrabold text-[44px] md:text-[60px] lg:text-[75px] text-black uppercase text-center leading-none tracking-tight typing-effect">
+            class="font-be-vietnam text-[36px] md:text-hero-lg font-extrabold tracking-[1.8px] md:tracking-normal text-black uppercase text-center typing-effect">
             FACES AND PLACES
         </h1>
 
         <!-- Subtitle -->
         <!-- mt-[32px] dựa theo tính toán khoảng cách từ bottom của H1 xuống Subtitle -->
         <p
-            class="font-be-vietnam font-light text-[14px] lg:text-[16px] text-black text-center mt-6 lg:mt-[15px] leading-[22px]" data-aos="fade-up" data-aos-delay="200">
+            class="font-be-vietnam text-body-16-norm font-thin text-black text-center mt-[5px] lg:mt-[15px]" data-aos="fade-up" data-aos-delay="200">
             Unposed emotions. The true pulse of the event
         </p>
 

@@ -13,36 +13,31 @@
 
         <!-- Active Page (1) -->
         <!-- Line-height 25.5px, border-bottom 2.5px solid black -->
-        <a href="#" class="text-[17px] font-bold text-black leading-[25.5px] border-b-[2.5px] border-black pb-[2px]"
-            style="font-family: 'Archivo', sans-serif;">
+        <a href="#" class="font-archivo text-paginate font-bold text-black border-b-[2.5px] border-black pb-[2px]">
             1
         </a>
 
         <!-- Inactive Page (2) -->
         <a href="#"
-            class="text-[17px] font-bold text-black/40 leading-[25.5px] hover:text-black transition-colors"
-            style="font-family: 'Archivo', sans-serif;">
+            class="font-archivo text-paginate font-bold text-black/40 hover:text-black transition-colors">
             2
         </a>
 
         <!-- Inactive Page (3) -->
         <a href="#"
-            class="text-[17px] font-bold text-black/40 leading-[25.5px] hover:text-black transition-colors"
-            style="font-family: 'Archivo', sans-serif;">
+            class="font-archivo text-paginate font-bold text-black/40 hover:text-black transition-colors">
             3
         </a>
 
         <!-- Dots (...) -->
         <!-- Letter-spacing 1.7px -->
-        <span class="text-[17px] font-bold text-black/40 leading-[25.5px] tracking-[1.7px]"
-            style="font-family: 'Archivo', sans-serif;">
+        <span class="font-archivo text-paginate font-bold text-black/40 tracking-[1.7px]">
             ...
         </span>
 
         <!-- Inactive Page (9) -->
         <a href="#"
-            class="text-[17px] font-bold text-black/40 leading-[25.5px] hover:text-black transition-colors"
-            style="font-family: 'Archivo', sans-serif;">
+            class="font-archivo text-paginate font-bold text-black/40 hover:text-black transition-colors">
             9
         </a>
 

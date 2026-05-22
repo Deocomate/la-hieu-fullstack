@@ -1,6 +1,6 @@
-<section class="photojournalism-list-card-contain-section w-full max-w-[1320px] mx-auto pb-20">
+<section class="photojournalism-list-card-contain-section w-full max-w-[1320px] mx-auto pb-[50px] md:pb-20">
     <!-- Sử dụng flex-col và gap để tạo khoảng cách chính xác giữa các card -->
-    <div class="w-full flex flex-col gap-[25px]">
+    <div class="w-full flex flex-col md:gap-[25px]">
 
         @for ($i = 0; $i < 4; $i++)
             @php

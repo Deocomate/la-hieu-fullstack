@@ -1,12 +1,12 @@
 {{-- resources/views/client/faces-and-places/partials/fap-gallery-item.blade.php --}}
-<div class="w-full flex flex-col items-center pb-12 lg:pb-[60px]">
+<div class="w-full flex flex-col items-center lg:pb-[60px]">
     <!-- ==========================================
          ALBUM HEADER INFO
          ========================================== -->
     <div class="w-full max-w-[725px] flex flex-col items-center text-center mb-8 lg:mb-[50px]" data-aos="fade-up">
         <!-- Title (36px, Be Vietnam, Bold) -->
         <h2
-            class="font-be-vietnam font-extrabold text-[28px] lg:text-[36px] text-black uppercase tracking-[2.4px] leading-tight typing-effect">
+            class="font-be-vietnam font-extrabold text-[24px] md:text-[28px] lg:text-[36px] text-black uppercase tracking-[1.2px] md:tracking-[2.4px] leading-tight typing-effect">
             {{ $title }}
         </h2>
 
@@ -24,8 +24,9 @@
 
     <!-- ==========================================
          ALBUM GALLERY GRID (Max-width 1320px)
+         Đổi grid-cols-1 sm:grid-cols-2 thành grid-cols-2 cho hiển thị 2 cột trên di động
          ========================================== -->
-    <div class="w-full max-w-[1320px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[10px]">
+    <div class="w-full max-w-[1320px] grid grid-cols-2 lg:grid-cols-4 gap-[10px]">
 
         <!-- COLUMN 1 (Gồm 2 ảnh) -->
         <div class="flex flex-col gap-[10px]" data-aos="fade-up" data-aos-delay="100">
