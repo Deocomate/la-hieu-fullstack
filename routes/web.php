@@ -14,10 +14,7 @@ Route::get('/', function () {
     return view('client.home.index');
 });
 
-// Ví dụ: Force /admin/users trỏ thẳng vào file edit.blade.php theo yêu cầu của bạn
-Route::get('/admin/users', function () {
-    return view('admin.users.edit');
-});
+// Custom routes can be placed here
 
 
 /*

@@ -6,12 +6,34 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
         $now = Carbon::now();
+
+        // Tạo Super Admin
+        User::firstOrCreate(
+            ['email' => env('ADMIN_EMAIL', 'admin@lahieu.com')],
+            [
+                'name' => 'Super Admin',
+                'password' => Hash::make('password'),
+                'role' => 'super_admin',
+            ]
+        );
+
+        // Tạo Admin thường để test phân quyền
+        User::firstOrCreate(
+            ['email' => 'staff@lahieu.com'],
+            [
+                'name' => 'Admin Staff',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+            ]
+        );
 
         // ==========================================
         // 1. SETTINGS SEEDER
