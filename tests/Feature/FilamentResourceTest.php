@@ -21,6 +21,7 @@ final class FilamentResourceTest extends TestCase
 
     public function test_guest_is_redirected_to_login(): void
     {
+        $this->get('/admin')->assertRedirect('/admin/login');
         $this->get('/admin/settings')->assertRedirect('/admin/login');
         $this->get('/admin/partners')->assertRedirect('/admin/login');
         $this->get('/admin/social-feeds')->assertRedirect('/admin/login');
@@ -51,7 +52,7 @@ final class FilamentResourceTest extends TestCase
 
         $this->actingAs($admin);
 
-        $this->get('/admin')->assertSuccessful();
+        $this->get('/admin')->assertRedirect('/admin/users');
         $this->get('/admin/settings')->assertSuccessful();
         $this->get('/admin/partners')->assertSuccessful();
         $this->get('/admin/social-feeds')->assertSuccessful();

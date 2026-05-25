@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\AboutController;
 use App\Http\Controllers\Client\ContactController;
@@ -15,6 +16,12 @@ use App\Http\Controllers\Client\VideographyController;
 | Sử dụng Explicit Routing để tối ưu tốc độ và bảo mật.
 |--------------------------------------------------------------------------
 */
+
+Route::get('/admin', function () {
+    return Auth::check()
+        ? redirect()->route('filament.admin.resources.users.index')
+        : redirect()->route('filament.admin.auth.login');
+})->name('admin.redirect');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
