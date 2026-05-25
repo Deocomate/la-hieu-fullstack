@@ -1,0 +1,33 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Support;
+
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
+final class ClientImage
+{
+    public static function url(?string $path, ?string $fallback = null): string
+    {
+        $path = trim((string) ($path ?: $fallback));
+
+        if ($path === '') {
+            return '';
+        }
+
+        if (
+            Str::startsWith($path, ['http://', 'https://', '//', '/'])
+            || Str::startsWith($path, 'data:')
+        ) {
+            return $path;
+        }
+
+        if (Str::startsWith($path, 'client/assets/')) {
+            return asset($path);
+        }
+
+        return Storage::url($path);
+    }
+}

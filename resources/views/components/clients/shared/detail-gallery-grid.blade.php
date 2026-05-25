@@ -9,7 +9,18 @@
         asset('client/assets/static/event-photo/gallery-grid-7.png'),
         asset('client/assets/static/event-photo/gallery-grid-8.png'),
     ];
-    $gridImages = $images ?? $defaultImages;
+    $gridImages = collect($images ?? $defaultImages)
+        ->filter()
+        ->values();
+
+    if ($gridImages->isEmpty()) {
+        $gridImages = collect($defaultImages);
+    }
+
+    $gridImages = $gridImages
+        ->pad(8, $gridImages->first())
+        ->take(8)
+        ->values();
 @endphp
 
 <section class="w-full bg-white px-[30px] md:px-[25px] pb-[50px] md:py-[50px]">

@@ -28,7 +28,7 @@
         ],
     ];
 
-    $blocks = $contentBlocks ?? $defaultBlocks;
+    $blocks = $contentBlocks ?? ($article->content_blocks ?? $defaultBlocks);
 @endphp
 
 <section class="w-full bg-white px-[30px] md:px-4 pb-[50px] md:py-12 lg:pt-0 lg:pb-[50px] flex flex-col items-center">

@@ -11,16 +11,22 @@
         <div class="w-full lg:w-[613px] flex-shrink-0 flex flex-col pt-[40px] md:pt-[96px]">
             <!-- Contact Title -->
             <!-- Căn giữa trên mobile (text-center), căn trái trên desktop (md:text-left) -->
+            @php
+                $contactImageSrc = \App\Support\ClientImage::url(
+                    $page->hero_images['contact_image'] ?? null,
+                    'client/assets/static/contact/contact-main-image.png',
+                );
+            @endphp
             <h1
                 class="font-be-vietnam text-[36px] md:text-hero-lg-contact font-extrabold md:font-bold tracking-[1.8px] md:tracking-normal text-black text-center md:text-left uppercase typing-effect">
-                contact
+                {{ $page->hero_title ?? 'contact' }}
             </h1>
 
             <!-- Main Image -->
             <!-- Khoảng cách CONTACT -> Hero Image: 30px trên mobile (mt-[30px]), 87px trên desktop (md:mt-[87px]) -->
             <div class="w-full h-auto lg:h-[460px] mt-[30px] md:mt-[87px] overflow-hidden bg-gray-100 shadow-sm"
                 data-aos="zoom-out" data-aos-duration="1000">
-                <img src="{{ asset('client/assets/static/contact/contact-main-image.png') }}"
+                <img src="{{ $contactImageSrc }}"
                     alt="La Hieu Photography Contact Journey" class="w-full h-full object-cover" loading="lazy">
             </div>
         </div>
@@ -34,8 +40,7 @@
             <!-- Khoảng cách từ ảnh đến intro text: 33px trên mobile (mt-[33px]), 50px trên desktop (md:mt-[50px]) -->
             <p
                 class="font-be-vietnam text-[20px] md:text-h-section-32 font-light text-black text-left typing-effect mt-[33px] md:mt-[50px]">
-                I'm always ready for the next journey<br />
-                Let’s talk about yours
+                {!! nl2br(e($page->hero_description ?? "I'm always ready for the next journey\nLet's talk about yours")) !!}
             </p>
 
             <!-- Đường kẻ ngang -->
@@ -59,9 +64,14 @@
                         <h4 class="font-be-vietnam text-[16px] md:text-[20px] font-semibold text-black uppercase">
                             Phone number
                         </h4>
-                        <a href="tel:0902222876"
+                        @php
+                            $contactPhone = $settings['contact_phone'] ?? ($page->content['phone'] ?? '090 2222 876');
+                            $contactEmail = $settings['contact_email'] ?? ($page->content['email'] ?? 'pvduchieu@gmail.com');
+                            $contactSocial = $settings['social_instagram'] ?? ($page->content['social'] ?? 'lahieuphotography');
+                        @endphp
+                        <a href="tel:{{ preg_replace('/\D+/', '', $contactPhone) }}"
                             class="font-be-vietnam text-[14px] md:text-body-16-norm font-light text-black hover:opacity-70 transition-opacity w-max">
-                            090 2222 876
+                            {{ $contactPhone }}
                         </a>
                     </div>
 
@@ -71,9 +81,9 @@
                         <h4 class="font-be-vietnam text-[16px] md:text-[20px] font-semibold text-black uppercase">
                             email
                         </h4>
-                        <a href="mailto:pvduchieu@gmail.com"
+                        <a href="mailto:{{ $contactEmail }}"
                             class="font-be-vietnam text-[14px] md:text-body-16-norm font-light text-black hover:opacity-70 transition-opacity break-all w-max">
-                            pvduchieu@gmail.com
+                            {{ $contactEmail }}
                         </a>
                     </div>
                 </div>
@@ -89,7 +99,7 @@
                         </h4>
                         <span
                             class="font-be-vietnam text-[14px] md:text-body-16-norm font-light text-black cursor-pointer hover:opacity-70 transition-opacity">
-                            lahieuphotography
+                            {{ $contactSocial }}
                         </span>
                     </div>
 

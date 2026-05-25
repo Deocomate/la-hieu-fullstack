@@ -55,7 +55,7 @@
                 Photojournalism
             </a>
             <!-- Lưu ý: Trong thư mục hiện tại của bạn phần videography chưa có index.blade.php, URL này đã được đặt sẵn chờ bạn tạo file -->
-            <a href="{{ url('videography/detail') }}"
+            <a href="{{ route('videography.index') }}"
                 class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] transition-colors
                 {{ request()->is('videography*') ? 'text-gray-400 font-medium md:font-semibold' : 'text-black font-medium md:font-normal hover:text-gray-500' }}">
                 Videography
@@ -103,7 +103,7 @@
             PHOTOS</a>
         <a href="{{ url('photojournalism') }}"
             class="font-oswald text-[18px] text-[#222222] uppercase tracking-[1.8px] leading-[18px] font-medium break-words w-max {{ request()->is('photojournalism*') ? 'underline' : 'hover:opacity-70' }}">PHOTOJOURNALISM</a>
-        <a href="{{ url('videography/detail') }}"
+        <a href="{{ route('videography.index') }}"
             class="font-oswald text-[18px] text-[#222222] uppercase tracking-[1.8px] leading-[18px] font-medium break-words w-max {{ request()->is('videography*') ? 'underline' : 'hover:opacity-70' }}">VIDEOGRAPHY</a>
         <a href="{{ url('faces-and-places') }}"
             class="font-oswald text-[18px] text-[#222222] uppercase tracking-[1.8px] leading-[18px] font-medium break-words w-max {{ request()->is('faces-and-places*') ? 'underline' : 'hover:opacity-70' }}">FACES

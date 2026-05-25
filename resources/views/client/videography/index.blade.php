@@ -4,8 +4,8 @@
 
 @section('content')
     @include('components.clients.shared.hero-banner', [
-        'title' => 'VIDEOGRAPHY',
-        'bgText' => 'VIDEOGRAPHY',
+        'title' => $page->hero_title ?? 'VIDEOGRAPHY',
+        'bgText' => $page->hero_bg_text ?? 'VIDEOGRAPHY',
     ])
 
     @include('components.clients.shared.article-list')

@@ -15,18 +15,18 @@
     <div
         class="w-full mt-[50px] md:mt-[80px] flex flex-row md:flex-nowrap overflow-x-auto md:overflow-visible snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 
-        @for ($i = 1; $i <= 5; $i++)
+        @foreach ($socialFeeds as $index => $feed)
             <!-- Image Item -->
             <!--
                 Mobile (< md): Kích thước cố định 307.8px x 307.8px, sát mép nhau (gap-0), hỗ trợ snap scroll.
                 Desktop (>= md): Chia đều 1/5 chiều rộng (20%), tỉ lệ khung hình vuông (aspect-square).
             -->
-            <a href="#" target="_blank" rel="noopener noreferrer"
+            <a href="{{ $feed->post_url ?: '#' }}" target="_blank" rel="noopener noreferrer"
                 class="w-[307.8px] h-[307.8px] md:w-1/5 md:h-auto md:aspect-square relative group overflow-hidden block flex-shrink-0 snap-start"
-                data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
+                data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
 
-                <img src="{{ asset('client/assets/static/home/follow-me-' . $i . '.png') }}"
-                    alt="Instagram Feed {{ $i }}"
+                <img src="{{ \App\Support\ClientImage::url($feed->image_url) }}"
+                    alt="{{ ucfirst($feed->platform) }} Feed {{ $index + 1 }}"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy">
 
@@ -36,7 +36,7 @@
                 </div>
 
             </a>
-        @endfor
+        @endforeach
 
     </div>
 </section>

@@ -1,4 +1,16 @@
-{{-- resources/views/client/faces-and-places/partials/fap-gallery-item.blade.php --}}
+@php
+    $images = collect($images ?? [])
+        ->filter()
+        ->values();
+    $fallbackImages = collect(range(1, 9))
+        ->map(fn ($i) => asset("client/assets/static/faces-and-places/faces-and-places-{$i}.png"));
+
+    if ($images->isEmpty()) {
+        $images = $fallbackImages;
+    }
+
+    $images = $images->pad(9, $images->first())->take(9)->values();
+@endphp
 <div class="w-full flex flex-col items-center lg:pb-[60px]">
     <!-- ==========================================
          ALBUM HEADER INFO
@@ -32,7 +44,7 @@
         <div class="flex flex-col gap-[10px]" data-aos="fade-up" data-aos-delay="100">
             <!-- Image 1: Tỷ lệ 322x510 -->
             <div class="w-full aspect-[322/510] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
-                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[0] ?? '')) }}"
+                <img src="{{ $images[0] }}"
                     alt="Gallery Image 1"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy">
@@ -42,7 +54,7 @@
             </div>
             <!-- Image 2: Tỷ lệ 322x451 -->
             <div class="w-full aspect-[322/451] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
-                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[1] ?? '')) }}"
+                <img src="{{ $images[1] }}"
                     alt="Gallery Image 2"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy">
@@ -56,7 +68,7 @@
         <div class="flex flex-col gap-[10px]" data-aos="fade-up" data-aos-delay="200">
             <!-- Image 3: Tỷ lệ 322x218 -->
             <div class="w-full aspect-[322/218] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
-                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[2] ?? '')) }}"
+                <img src="{{ $images[2] }}"
                     alt="Gallery Image 3"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy">
@@ -66,7 +78,7 @@
             </div>
             <!-- Image 4: Tỷ lệ 322x504 -->
             <div class="w-full aspect-[322/504] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
-                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[3] ?? '')) }}"
+                <img src="{{ $images[3] }}"
                     alt="Gallery Image 4"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy">
@@ -76,7 +88,7 @@
             </div>
             <!-- Image 5: Tỷ lệ 322x218 -->
             <div class="w-full aspect-[322/218] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
-                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[4] ?? '')) }}"
+                <img src="{{ $images[4] }}"
                     alt="Gallery Image 5"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy">
@@ -90,7 +102,7 @@
         <div class="flex flex-col gap-[10px]" data-aos="fade-up" data-aos-delay="300">
             <!-- Image 6: Tỷ lệ 322x451 -->
             <div class="w-full aspect-[322/451] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
-                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[5] ?? '')) }}"
+                <img src="{{ $images[5] }}"
                     alt="Gallery Image 6"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy">
@@ -100,7 +112,7 @@
             </div>
             <!-- Image 7: Tỷ lệ 322x452 -->
             <div class="w-full aspect-[322/452] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
-                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[6] ?? '')) }}"
+                <img src="{{ $images[6] }}"
                     alt="Gallery Image 7"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy">
@@ -114,7 +126,7 @@
         <div class="flex flex-col gap-[10px]" data-aos="fade-up" data-aos-delay="400">
             <!-- Image 8: Tỷ lệ 322x598 -->
             <div class="w-full aspect-[322/598] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
-                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[7] ?? '')) }}"
+                <img src="{{ $images[7] }}"
                     alt="Gallery Image 8"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy">
@@ -124,7 +136,7 @@
             </div>
             <!-- Image 9: Tỷ lệ 322x221 -->
             <div class="w-full aspect-[322/221] overflow-hidden group relative cursor-pointer shadow-sm bg-gray-100">
-                <img src="{{ asset('client/assets/static/faces-and-places/' . ($images[8] ?? '')) }}"
+                <img src="{{ $images[8] }}"
                     alt="Gallery Image 9"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy">
