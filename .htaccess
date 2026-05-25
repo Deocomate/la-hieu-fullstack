@@ -10,14 +10,24 @@
     RewriteCond %{HTTP:X-Forwarded-Proto} !https
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+    # Canonicalize accidental /public URLs.
+    RewriteRule ^public/?$ / [L,R=301]
+    RewriteRule ^public/(.*)$ /$1 [L,R=301]
+
     # Block direct access to sensitive Laravel files and folders when the
     # hosting document root points at the project root.
     RewriteRule ^(\.env|\.git|composer\.(json|lock)|package(-lock)?\.json|vite\.config\.js|phpunit\.xml|artisan)$ - [F,L,NC]
     RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor)(/|$) - [F,L,NC]
 
+    # Filament publishes assets to public/admin, so /admin can look like a
+    # physical directory to Apache/LiteSpeed. Always route admin pages through
+    # Laravel while still allowing concrete asset files below /admin/*.
+    RewriteRule ^admin/?$ public/index.php [L]
+    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} !-f
+    RewriteRule ^admin/.+$ public/index.php [L]
+
     # Serve existing files from public directly.
-    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f [OR]
-    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -d
+    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
     RewriteRule ^(.*)$ public/$1 [L]
 
     # Send everything else to Laravel's front controller.

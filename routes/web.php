@@ -23,6 +23,12 @@ Route::get('/admin', function () {
         : redirect()->route('filament.admin.auth.login');
 })->name('admin.redirect');
 
+Route::get('/public/admin/{path?}', function (?string $path = null) {
+    $target = trim((string) $path, '/');
+
+    return redirect('/admin'.($target !== '' ? "/{$target}" : ''), 301);
+})->where('path', '.*')->name('admin.public.redirect');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
