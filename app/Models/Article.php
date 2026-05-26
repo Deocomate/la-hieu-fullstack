@@ -75,7 +75,20 @@ final class Article extends Model
      */
     public function scopePublished(Builder $query): Builder
     {
+        $user = auth()->user();
+
+        if ($user && in_array($user->role, ['admin', 'super_admin'], true)) {
+            return $query;
+        }
+
         return $query->where('status', 'published');
+    }
+
+    public function getPreviewUrl(): string
+    {
+        return $this->type === 'videography'
+            ? route('videography.show', $this->slug)
+            : route('photojournalism.show', $this->slug);
     }
 
     /**

@@ -12,6 +12,7 @@ use App\Models\Page;
 use App\Models\Partner;
 use App\Models\Setting;
 use App\Models\SocialFeed;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
@@ -219,6 +220,17 @@ final class ClientPageDataBindingTest extends TestCase
         Article::factory()->create([
             'type' => 'videography',
             'category_id' => $category->id,
+            'title' => 'Hidden Video Detail Article',
+            'slug' => 'hidden-video-detail-article',
+            'status' => 'hidden',
+            'content_blocks' => [
+                ['type' => 'paragraph', 'text' => 'Hidden video body from database.'],
+            ],
+        ]);
+
+        Article::factory()->create([
+            'type' => 'videography',
+            'category_id' => $category->id,
             'title' => 'Video Detail Article',
             'slug' => 'video-detail-article',
             'status' => 'published',
@@ -253,6 +265,101 @@ final class ClientPageDataBindingTest extends TestCase
             ->assertSee('Video Detail Article')
             ->assertSee('Video body from database.')
             ->assertSee('abc123XYZ');
+
+        $this->get('/videography/hidden-video-detail-article')->assertNotFound();
+    }
+
+    public function test_admin_can_preview_non_public_frontend_records_and_indexes(): void
+    {
+        $this->createPage('home');
+        $this->createPage('event-photos');
+        $this->createPage('faces-and-places');
+        $this->createPage('photojournalism');
+        $this->createPage('videography');
+
+        $admin = User::factory()->create(['role' => 'admin']);
+        $category = ArticleCategory::factory()->create(['name' => 'Private Drafts', 'slug' => 'private-drafts']);
+
+        $eventAlbum = EventAlbum::factory()->create([
+            'title' => 'Draft Event Preview Album',
+            'slug' => 'draft-event-preview-album',
+            'status' => 'draft',
+            'is_featured' => true,
+        ]);
+        $eventAlbum->media()->create($this->mediaAttributes('draft-event-preview.png'));
+
+        $facesAlbum = FacesPlacesAlbum::factory()->create([
+            'title' => 'Hidden Faces Preview Album',
+            'slug' => 'hidden-faces-preview-album',
+            'status' => 'hidden',
+        ]);
+        $facesAlbum->media()->create($this->mediaAttributes('hidden-faces-preview.png'));
+
+        $photoArticle = Article::factory()->create([
+            'type' => 'photojournalism',
+            'category_id' => $category->id,
+            'title' => 'Draft Photo Preview Article',
+            'slug' => 'draft-photo-preview-article',
+            'status' => 'draft',
+            'is_featured' => true,
+            'content_blocks' => [
+                ['type' => 'paragraph', 'text' => 'Draft photo preview body.'],
+            ],
+        ]);
+        $photoArticle->media()->create($this->mediaAttributes('draft-photo-preview.png', 'slider'));
+
+        Article::factory()->create([
+            'type' => 'videography',
+            'category_id' => $category->id,
+            'title' => 'Hidden Video Preview Article',
+            'slug' => 'hidden-video-preview-article',
+            'status' => 'hidden',
+            'content_blocks' => [
+                ['type' => 'paragraph', 'text' => 'Hidden video preview body.'],
+            ],
+        ]);
+
+        $this->actingAs($admin);
+
+        $this->get('/event-photos/draft-event-preview-album')
+            ->assertOk()
+            ->assertSee('Draft Event Preview Album');
+
+        $this->get('/faces-and-places/hidden-faces-preview-album')
+            ->assertOk()
+            ->assertSee('Hidden Faces Preview Album');
+
+        $this->get('/photojournalism/draft-photo-preview-article')
+            ->assertOk()
+            ->assertSee('Draft Photo Preview Article')
+            ->assertSee('Draft photo preview body.');
+
+        $this->get('/videography/hidden-video-preview-article')
+            ->assertOk()
+            ->assertSee('Hidden Video Preview Article')
+            ->assertSee('Hidden video preview body.');
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Draft Event Preview Album')
+            ->assertSee('Draft Photo Preview Article')
+            ->assertSee('Hidden Video Preview Article');
+
+        $this->get('/event-photos')
+            ->assertOk()
+            ->assertSee('Draft Event Preview Album');
+
+        $this->get('/faces-and-places')
+            ->assertOk()
+            ->assertSee('Hidden Faces Preview Album');
+
+        $this->get('/photojournalism')
+            ->assertOk()
+            ->assertSee('Draft Photo Preview Article');
+
+        $this->get('/videography')
+            ->assertOk()
+            ->assertSee('Hidden Video Preview Article');
     }
 
     public function test_global_composers_render_settings_and_published_social_feeds(): void

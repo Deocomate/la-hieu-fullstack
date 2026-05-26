@@ -57,7 +57,18 @@ final class EventAlbum extends Model
      */
     public function scopePublished(Builder $query): Builder
     {
+        $user = auth()->user();
+
+        if ($user && in_array($user->role, ['admin', 'super_admin'], true)) {
+            return $query;
+        }
+
         return $query->where('status', 'published');
+    }
+
+    public function getPreviewUrl(): string
+    {
+        return route('event-photos.show', $this->slug);
     }
 
     /**

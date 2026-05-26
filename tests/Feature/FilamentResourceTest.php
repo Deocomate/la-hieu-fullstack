@@ -4,15 +4,26 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Filament\Resources\Articles\Pages\EditArticle as EditArticleRecord;
+use App\Filament\Resources\Articles\Pages\ListArticles;
+use App\Filament\Resources\EventAlbums\Pages\EditEventAlbum as EditEventAlbumRecord;
+use App\Filament\Resources\EventAlbums\Pages\ListEventAlbums;
+use App\Filament\Resources\FacesPlacesAlbums\Pages\EditFacesPlacesAlbum as EditFacesPlacesAlbumRecord;
+use App\Filament\Resources\FacesPlacesAlbums\Pages\ListFacesPlacesAlbums;
+use App\Filament\Resources\Pages\Pages\EditPage as EditPageRecord;
+use App\Filament\Resources\Pages\Pages\ListPages as ListPageRecords;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\EventAlbum;
 use App\Models\FacesPlacesAlbum;
+use App\Models\Page;
 use App\Models\Partner;
 use App\Models\Setting;
 use App\Models\SocialFeed;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 final class FilamentResourceTest extends TestCase
@@ -70,6 +81,72 @@ final class FilamentResourceTest extends TestCase
         $this->get('/admin/articles')->assertSuccessful();
         $this->get('/admin/articles/create')->assertSuccessful();
         $this->get("/admin/articles/{$article->id}/edit")->assertSuccessful();
+    }
+
+    public function test_preview_urls_are_generated_for_previewable_models(): void
+    {
+        $this->assertSame(route('home'), Page::factory()->make(['key' => 'home'])->getPreviewUrl());
+        $this->assertSame(route('about'), Page::factory()->make(['key' => 'about'])->getPreviewUrl());
+        $this->assertSame(route('contact'), Page::factory()->make(['key' => 'contact'])->getPreviewUrl());
+        $this->assertSame(route('event-photos.index'), Page::factory()->make(['key' => 'event-photos'])->getPreviewUrl());
+        $this->assertSame(route('faces-and-places.index'), Page::factory()->make(['key' => 'faces-and-places'])->getPreviewUrl());
+        $this->assertSame(route('photojournalism.index'), Page::factory()->make(['key' => 'photojournalism'])->getPreviewUrl());
+        $this->assertSame(route('videography.index'), Page::factory()->make(['key' => 'videography'])->getPreviewUrl());
+        $this->assertSame(url('/'), Page::factory()->make(['key' => 'unknown-page'])->getPreviewUrl());
+
+        $category = ArticleCategory::factory()->create();
+
+        $photoArticle = Article::factory()->create([
+            'category_id' => $category->id,
+            'type' => 'photojournalism',
+            'slug' => 'preview-photo-story',
+        ]);
+        $videoArticle = Article::factory()->create([
+            'category_id' => $category->id,
+            'type' => 'videography',
+            'slug' => 'preview-video-story',
+        ]);
+        $eventAlbum = EventAlbum::factory()->create(['slug' => 'preview-event-album']);
+        $facesPlacesAlbum = FacesPlacesAlbum::factory()->create(['slug' => 'preview-faces-album']);
+
+        $this->assertSame(route('photojournalism.show', 'preview-photo-story'), $photoArticle->getPreviewUrl());
+        $this->assertSame(route('videography.show', 'preview-video-story'), $videoArticle->getPreviewUrl());
+        $this->assertSame(route('event-photos.show', 'preview-event-album'), $eventAlbum->getPreviewUrl());
+        $this->assertSame(route('faces-and-places.show', 'preview-faces-album'), $facesPlacesAlbum->getPreviewUrl());
+    }
+
+    public function test_preview_actions_exist_on_filament_lists_and_edit_pages(): void
+    {
+        $admin = User::factory()->create(['role' => 'super_admin']);
+        $page = Page::factory()->create(['key' => 'home']);
+        $category = ArticleCategory::factory()->create();
+        $article = Article::factory()->create([
+            'category_id' => $category->id,
+            'slug' => 'filament-preview-article',
+        ]);
+        $eventAlbum = EventAlbum::factory()->create(['slug' => 'filament-preview-event-album']);
+        $facesPlacesAlbum = FacesPlacesAlbum::factory()->create(['slug' => 'filament-preview-faces-album']);
+
+        $this->actingAs($admin);
+        Filament::setCurrentPanel(Filament::getPanel('admin'));
+
+        Livewire::test(ListPageRecords::class)
+            ->assertTableActionExists('preview', null, $page);
+        Livewire::test(ListArticles::class)
+            ->assertTableActionExists('preview', null, $article);
+        Livewire::test(ListEventAlbums::class)
+            ->assertTableActionExists('preview', null, $eventAlbum);
+        Livewire::test(ListFacesPlacesAlbums::class)
+            ->assertTableActionExists('preview', null, $facesPlacesAlbum);
+
+        Livewire::test(EditPageRecord::class, ['record' => $page->getKey()])
+            ->assertActionExists('preview');
+        Livewire::test(EditArticleRecord::class, ['record' => $article->getKey()])
+            ->assertActionExists('preview');
+        Livewire::test(EditEventAlbumRecord::class, ['record' => $eventAlbum->getKey()])
+            ->assertActionExists('preview');
+        Livewire::test(EditFacesPlacesAlbumRecord::class, ['record' => $facesPlacesAlbum->getKey()])
+            ->assertActionExists('preview');
     }
 
     public function test_model_crud_and_persistence(): void

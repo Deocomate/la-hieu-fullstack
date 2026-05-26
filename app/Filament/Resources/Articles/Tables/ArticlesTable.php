@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Articles\Tables;
 
+use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteAction;
@@ -94,6 +95,12 @@ final class ArticlesTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
+                Action::make('preview')
+                    ->label('Xem trước')
+                    ->icon('heroicon-o-eye')
+                    ->color('info')
+                    ->url(fn ($record): string => $record->getPreviewUrl())
+                    ->openUrlInNewTab(),
                 EditAction::make(),
                 DeleteAction::make(),
                 RestoreAction::make(),
