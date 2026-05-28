@@ -1,35 +1,19 @@
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
 
-    RewriteEngine On
+# That was ONLY to protect you from 500 errors
 
-    # Force HTTPS in production.
-    RewriteCond %{HTTPS} !=on
-    RewriteCond %{HTTP:X-Forwarded-Proto} !https
-    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# if your server did not have mod_rewrite enabled
 
-    # Canonicalize accidental /public URLs.
-    RewriteRule ^public/?$ / [L,R=301]
-    RewriteRule ^public/(.*)$ /$1 [L,R=301]
+RewriteEngine On
 
-    # Block direct access to sensitive Laravel files and folders when the
-    # hosting document root points at the project root.
-    RewriteRule ^(\.env|\.git|composer\.(json|lock)|package(-lock)?\.json|vite\.config\.js|phpunit\.xml|artisan)$ - [F,L,NC]
-    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor)(/|$) - [F,L,NC]
+# RewriteBase /
 
-    # Filament publishes assets to public/admin, so /admin can look like a
-    # physical directory to Apache/LiteSpeed. Always route admin pages through
-    # Laravel while still allowing concrete asset files below /admin/*.
-    RewriteRule ^admin/?$ public/index.php [L]
-    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} !-f
-    RewriteRule ^admin/.+$ public/index.php [L]
+# NOT needed unless you're using mod_alias to redirect
 
-    # Serve existing files from public directly.
-    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
-    RewriteRule ^(.*)$ public/$1 [L]
+RewriteCond %{REQUEST_URI} !/public
 
-    # Send everything else to Laravel's front controller.
-    RewriteRule ^ public/index.php [L]
+RewriteRule ^(.*)$ public/$1 [L]
+
+# Direct all requests to /public folder
+
 </IfModule>
