@@ -9,16 +9,17 @@
         class="w-full max-w-[1320px] ml-[50px] mt-[50px] md:mt-[87px] flex flex-row md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:grid-cols-4 gap-[16px] md:gap-6 lg:gap-[52px] md:px-0 justify-items-center items-start [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 
         @foreach ($partners as $index => $partner)
-            <div class="w-[147px] h-[147px] md:w-full md:max-w-[291px] aspect-square flex-shrink-0 snap-start bg-white md:bg-[#D9D9D9] rounded-full overflow-hidden flex items-center justify-center cursor-pointer"
+            <div class="w-[147px] md:w-full md:max-w-[295px] aspect-square flex-shrink-0 snap-start bg-transparent rounded-full overflow-hidden flex items-center justify-center cursor-pointer"
                 data-aos="zoom-out" data-aos-delay="{{ ($index + 1) * 100 }}">
                 @if ($partner->link_url)
                     <a href="{{ $partner->link_url }}" target="_blank" rel="noopener noreferrer"
                         class="w-full h-full block">
-                @endif
-                <img src="{{ \App\Support\ClientImage::url($partner->logo_image, 'client/assets/static/home/partner-1.png') }}"
-                    alt="{{ $partner->name }}" class="w-full h-full object-cover" loading="lazy">
-                @if ($partner->link_url)
+                        <img src="{{ \App\Support\ClientImage::url($partner->logo_image, 'client/assets/static/home/partner-1.png') }}"
+                            alt="{{ $partner->name }}" class="w-full h-full object-cover" loading="lazy">
                     </a>
+                @else
+                    <img src="{{ \App\Support\ClientImage::url($partner->logo_image, 'client/assets/static/home/partner-1.png') }}"
+                        alt="{{ $partner->name }}" class="w-full h-full object-cover" loading="lazy">
                 @endif
             </div>
         @endforeach
