@@ -5,12 +5,12 @@
     $finalPaddingTop = $paddingTop ?? 'pt-[35px] lg:pt-[80px]';
     $finalPaddingBottom = $paddingBottom ?? 'pb-[20px] lg:pb-[80px]';
     $finalHeadingClass = $headingClass ?? 'text-[36px] md:text-hero-lg font-extrabold tracking-[1.8px] md:tracking-normal';
-    $finalSubtitleClass = $subtitleClass ?? 'text-body-16-norm font-thin mt-[5px] lg:mt-[15px]';
+    $finalSubtitleClass = $subtitleClass ?? 'text-body-16-norm font-thin mt-[5px] lg:mt-[5px]';
     // Xử lý Dynamic Background Text
     $bgTextString = strtoupper($bgText ?? $title ?? 'PHOTOJOURNALISM');
     $chars = mb_str_split($bgTextString);
     $finalBgSvgs = [];
-    
+
     // Mapping các ký tự đặc biệt trùng khớp với script JS tạo SVG
     $specialCharsMap = [
         '?' => 'question',

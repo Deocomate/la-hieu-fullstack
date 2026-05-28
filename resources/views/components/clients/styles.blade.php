@@ -178,7 +178,7 @@
                         lineHeight: '22px'
                     }], // Contact Hero
                     'hero-md': ['48px', {
-                        lineHeight: '22px'
+                        lineHeight: 'auto'
                     }], // Detail pages P4G, Nature & Landscape
                     'hero-sm': ['44px', {
                         lineHeight: 'normal',
