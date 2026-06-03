@@ -25,9 +25,12 @@ final class ClientImage
         }
 
         if (Str::startsWith($path, 'client/assets/')) {
-            return asset($path);
+            if (Str::endsWith(strtolower($path), '.svg') || file_exists(public_path($path))) {
+                return asset($path);
+            }
+            return Storage::disk('public')->url($path);
         }
 
-        return Storage::url($path);
+        return Storage::disk('public')->url($path);
     }
 }

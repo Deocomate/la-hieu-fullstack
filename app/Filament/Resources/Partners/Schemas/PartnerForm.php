@@ -23,6 +23,7 @@ final class PartnerForm
                         ->maxLength(255),
                     FileUpload::make('logo_image')
                         ->label('Logo đối tác')
+                        ->disk('public')
                         ->directory('partners')
                         ->image()
                         ->required(),

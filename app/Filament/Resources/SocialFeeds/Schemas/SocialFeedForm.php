@@ -29,6 +29,7 @@ final class SocialFeedForm
                         ->required(),
                     FileUpload::make('image_url')
                         ->label('Ảnh feed')
+                        ->disk('public')
                         ->directory('social_feeds')
                         ->image()
                         ->required(),

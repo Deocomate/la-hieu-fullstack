@@ -18,7 +18,8 @@ final class SocialFeedsTable
         return $table
             ->columns([
                 ImageColumn::make('image_url')
-                    ->label('Ảnh feed'),
+                    ->label('Ảnh feed')
+                    ->disk('public'),
                 TextColumn::make('platform')
                     ->label('Nền tảng')
                     ->badge()

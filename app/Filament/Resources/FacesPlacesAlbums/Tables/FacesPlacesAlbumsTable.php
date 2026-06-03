@@ -22,7 +22,8 @@ final class FacesPlacesAlbumsTable
         return $table
             ->columns([
                 ImageColumn::make('cover_image')
-                    ->label('Ảnh đại diện'),
+                    ->label('Ảnh đại diện')
+                    ->disk('public'),
                 TextColumn::make('title')
                     ->label('Tên bộ sưu tập')
                     ->searchable()

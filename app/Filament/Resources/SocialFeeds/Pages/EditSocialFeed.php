@@ -7,7 +7,6 @@ namespace App\Filament\Resources\SocialFeeds\Pages;
 use App\Filament\Resources\SocialFeeds\SocialFeedResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Support\Facades\Cache;
 
 final class EditSocialFeed extends EditRecord
 {
@@ -16,13 +15,7 @@ final class EditSocialFeed extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make()
-                ->after(fn (): bool => Cache::forget('client.social_feeds')),
+            DeleteAction::make(),
         ];
-    }
-
-    protected function afterSave(): void
-    {
-        Cache::forget('client.social_feeds');
     }
 }

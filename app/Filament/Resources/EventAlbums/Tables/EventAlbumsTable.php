@@ -24,7 +24,8 @@ final class EventAlbumsTable
         return $table
             ->columns([
                 ImageColumn::make('cover_image')
-                    ->label('Ảnh đại diện'),
+                    ->label('Ảnh đại diện')
+                    ->disk('public'),
                 TextColumn::make('title')
                     ->label('Tên sự kiện')
                     ->searchable()

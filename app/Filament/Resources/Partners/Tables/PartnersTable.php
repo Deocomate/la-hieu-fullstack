@@ -18,7 +18,8 @@ final class PartnersTable
         return $table
             ->columns([
                 ImageColumn::make('logo_image')
-                    ->label('Logo'),
+                    ->label('Logo')
+                    ->disk('public'),
                 TextColumn::make('name')
                     ->label('Tên đối tác')
                     ->searchable()

@@ -15,10 +15,10 @@ use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
+use App\Filament\Schemas\Components\SeoTab;
+use App\Support\MediaProcessor;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Throwable;
 
 final class FacesPlacesAlbumForm
 {
@@ -60,6 +60,7 @@ final class FacesPlacesAlbumForm
                                         ->maxLength(100),
                                     FileUpload::make('cover_image')
                                         ->label('Ảnh đại diện')
+                                        ->disk('public')
                                         ->directory('faces_places_albums/covers')
                                         ->image()
                                         ->imageEditor(),
@@ -91,38 +92,21 @@ final class FacesPlacesAlbumForm
                                         ->schema([
                                             FileUpload::make('file_url')
                                                 ->label('Ảnh')
+                                                ->disk('public')
                                                 ->directory('faces_places_albums/gallery')
                                                 ->image()
                                                 ->imageEditor()
                                                 ->required(),
                                         ])
-                                        ->mutateRelationshipDataBeforeCreateUsing(fn (array $data): array => self::prepareMediaData($data))
-                                        ->mutateRelationshipDataBeforeSaveUsing(fn (array $data): array => self::prepareMediaData($data))
+                                        ->mutateRelationshipDataBeforeCreateUsing(fn (array $data): array => MediaProcessor::prepare($data, 'gallery'))
+                                        ->mutateRelationshipDataBeforeSaveUsing(fn (array $data): array => MediaProcessor::prepare($data, 'gallery'))
                                         ->addActionLabel('Thêm ảnh')
                                         ->collapsible()
-                                        ->itemLabel(fn (array $state): ?string => self::mediaItemLabel($state)),
+                                        ->itemLabel(fn (array $state): ?string => MediaProcessor::itemLabel($state)),
                                 ]),
                         ]),
 
-                    Tab::make('SEO')
-                        ->icon('heroicon-o-magnifying-glass')
-                        ->schema([
-                            Section::make('Thông tin SEO')
-                                ->schema([
-                                    TextInput::make('seo_title')
-                                        ->label('SEO Title')
-                                        ->maxLength(70),
-                                    Textarea::make('seo_description')
-                                        ->label('SEO Description')
-                                        ->maxLength(160)
-                                        ->rows(3),
-                                    FileUpload::make('seo_image')
-                                        ->label('Ảnh SEO (Open Graph)')
-                                        ->directory('faces_places_albums/seo')
-                                        ->image()
-                                        ->imageEditor(),
-                                ])->columns(1),
-                        ]),
+                    SeoTab::make('faces_places_albums/seo'),
                 ])
                 ->columnSpanFull(),
         ]);
@@ -164,70 +148,5 @@ final class FacesPlacesAlbumForm
         ];
     }
 
-    private static function mediaItemLabel(array $state): ?string
-    {
-        $fileUrl = self::fileUrlFromState($state['file_url'] ?? null);
 
-        return $state['file_name'] ?? ($fileUrl ? basename($fileUrl) : null);
-    }
-
-    private static function prepareMediaData(array $data): array
-    {
-        $fileUrl = self::fileUrlFromState($data['file_url'] ?? null);
-
-        $data['collection_name'] = 'gallery';
-        $data['file_name'] = $fileUrl ? basename($fileUrl) : ($data['file_name'] ?? '');
-        $data['custom_properties'] = $data['custom_properties'] ?? [];
-
-        return array_merge($data, self::fileMetadata($fileUrl));
-    }
-
-    private static function fileUrlFromState(mixed $state): ?string
-    {
-        if (is_array($state)) {
-            $state = reset($state);
-        }
-
-        return is_string($state) && $state !== '' ? $state : null;
-    }
-
-    /**
-     * @return array{mime_type: ?string, size: ?int, width: ?int, height: ?int}
-     */
-    private static function fileMetadata(?string $path): array
-    {
-        $metadata = [
-            'mime_type' => null,
-            'size' => null,
-            'width' => null,
-            'height' => null,
-        ];
-
-        if (! $path) {
-            return $metadata;
-        }
-
-        $disk = Storage::disk((string) config('filesystems.default'));
-
-        try {
-            if (! $disk->exists($path)) {
-                return $metadata;
-            }
-
-            $metadata['mime_type'] = $disk->mimeType($path) ?: null;
-            $metadata['size'] = $disk->size($path) ?: null;
-
-            $absolutePath = $disk->path($path);
-            $dimensions = @getimagesize($absolutePath);
-
-            if (is_array($dimensions)) {
-                $metadata['width'] = $dimensions[0] ?? null;
-                $metadata['height'] = $dimensions[1] ?? null;
-            }
-        } catch (Throwable) {
-            return $metadata;
-        }
-
-        return $metadata;
-    }
 }

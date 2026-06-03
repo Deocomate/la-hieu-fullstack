@@ -12,6 +12,7 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
+use App\Filament\Schemas\Components\SeoTab;
 use Filament\Schemas\Schema;
 
 final class PageForm
@@ -21,29 +22,7 @@ final class PageForm
         return $schema->components([
             Tabs::make('Tabs')
                 ->tabs([
-                    Tab::make('SEO')
-                        ->icon('heroicon-o-magnifying-glass')
-                        ->schema([
-                            Section::make('Thông tin SEO')
-                                ->description('Tối ưu hóa công cụ tìm kiếm cho trang này.')
-                                ->schema([
-                                    TextInput::make('seo_title')
-                                        ->label('SEO Title')
-                                        ->helperText('Tối đa 70 ký tự. Hiển thị trên tab trình duyệt và kết quả Google.')
-                                        ->maxLength(70),
-                                    Textarea::make('seo_description')
-                                        ->label('SEO Description')
-                                        ->helperText('Tối đa 160 ký tự. Đoạn mô tả xuất hiện dưới tiêu đề trong kết quả tìm kiếm.')
-                                        ->maxLength(160)
-                                        ->rows(3),
-                                    FileUpload::make('seo_image')
-                                        ->label('Ảnh SEO (Open Graph)')
-                                        ->helperText('Ảnh hiển thị khi chia sẻ link lên mạng xã hội. Khuyến nghị 1200x630px.')
-                                        ->directory('pages/seo')
-                                        ->image()
-                                        ->imageEditor(),
-                                ])->columns(1),
-                        ]),
+                    SeoTab::make('pages/seo', 'Tối ưu hóa công cụ tìm kiếm cho trang này.'),
 
                     Tab::make('Hero / Header')
                         ->icon('heroicon-o-photo')
@@ -93,6 +72,7 @@ final class PageForm
                                 ->schema([
                                     FileUpload::make('hero_images.hero_banner')
                                         ->label('Ảnh Banner chính')
+                                        ->disk('public')
                                         ->helperText('Ảnh lớn hiển thị phía trên trang chủ (ảnh cô gái H\'Mông). Để trống = dùng ảnh mặc định.')
                                         ->directory('pages/home')
                                         ->image()
@@ -100,12 +80,14 @@ final class PageForm
                                         ->visible(fn (Get $get): bool => $get('key') === 'home'),
                                     FileUpload::make('hero_images.signature_logo')
                                         ->label('Ảnh chữ ký (Signature)')
+                                        ->disk('public')
                                         ->helperText('Logo chữ ký La Hiếu bên dưới nội dung. Để trống = dùng ảnh mặc định.')
                                         ->directory('pages/signatures')
                                         ->image()
                                         ->visible(fn (Get $get): bool => in_array($get('key'), ['home', 'about'])),
                                     FileUpload::make('hero_images.about_image')
                                         ->label('Ảnh chân dung')
+                                        ->disk('public')
                                         ->helperText('Ảnh chân dung La Hiếu hiển thị bên trái trang About. Để trống = dùng ảnh mặc định.')
                                         ->directory('pages/about')
                                         ->image()
@@ -113,6 +95,7 @@ final class PageForm
                                         ->visible(fn (Get $get): bool => $get('key') === 'about'),
                                     FileUpload::make('hero_images.contact_image')
                                         ->label('Ảnh chuyến đi (Contact)')
+                                        ->disk('public')
                                         ->helperText('Ảnh phong cảnh hiển thị bên trái trang Contact. Để trống = dùng ảnh mặc định.')
                                         ->directory('pages/contact')
                                         ->image()
@@ -138,6 +121,7 @@ final class PageForm
                                         ->rows(3),
                                     FileUpload::make('content.event.bg_image')
                                         ->label('Ảnh nền (Background)')
+                                        ->disk('public')
                                         ->helperText('Ảnh nền tối phía sau section Event. Để trống = dùng ảnh mặc định.')
                                         ->directory('pages/home/event')
                                         ->image()
@@ -168,6 +152,7 @@ final class PageForm
                                         ->rows(4),
                                     FileUpload::make('content.photojournalism.desktop_bg')
                                         ->label('Ảnh nền Desktop')
+                                        ->disk('public')
                                         ->helperText('Ảnh nền hiển thị trên màn hình Desktop. Để trống = dùng ảnh mặc định.')
                                         ->directory('pages/home/photojournalism')
                                         ->image()
@@ -178,6 +163,7 @@ final class PageForm
                                         ->schema([
                                             FileUpload::make('image')
                                                 ->label('Ảnh slide')
+                                                ->disk('public')
                                                 ->directory('pages/home/photojournalism/slides')
                                                 ->image()
                                                 ->imageEditor()

@@ -17,17 +17,7 @@ use App\Http\Controllers\Client\VideographyController;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/admin', function () {
-    return Auth::check()
-        ? redirect()->route('filament.admin.resources.users.index')
-        : redirect()->route('filament.admin.auth.login');
-})->name('admin.redirect');
 
-Route::get('/public/admin/{path?}', function (?string $path = null) {
-    $target = trim((string) $path, '/');
-
-    return redirect('/admin'.($target !== '' ? "/{$target}" : ''), 301);
-})->where('path', '.*')->name('admin.public.redirect');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
@@ -56,3 +46,28 @@ Route::prefix('videography')->name('videography.')->group(function () {
     Route::get('/', [VideographyController::class, 'index'])->name('index');
     Route::get('/{slug}', [VideographyController::class, 'show'])->name('show');
 });
+
+// Fallback image routes for local/windows environment
+Route::get('storage/{path}', function (string $path) {
+    abort_if(str_contains($path, '..'), 400, 'Invalid path');
+
+    $filePath = storage_path('app/public/' . $path);
+    if (!file_exists($filePath)) {
+        abort(404);
+    }
+    return response()->file($filePath);
+})->where('path', '.*');
+
+Route::get('client/assets/{path}', function (string $path) {
+    abort_if(str_contains($path, '..'), 400, 'Invalid path');
+
+    $filePath = public_path('client/assets/' . $path);
+    if (!file_exists($filePath)) {
+        $filePath = storage_path('app/public/client/assets/' . $path);
+    }
+    if (!file_exists($filePath)) {
+        abort(404);
+    }
+    return response()->file($filePath);
+})->where('path', '.*');
+

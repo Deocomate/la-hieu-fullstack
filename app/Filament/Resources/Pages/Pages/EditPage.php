@@ -7,7 +7,6 @@ namespace App\Filament\Resources\Pages\Pages;
 use App\Filament\Resources\Pages\PageResource;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Support\Facades\Cache;
 
 final class EditPage extends EditRecord
 {
@@ -23,12 +22,5 @@ final class EditPage extends EditRecord
                 ->url(fn (): string => $this->record->getPreviewUrl())
                 ->openUrlInNewTab(),
         ];
-    }
-
-    protected function afterSave(): void
-    {
-        /** @var \App\Models\Page $page */
-        $page = $this->record;
-        Cache::forget("page.{$page->key}");
     }
 }

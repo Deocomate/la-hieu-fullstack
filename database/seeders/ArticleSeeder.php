@@ -47,9 +47,16 @@ final class ArticleSeeder extends Seeder
 
         foreach (['photojournalism', 'videography'] as $type) {
             for ($number = 1; $number <= 4; $number++) {
-                $assetIndex = (($number - 1) % 2) + 1;
-                $coverImage = "client/assets/static/photojournalism/photo-image-card-{$assetIndex}.png";
-                $badgeLogo = "client/assets/static/photojournalism/photo-logo-card-{$assetIndex}.svg";
+                if ($type === 'photojournalism') {
+                    $assetIndex = (($number - 1) % 2) + 1;
+                    $coverImage = "client/assets/static/photojournalism/photo-image-card-{$assetIndex}.png";
+                    $badgeLogo = "client/assets/static/photojournalism/photo-logo-card-{$assetIndex}.svg";
+                } else {
+                    $assetIndex = (($number - 1) % 3) + 1;
+                    $coverImage = "client/assets/static/videography/hero-slider-{$assetIndex}.png";
+                    $badgeLogo = null;
+                }
+                
                 $title = "Mordern & Trendy App Designs {$number}";
                 $label = $type === 'photojournalism' ? 'Photojournalism' : 'Videography';
                 $slugPrefix = $type === 'photojournalism' ? 'pj' : 'vd';
@@ -78,7 +85,11 @@ final class ArticleSeeder extends Seeder
                     ]
                 );
 
-                $this->seedSliderMedia($article);
+                if ($type === 'photojournalism') {
+                    $this->seedSliderMedia($article);
+                } else {
+                    $article->media()->delete();
+                }
             }
         }
     }

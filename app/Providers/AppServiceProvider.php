@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Page;
 use App\Models\Setting;
 use App\Models\SocialFeed;
+use App\Observers\PageObserver;
+use App\Observers\SettingObserver;
+use App\Observers\SocialFeedObserver;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Setting::observe(SettingObserver::class);
+        SocialFeed::observe(SocialFeedObserver::class);
+        Page::observe(PageObserver::class);
+
         View::composer('components.clients.follow-section', function ($view): void {
             $socialFeeds = Cache::remember('client.social_feeds', 3600, function () {
                 return SocialFeed::published()
