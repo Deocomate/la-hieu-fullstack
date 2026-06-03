@@ -40,6 +40,7 @@
         font-display: swap;
     }
 
+    /* fix font 500*/
     @font-face {
         font-family: 'Be Vietnam';
         src: url("{{ asset('client/assets/fonts/BeVietnam-Light.ttf') }}") format('truetype');
