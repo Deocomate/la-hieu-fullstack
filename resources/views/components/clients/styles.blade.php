@@ -42,7 +42,7 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-Thin.ttf') }}") format('truetype');
+        src: url("{{ asset('client/assets/fonts/BeVietnam-Light.ttf') }}") format('truetype');
         font-weight: 500;
         font-style: normal;
         font-display: swap;
