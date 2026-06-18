@@ -39,7 +39,7 @@
             <!-- Description -->
             <!-- Khoảng cách từ ảnh đến intro text: 33px trên mobile (mt-[33px]), 50px trên desktop (md:mt-[50px]) -->
             <p
-                class="font-be-vietnam text-[20px] md:text-h-section-32 font-light text-black text-left typing-effect mt-[33px] md:mt-[50px]">
+                class="font-be-vietnam text-[20px] md:text-h-section-32 font-light text-black text-left typing-effect mt-[30px] md:mt-[15px]">
                 {!! nl2br(e($page->hero_description ?? "I'm always ready for the next journey\nLet's talk about yours")) !!}
             </p>
 

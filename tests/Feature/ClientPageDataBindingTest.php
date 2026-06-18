@@ -362,6 +362,90 @@ final class ClientPageDataBindingTest extends TestCase
             ->assertSee('Hidden Video Preview Article');
     }
 
+    public function test_gallery_pages_render_lightbox_markup(): void
+    {
+        $this->createPage('event-photos');
+        $this->createPage('faces-and-places');
+
+        $eventAlbum = EventAlbum::factory()->create([
+            'title' => 'Lightbox Event Album',
+            'slug' => 'lightbox-event-album',
+            'status' => 'published',
+        ]);
+
+        foreach (range(1, 3) as $number) {
+            $eventAlbum->media()->create(array_merge(
+                $this->mediaAttributes("event-gallery-{$number}.png"),
+                ['priority' => $number],
+            ));
+        }
+
+        $facesAlbum = FacesPlacesAlbum::factory()->create([
+            'title' => 'Lightbox Faces Album',
+            'slug' => 'lightbox-faces-album',
+            'status' => 'published',
+        ]);
+
+        foreach (range(1, 2) as $number) {
+            $facesAlbum->media()->create(array_merge(
+                $this->mediaAttributes("faces-gallery-{$number}.png"),
+                ['priority' => $number],
+            ));
+        }
+
+        $this->get('/event-photos/lightbox-event-album')
+            ->assertOk()
+            ->assertSee('data-gallery', false)
+            ->assertSee('data-gallery-index', false)
+            ->assertSee('gallery-trigger', false)
+            ->assertSee('event-gallery-3.png');
+
+        $this->get('/event-photos')
+            ->assertOk()
+            ->assertSee('data-gallery="event-photos-active"', false)
+            ->assertSee('gallery-trigger', false);
+
+        $this->get('/faces-and-places/lightbox-faces-album')
+            ->assertOk()
+            ->assertSee('data-gallery="fap-lightbox-faces-album"', false)
+            ->assertSee('faces-gallery-2.png');
+
+        $this->get('/faces-and-places')
+            ->assertOk()
+            ->assertSee('data-gallery="fap-lightbox-faces-album"', false)
+            ->assertSee('gallery-trigger', false);
+    }
+
+    public function test_index_pages_render_card_hover_markup(): void
+    {
+        $this->createPage('videography');
+        $this->createPage('faces-and-places');
+
+        $category = ArticleCategory::factory()->create(['name' => 'Films', 'slug' => 'films']);
+
+        Article::factory()->create([
+            'type' => 'videography',
+            'category_id' => $category->id,
+            'title' => 'Hover Video Article',
+            'slug' => 'hover-video-article',
+            'status' => 'published',
+        ]);
+
+        FacesPlacesAlbum::factory()->create([
+            'title' => 'Hover Faces Album',
+            'slug' => 'hover-faces-album',
+            'status' => 'published',
+        ]);
+
+        $this->get('/videography')
+            ->assertOk()
+            ->assertSee('card-section-hover-surface', false);
+
+        $this->get('/faces-and-places')
+            ->assertOk()
+            ->assertSee('card-section-hover-surface', false);
+    }
+
     public function test_global_composers_render_settings_and_published_social_feeds(): void
     {
         $this->createPage('contact');

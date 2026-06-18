@@ -40,34 +40,34 @@
         <!-- Menu ở giữa -->
         <nav class="hidden lg:flex items-center gap-8 xl:gap-12">
             <a href="{{ url('about') }}"
-                class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] transition-colors
-                {{ request()->is('about') ? 'text-gray-400 font-medium md:font-semibold' : 'text-black font-medium md:font-normal hover:text-gray-500' }}">
+                class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] text-black font-medium md:font-normal transition-colors
+                {{ request()->is('about') ? 'underline underline-offset-4' : 'hover:text-gray-500' }}">
                 About
             </a>
             <a href="{{ url('event-photos') }}"
-                class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] transition-colors
-                {{ request()->is('event-photos*') ? 'text-gray-400 font-medium md:font-semibold' : 'text-black font-medium md:font-normal hover:text-gray-500' }}">
+                class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] text-black font-medium md:font-normal transition-colors
+                {{ request()->is('event-photos*') ? 'underline underline-offset-4' : 'hover:text-gray-500' }}">
                 Event Photo
             </a>
             <a href="{{ url('photojournalism') }}"
-                class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] transition-colors
-                {{ request()->is('photojournalism*') ? 'text-gray-400 font-medium md:font-semibold' : 'text-black font-medium md:font-normal hover:text-gray-500' }}">
+                class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] text-black font-medium md:font-normal transition-colors
+                {{ request()->is('photojournalism*') ? 'underline underline-offset-4' : 'hover:text-gray-500' }}">
                 Photojournalism
             </a>
             <!-- Lưu ý: Trong thư mục hiện tại của bạn phần videography chưa có index.blade.php, URL này đã được đặt sẵn chờ bạn tạo file -->
             <a href="{{ route('videography.index') }}"
-                class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] transition-colors
-                {{ request()->is('videography*') ? 'text-gray-400 font-medium md:font-semibold' : 'text-black font-medium md:font-normal hover:text-gray-500' }}">
+                class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] text-black font-medium md:font-normal transition-colors
+                {{ request()->is('videography*') ? 'underline underline-offset-4' : 'hover:text-gray-500' }}">
                 Videography
             </a>
             <a href="{{ url('faces-and-places') }}"
-                class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] transition-colors
-                {{ request()->is('faces-and-places*') ? 'text-gray-400 font-medium md:font-semibold' : 'text-black font-medium md:font-normal hover:text-gray-500' }}">
+                class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] text-black font-medium md:font-normal transition-colors
+                {{ request()->is('faces-and-places*') ? 'underline underline-offset-4' : 'hover:text-gray-500' }}">
                 Faces & Places
             </a>
             <a href="{{ url('contact') }}"
-                class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] transition-colors
-                {{ request()->is('contact') ? 'text-gray-400 font-medium md:font-semibold' : 'text-black font-medium md:font-normal hover:text-gray-500' }}">
+                class="font-oswald text-[18px] md:text-nav uppercase tracking-[1.8px] md:tracking-[1.2px] text-black font-medium md:font-normal transition-colors
+                {{ request()->is('contact') ? 'underline underline-offset-4' : 'hover:text-gray-500' }}">
                 Contact
             </a>
         </nav>

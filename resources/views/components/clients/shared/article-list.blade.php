@@ -1,5 +1,6 @@
 @php
     $list = $articles ?? collect();
+    $cardLayout = $cardLayout ?? 'zigzag';
     $defaultDescription =
         'Even in the middle of a vibrant crowd, I am always looking for the same thing: the raw, genuine moments that define the true character of the event.';
 @endphp
@@ -8,8 +9,9 @@
     <div class="w-full flex flex-col md:gap-[25px]">
         @forelse ($list as $index => $item)
             @php
-                $bgColor = $index === 0 ? 'rgba(250, 250, 250, 1)' : 'transparent';
-                $isSwapped = $index % 2 !== 0;
+                $isHoverLayout = $cardLayout === 'hover';
+                $bgColor = $isHoverLayout ? 'transparent' : ($index === 0 ? 'rgba(250, 250, 250, 1)' : 'transparent');
+                $isSwapped = $isHoverLayout ? false : $index % 2 !== 0;
                 $assetIndex = ($index % 2) + 1;
                 $fallbackImage = asset('client/assets/static/photojournalism/photo-image-card-' . $assetIndex . '.png');
                 $fallbackLogo = asset('client/assets/static/photojournalism/photo-logo-card-' . $assetIndex . '.svg');
@@ -17,8 +19,8 @@
                 $publishedDate = $item->published_at?->format('F j, Y') ?? '';
             @endphp
 
-            <a href="{{ route($routeName, $item->slug) }}" class="block">
-                <x-clients.shared.article-card :bg-color="$bgColor" :is-swapped="$isSwapped"
+            <a href="{{ route($routeName, $item->slug) }}" class="block {{ $isHoverLayout ? 'group' : '' }}">
+                <x-clients.shared.article-card :variant="$cardLayout" :bg-color="$bgColor" :is-swapped="$isSwapped"
                     :image="\App\Support\ClientImage::url($item->cover_image, $fallbackImage)"
                     :logo="\App\Support\ClientImage::url($item->badge_logo, $fallbackLogo)"
                     :category="$item->category->name ?? 'Uncategorized'"

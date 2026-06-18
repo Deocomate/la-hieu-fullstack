@@ -1,5 +1,6 @@
 <!-- Cấu hình thư viện AOS (Animation) -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.css" />
 
 <!-- Import Font Oswald từ Google Fonts (Dành cho Navigation & Tags) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -133,6 +134,68 @@
             opacity: 1 !important;
             transform: none !important;
         }
+    }
+
+    .gallery-trigger {
+        display: block;
+        padding: 0;
+        border: none;
+        background: transparent;
+        text-align: inherit;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .gallery-trigger:focus-visible {
+        outline: 2px solid #C5AA82;
+        outline-offset: 2px;
+    }
+
+    #gallery-thumb-strip:not(.is-visible) {
+        display: none;
+    }
+
+    #gallery-thumb-scroll {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    #gallery-thumb-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .gallery-thumb-btn.is-active {
+        border-color: #C5AA82;
+        opacity: 1;
+    }
+
+    .gallery-thumb-btn:not(.is-active) {
+        opacity: 0.55;
+    }
+
+    .gallery-thumb-btn:not(.is-active):hover {
+        opacity: 0.85;
+    }
+
+    .card-section-hover-surface {
+        position: relative;
+        isolation: isolate;
+    }
+
+    .card-section-hover-surface::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: #FAFAFA;
+        opacity: 0;
+        transition: opacity 500ms ease-in-out;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    .group:hover .card-section-hover-surface::before,
+    .card-section-hover-surface.group:hover::before {
+        opacity: 1;
     }
 </style>
 

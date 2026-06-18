@@ -13,7 +13,9 @@
         'bgText' => $album->hero_bg_text ?? 'EVENT PHOTOS',
     ])
     @include('components.clients.shared.detail-gallery-grid', [
-        'images' => $album->media->pluck('file_url')->map(fn ($path) => \App\Support\ClientImage::url($path)),
+        'lightboxImages' => \App\Support\GalleryImage::fromMediaCollection($album->media, $album->title),
+        'galleryId' => 'event-' . $album->slug,
+        'altPrefix' => $album->title,
     ])
     @include('components.clients.follow-section')
 @endsection

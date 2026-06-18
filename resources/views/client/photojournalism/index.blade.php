@@ -9,7 +9,7 @@
         'bgText' => $page->hero_bg_text ?? 'PHOTOJOURNALISM',
     ])
 
-    @include('components.clients.shared.article-list')
+    @include('components.clients.shared.article-list', ['cardLayout' => $cardLayout ?? 'zigzag'])
 
     @include('components.clients.follow-section')
 @endsection

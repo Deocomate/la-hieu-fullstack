@@ -19,7 +19,11 @@ class VideographyController extends Controller
             ->ordered()
             ->paginate(10);
 
-        return view('client.videography.index', compact('articles', 'page'));
+        return view('client.videography.index', [
+            'articles' => $articles,
+            'page' => $page,
+            'cardLayout' => 'hover',
+        ]);
     }
 
     public function show($slug)

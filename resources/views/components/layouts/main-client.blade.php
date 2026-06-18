@@ -19,6 +19,7 @@
     </main>
 
     @include('components.clients.footer')
+    @include('components.clients.gallery.lightbox')
     @include('components.clients.scripts')
     @stack('scripts')
 </body>

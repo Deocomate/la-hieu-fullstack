@@ -29,7 +29,7 @@
 
         <!-- Title: 24px, weight 400, line-height 25px -->
         <h1 class="font-be-vietnam text-h-sub-24-norm font-normal text-black text-center text-wrap typing-effect">
-            {!! nl2br(e($page->hero_title ?? "Welcome to \nLa Hieu Photography website!")) !!}
+            {!! nl2br(e($page->hero_title ?? "Welcome to La Hieu Photography website!")) !!}
         </h1>
 
         <!-- Description: 16px, weight 300, line-height 22px, max-width 608px -->

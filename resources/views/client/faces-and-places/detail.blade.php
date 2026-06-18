@@ -13,7 +13,9 @@
         'bgText' => $album->hero_bg_text ?? 'FACES & PLACES',
     ])
     @include('components.clients.shared.detail-gallery-grid', [
-        'images' => $album->media->pluck('file_url')->map(fn ($path) => \App\Support\ClientImage::url($path)),
+        'lightboxImages' => \App\Support\GalleryImage::fromMediaCollection($album->media, $album->title),
+        'galleryId' => 'fap-' . $album->slug,
+        'altPrefix' => $album->title,
     ])
     @include('components.clients.follow-section')
 @endsection

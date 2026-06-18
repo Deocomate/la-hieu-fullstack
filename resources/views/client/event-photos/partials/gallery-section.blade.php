@@ -51,10 +51,12 @@
                 'title' => $album->title,
                 'url' => route('event-photos.show', $album->slug),
                 'images' => $images,
+                'lightboxImages' => \App\Support\GalleryImage::fromMediaCollection($album->media, $album->title),
             ];
         });
 
     $activeAlbum = $albumPayload->first();
+    $activeLightboxImages = $activeAlbum['lightboxImages'] ?? [];
 @endphp
 
 <section class="w-full bg-white pb-16 lg:pb-[100px] flex flex-col items-center">
@@ -110,18 +112,20 @@
             </ul>
         </aside>
 
-        <div id="gallery-container"
+        <div id="gallery-container" data-gallery="event-photos-active"
+            data-gallery-images='@json($activeLightboxImages)'
             class="flex-1 w-full columns-2 md:columns-2 lg:columns-3 gap-[10px] pl-[30px] pr-[27px] md:pl-0 md:pr-0">
-            @foreach (($activeAlbum['images'] ?? collect()) as $image)
-                <div class="w-full mb-[10px] break-inside-avoid overflow-hidden bg-gray-100 group cursor-pointer relative shadow-[0_2px_8px_rgba(0,0,0,0.05)] animate-fade-in-up"
-                    style="animation-delay: {{ $loop->index * 0.1 }}s">
-                    <img src="{{ $image }}" alt="Gallery Image {{ $loop->iteration }}"
+            @foreach ($activeLightboxImages as $index => $image)
+                <button type="button" data-gallery-index="{{ $index }}"
+                    class="gallery-trigger w-full mb-[10px] break-inside-avoid overflow-hidden bg-gray-100 group relative shadow-[0_2px_8px_rgba(0,0,0,0.05)] animate-fade-in-up"
+                    style="animation-delay: {{ $index * 0.1 }}s">
+                    <img src="{{ $image['src'] }}" alt="{{ $image['alt'] }}"
                         class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                         loading="lazy">
                     <div
                         class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none">
                     </div>
-                </div>
+                </button>
             @endforeach
         </div>
     </div>
@@ -139,17 +143,26 @@
             const mobileTitle = document.getElementById('mobile-album-title');
             const mobileLink = document.getElementById('mobile-album-link');
 
+            function escapeHtml(value) {
+                return String(value ?? '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+            }
+
             function renderGallery(album) {
+                galleryContainer.dataset.galleryImages = JSON.stringify(album.lightboxImages || []);
                 galleryContainer.style.opacity = '0';
 
                 setTimeout(() => {
-                    galleryContainer.innerHTML = '';
+                    const items = album.lightboxImages || [];
 
-                    galleryContainer.innerHTML = album.images.map((image, index) => `
-                        <div class="w-full mb-[10px] break-inside-avoid overflow-hidden bg-gray-100 group cursor-pointer relative shadow-[0_2px_8px_rgba(0,0,0,0.05)] animate-fade-in-up" style="animation-delay: ${index * 0.1}s">
-                            <img src="${image}" alt="Gallery Image ${index + 1}" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                    galleryContainer.innerHTML = items.map((image, index) => `
+                        <button type="button" data-gallery-index="${index}" class="gallery-trigger w-full mb-[10px] break-inside-avoid overflow-hidden bg-gray-100 group relative shadow-[0_2px_8px_rgba(0,0,0,0.05)] animate-fade-in-up" style="animation-delay: ${index * 0.1}s">
+                            <img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || `Gallery Image ${index + 1}`)}" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
                             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none"></div>
-                        </div>
+                        </button>
                     `).join('');
 
                     galleryContainer.style.opacity = '1';

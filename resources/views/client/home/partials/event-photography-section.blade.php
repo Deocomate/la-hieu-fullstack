@@ -9,8 +9,8 @@
     class="relative w-full pt-[34px] pb-[71px] md:py-16 lg:pt-[71px] lg:pb-[112px] flex flex-col items-center overflow-hidden">
     <div class="absolute inset-0 z-0">
         <img src="{{ $eventBgSrc }}" alt="Event Photography Background" class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-black/40"
-            style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.50) 0%, rgba(102, 102, 102, 0) 100%);">
+        <div class="absolute inset-0"
+            style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 100%);">
         </div>
     </div>
 

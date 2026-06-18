@@ -19,7 +19,11 @@ class PhotojournalismController extends Controller
             ->ordered()
             ->paginate(10);
 
-        return view('client.photojournalism.index', compact('articles', 'page'));
+        return view('client.photojournalism.index', [
+            'articles' => $articles,
+            'page' => $page,
+            'cardLayout' => 'hover',
+        ]);
     }
 
     public function show($slug)

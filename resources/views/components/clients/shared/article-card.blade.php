@@ -1,4 +1,5 @@
 @props([
+    'variant' => 'zigzag',
     'bgColor' => 'transparent',
     'isSwapped' => false,
     'image' => asset('client/assets/static/photojournalism/photo-image-card-1.png'),
@@ -10,7 +11,13 @@
     'date' => 'August 6, 2020',
 ])
 
-<div class="md:hidden w-full flex flex-col pb-[21.87px]" style="background-color: {{ $bgColor }}" data-aos="fade-up">
+@php
+    $isHoverVariant = $variant === 'hover';
+    $hoverSurfaceClass = $isHoverVariant ? 'card-section-hover-surface' : '';
+@endphp
+
+<div class="md:hidden w-full flex flex-col pb-[21.87px] {{ $hoverSurfaceClass }}"
+    @unless($isHoverVariant) style="background-color: {{ $bgColor }}" @endunless data-aos="fade-up">
     <div
         class="w-full flex items-center pt-[20px] {{ $isSwapped ? 'flex-row-reverse pl-[36.57px] pr-[29px]' : 'flex-row pl-[29px] pr-[36.57px]' }}">
         <div class="flex-1 aspect-square overflow-hidden shadow-sm bg-gray-100" data-aos="zoom-out"
@@ -48,8 +55,8 @@
     </div>
 </div>
 
-<div class="hidden md:flex w-full justify-center py-10 lg:py-[48px]" style="background-color: {{ $bgColor }}"
-    data-aos="fade-up">
+<div class="hidden md:flex w-full justify-center py-10 lg:py-[48px] {{ $hoverSurfaceClass }}"
+    @unless($isHoverVariant) style="background-color: {{ $bgColor }}" @endunless data-aos="fade-up">
     <div
         class="w-full max-w-[1320px] mx-auto px-4 lg:pl-[88px] lg:pr-[112px] flex flex-col {{ $isSwapped ? 'lg:flex-row-reverse' : 'lg:flex-row' }} items-center lg:items-start justify-between gap-12 lg:gap-[116px]">
         <div class="flex flex-col w-full lg:max-w-[714px] flex-shrink-0">

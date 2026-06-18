@@ -16,7 +16,7 @@ final class PageSeeder extends Seeder
             [
                 'key' => 'home',
                 'title' => 'Home',
-                'hero_title' => "Welcome to \nLa Hieu Photography website!",
+                'hero_title' => "Welcome to La Hieu Photography website!",
                 'hero_subtitle' => 'Professional Photographer',
                 'hero_description' => "Step into the journey I have been on. It all started back in 2009, chasing wild, untouched landscapes with nothing but a bike, a backpack, and a camera. Somewhere along those dusty roads, my passion quietly became my life's work. Today, whether I'm in the middle of vibrant events or out on the field trips, my heart belongs to raw human stories captured through both lens and motion. Connecting with different lives, telling their truths. I am truly living my dream.",
                 'hero_bg_text' => 'LA HIEU',
