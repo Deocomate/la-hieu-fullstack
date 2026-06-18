@@ -14,6 +14,8 @@
     if ($galleryImages->isEmpty()) {
         $galleryImages = collect(range(1, 19))->map(fn ($i) => "client/assets/static/home/faces-and-places-{$i}.png");
     }
+
+    $lightboxImages = \App\Support\GalleryImage::fromPaths($galleryImages, 'Faces and Places');
 @endphp
 
 <section
@@ -23,20 +25,15 @@
         {{ $page->content['faces']['title'] ?? 'faces & places' }}
     </h2>
 
-    <div
+    <div data-gallery="home-faces-and-places" data-gallery-images='@json($lightboxImages)'
         class="w-full mt-10 lg:mt-[80px] md:mx-auto flex flex-col md:block flex-wrap content-start h-[560px] md:h-auto overflow-x-auto overflow-y-hidden md:overflow-visible gap-x-[10px] md:gap-[12px] ml-[50px] md:ml-0 snap-x snap-mandatory md:snap-none md:columns-4 lg:columns-6 xl:columns-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] after:content-[''] after:w-[30px] md:after:hidden after:h-full after:shrink-0">
 
-        @foreach ($galleryImages as $index => $image)
-            <div class="w-[180px] md:w-full break-inside-avoid snap-start mb-[10px] md:mb-3 lg:mb-[12px] overflow-hidden shadow-sm group cursor-pointer relative bg-gray-100 rounded-sm"
-                data-aos="fade-up" data-aos-delay="{{ (($index + 1) % 4) * 100 }}">
-                <img src="{{ \App\Support\ClientImage::url($image) }}" alt="Faces and Places {{ $index + 1 }}"
-                    class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy">
-
-                <div
-                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none">
-                </div>
-            </div>
+        @foreach ($lightboxImages as $index => $image)
+            <x-clients.gallery.grid-trigger :src="$image['src']" :alt="$image['alt']" :index="$index"
+                wrapperClass="w-[180px] md:w-full break-inside-avoid snap-start mb-[10px] md:mb-3 lg:mb-[12px] overflow-hidden shadow-sm group relative bg-gray-100 rounded-sm"
+                imageClass="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
+                overlayClass="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none"
+                data-aos="fade-up" :data-aos-delay="(($index + 1) % 4) * 100" />
         @endforeach
     </div>
 

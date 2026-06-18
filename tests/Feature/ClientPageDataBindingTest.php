@@ -107,6 +107,8 @@ final class ClientPageDataBindingTest extends TestCase
         $response->assertSee('Visible Video Story');
         $response->assertSee('Visible Partner');
         $response->assertDontSee('Hidden Partner');
+        $response->assertSee('data-gallery="home-faces-and-places"', false);
+        $response->assertSee('gallery-trigger', false);
     }
 
     public function test_index_pages_render_dynamic_records_media_categories_and_pagination(): void

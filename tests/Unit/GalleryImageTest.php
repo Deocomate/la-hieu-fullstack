@@ -58,8 +58,30 @@ final class GalleryImageTest extends TestCase
         $this->assertStringContainsString('test.png', $result[0]['src']);
         $this->assertStringContainsString('test.png', $result[0]['thumb']);
         $this->assertSame('Img 1', $result[0]['alt']);
-        $this->assertSame(1920, $result[0]['width']);
-        $this->assertSame(1280, $result[0]['height']);
+        $this->assertSame(0, $result[0]['width']);
+        $this->assertSame(0, $result[0]['height']);
+    }
+
+    public function test_maps_media_without_dimensions_to_zero(): void
+    {
+        $album = EventAlbum::factory()->create();
+
+        $album->media()->create([
+            'collection_name' => 'gallery',
+            'file_name' => 'portrait.jpg',
+            'file_url' => 'client/assets/static/testing/portrait.jpg',
+            'mime_type' => 'image/jpeg',
+            'size' => 1024,
+            'width' => null,
+            'height' => null,
+            'custom_properties' => [],
+            'priority' => 1,
+        ]);
+
+        $result = GalleryImage::fromMediaCollection($album->fresh()->media, 'Portrait');
+
+        $this->assertSame(0, $result[0]['width']);
+        $this->assertSame(0, $result[0]['height']);
     }
 
     public function test_filters_empty_paths(): void

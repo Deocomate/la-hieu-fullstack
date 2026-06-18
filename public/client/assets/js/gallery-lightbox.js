@@ -12,13 +12,55 @@ function prefersReducedMotion() {
     return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-function buildDataSource(images) {
-    return images.map((image) => ({
-        src: image.src,
-        width: Number(image.width) || 1920,
-        height: Number(image.height) || 1280,
-        alt: image.alt || '',
-    }));
+const PLACEHOLDER_WIDTH = 1600;
+const PLACEHOLDER_HEIGHT = 1067;
+
+function resolveDimensions(image, trigger, index, startIndex) {
+    if (index === startIndex && trigger) {
+        const thumbImg = trigger.querySelector('img');
+
+        if (thumbImg?.naturalWidth && thumbImg?.naturalHeight) {
+            return {
+                width: thumbImg.naturalWidth,
+                height: thumbImg.naturalHeight,
+            };
+        }
+    }
+
+    const width = Number(image.width);
+    const height = Number(image.height);
+
+    if (width > 0 && height > 0) {
+        return { width, height };
+    }
+
+    return {
+        width: PLACEHOLDER_WIDTH,
+        height: PLACEHOLDER_HEIGHT,
+    };
+}
+
+function heightFitZoomLevel(zoomLevelObject) {
+    const { elementSize, panAreaSize, fit } = zoomLevelObject;
+
+    if (!elementSize?.y || !panAreaSize?.y) {
+        return fit ?? 1;
+    }
+
+    return panAreaSize.y / elementSize.y;
+}
+
+function buildDataSource(images, startIndex = 0, trigger = null) {
+    return images.map((image, index) => {
+        const { width, height } = resolveDimensions(image, trigger, index, startIndex);
+
+        return {
+            src: image.src,
+            width,
+            height,
+            alt: image.alt || '',
+        };
+    });
 }
 
 function renderThumbs(images, activeIndex) {
@@ -79,14 +121,14 @@ function hideThumbStrip() {
     }
 }
 
-function openGallery(images, startIndex = 0) {
+function openGallery(images, startIndex = 0, trigger = null) {
     if (!images?.length) {
         return;
     }
 
     currentImages = images;
-    const dataSource = buildDataSource(images);
-    const index = Math.min(Math.max(startIndex, 0), dataSource.length - 1);
+    const index = Math.min(Math.max(startIndex, 0), images.length - 1);
+    const dataSource = buildDataSource(images, index, trigger);
 
     if (activeLightbox) {
         activeLightbox.destroy();
@@ -98,12 +140,37 @@ function openGallery(images, startIndex = 0) {
         pswpModule: PhotoSwipe,
         index,
         bgOpacity: 0.95,
-        padding: { top: 40, bottom: 140, left: 12, right: 12 },
+        padding: { top: 24, bottom: 140, left: 12, right: 12 },
         showHideAnimationType: prefersReducedMotion() ? 'none' : 'fade',
         zoom: false,
-        initialZoomLevel: 'fit',
-        secondaryZoomLevel: 'fit',
-        maxZoomLevel: 1,
+        initialZoomLevel: heightFitZoomLevel,
+        secondaryZoomLevel: heightFitZoomLevel,
+        maxZoomLevel: heightFitZoomLevel,
+    });
+
+    lightbox.on('contentLoad', (event) => {
+        const { content } = event;
+
+        if (content.type !== 'image') {
+            return;
+        }
+
+        event.preventDefault();
+
+        const image = new Image();
+
+        image.onload = () => {
+            content.width = image.naturalWidth;
+            content.height = image.naturalHeight;
+            content.element = image;
+            content.onLoaded();
+        };
+
+        image.onerror = () => {
+            content.onLoaded();
+        };
+
+        image.src = content.data.src;
     });
 
     lightbox.on('afterInit', () => {
@@ -143,7 +210,7 @@ document.addEventListener('click', (event) => {
     try {
         const images = JSON.parse(gallery.dataset.galleryImages);
         const startIndex = Number(trigger.dataset.galleryIndex) || 0;
-        openGallery(images, startIndex);
+        openGallery(images, startIndex, trigger);
     } catch (error) {
         console.warn('Gallery lightbox: invalid gallery data', error);
     }

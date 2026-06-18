@@ -9,10 +9,6 @@ use Illuminate\Support\Collection;
 
 final class GalleryImage
 {
-    private const DEFAULT_WIDTH = 1920;
-
-    private const DEFAULT_HEIGHT = 1280;
-
     /**
      * @return list<array{src: string, thumb: string, alt: string, width: int, height: int}>
      */
@@ -36,8 +32,8 @@ final class GalleryImage
             'src' => $src,
             'thumb' => $src,
             'alt' => $alt,
-            'width' => $media->width ?: self::DEFAULT_WIDTH,
-            'height' => $media->height ?: self::DEFAULT_HEIGHT,
+            'width' => (int) ($media->width ?: 0),
+            'height' => (int) ($media->height ?: 0),
         ];
     }
 
@@ -60,8 +56,8 @@ final class GalleryImage
                 'src' => $src,
                 'thumb' => $src,
                 'alt' => "{$altPrefix} ".($index + 1),
-                'width' => self::DEFAULT_WIDTH,
-                'height' => self::DEFAULT_HEIGHT,
+                'width' => 0,
+                'height' => 0,
             ];
         }
 
