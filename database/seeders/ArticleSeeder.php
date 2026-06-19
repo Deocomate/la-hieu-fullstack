@@ -49,11 +49,11 @@ final class ArticleSeeder extends Seeder
             for ($number = 1; $number <= 4; $number++) {
                 if ($type === 'photojournalism') {
                     $assetIndex = (($number - 1) % 2) + 1;
-                    $coverImage = "client/assets/static/photojournalism/photo-image-card-{$assetIndex}.png";
-                    $badgeLogo = "client/assets/static/photojournalism/photo-logo-card-{$assetIndex}.svg";
+                    $coverImage = "assets/static/photojournalism/photo-image-card-{$assetIndex}.png";
+                    $badgeLogo = "assets/static/photojournalism/photo-logo-card-{$assetIndex}.svg";
                 } else {
                     $assetIndex = (($number - 1) % 3) + 1;
-                    $coverImage = "client/assets/static/videography/hero-slider-{$assetIndex}.png";
+                    $coverImage = "assets/static/videography/hero-slider-{$assetIndex}.png";
                     $badgeLogo = null;
                 }
                 
@@ -109,7 +109,7 @@ final class ArticleSeeder extends Seeder
             $article->media()->create([
                 'collection_name' => 'slider',
                 'file_name' => $fileName,
-                'file_url' => "client/assets/static/photojournalism/{$fileName}",
+                'file_url' => "assets/static/photojournalism/{$fileName}",
                 'mime_type' => 'image/png',
                 'size' => 1024,
                 'width' => 1920,

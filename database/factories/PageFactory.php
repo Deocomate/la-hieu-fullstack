@@ -23,11 +23,11 @@ final class PageFactory extends Factory
             'hero_subtitle' => 'Default Hero Subtitle',
             'hero_description' => 'Default Hero Description',
             'hero_bg_text' => 'DEFAULT BANNER',
-            'hero_images' => ['client/assets/static/home/hero-image.png'],
+            'hero_images' => ['assets/static/home/hero-image.png'],
             'content' => [],
             'seo_title' => 'Default Page',
             'seo_description' => 'Default Description',
-            'seo_image' => 'client/assets/static/home/hero-image.png',
+            'seo_image' => 'assets/static/home/hero-image.png',
         ];
     }
 }

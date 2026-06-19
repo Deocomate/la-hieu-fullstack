@@ -1,3 +1,8 @@
+@props([
+    'contentBlocks' => null,
+    'article' => null,
+])
+
 @php
     $defaultBlocks = [
         [

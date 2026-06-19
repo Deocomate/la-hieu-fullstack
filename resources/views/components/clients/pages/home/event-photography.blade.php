@@ -1,7 +1,7 @@
 @php
     $eventBgSrc = \App\Support\ClientImage::url(
         $page->content['event']['bg_image'] ?? null,
-        'client/assets/static/home/event-photography-background.jpg',
+        'assets/static/home/event-photography-background.jpg',
     );
 @endphp
 
@@ -35,7 +35,7 @@
                     class="flex flex-col w-[310px] sm:w-[320px] md:w-full flex-shrink-0 snap-start group"
                     data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                     <div class="w-full overflow-hidden shadow-[2px_4px_11px_rgba(0,0,0,0.1)]">
-                        <img src="{{ \App\Support\ClientImage::url($album->cover_image, 'client/assets/static/home/event-photography-1.png') }}"
+                        <img src="{{ \App\Support\ClientImage::url($album->cover_image, 'assets/static/home/event-photography-1.png') }}"
                             alt="{{ $album->title }}"
                             class="w-full aspect-[313/208] object-cover transition-transform duration-500 group-hover:scale-105"
                             loading="lazy">

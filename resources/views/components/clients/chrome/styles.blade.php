@@ -19,7 +19,7 @@
        ========================================== */
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-Thin.ttf') }}") format('truetype');
+        src: url("{{ asset('assets/fonts/BeVietnam-Thin.ttf') }}") format('truetype');
         font-weight: 100;
         font-style: normal;
         font-display: swap;
@@ -27,7 +27,7 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-Light.ttf') }}") format('truetype');
+        src: url("{{ asset('assets/fonts/BeVietnam-Light.ttf') }}") format('truetype');
         font-weight: 300;
         font-style: normal;
         font-display: swap;
@@ -35,7 +35,7 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-Regular.ttf') }}") format('truetype');
+        src: url("{{ asset('assets/fonts/BeVietnam-Regular.ttf') }}") format('truetype');
         font-weight: 400;
         font-style: normal;
         font-display: swap;
@@ -44,7 +44,7 @@
     /* fix font 500*/
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-Light.ttf') }}") format('truetype');
+        src: url("{{ asset('assets/fonts/BeVietnam-Light.ttf') }}") format('truetype');
         font-weight: 500;
         font-style: normal;
         font-display: swap;
@@ -52,7 +52,7 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-SemiBold.ttf') }}") format('truetype');
+        src: url("{{ asset('assets/fonts/BeVietnam-SemiBold.ttf') }}") format('truetype');
         font-weight: 600;
         font-style: normal;
         font-display: swap;
@@ -60,7 +60,7 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-SemiBoldItalic.ttf') }}") format('truetype');
+        src: url("{{ asset('assets/fonts/BeVietnam-SemiBoldItalic.ttf') }}") format('truetype');
         font-weight: 600;
         font-style: italic;
         font-display: swap;
@@ -68,7 +68,7 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-Bold.ttf') }}") format('truetype');
+        src: url("{{ asset('assets/fonts/BeVietnam-Bold.ttf') }}") format('truetype');
         font-weight: 700;
         font-style: normal;
         font-display: swap;
@@ -76,7 +76,7 @@
 
     @font-face {
         font-family: 'Be Vietnam';
-        src: url("{{ asset('client/assets/fonts/BeVietnam-ExtraBold.ttf') }}") format('truetype');
+        src: url("{{ asset('assets/fonts/BeVietnam-ExtraBold.ttf') }}") format('truetype');
         font-weight: 800;
         font-style: normal;
         font-display: swap;
@@ -88,7 +88,7 @@
        ========================================== */
     @font-face {
         font-family: 'Archivo Local';
-        src: url("{{ asset('client/assets/fonts/Archivo-Bold.ttf') }}") format('truetype');
+        src: url("{{ asset('assets/fonts/Archivo-Bold.ttf') }}") format('truetype');
         font-weight: 700;
         font-style: normal;
         font-display: swap;

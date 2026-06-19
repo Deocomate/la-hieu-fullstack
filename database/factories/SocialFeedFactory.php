@@ -18,7 +18,7 @@ final class SocialFeedFactory extends Factory
     {
         return [
             'platform' => 'instagram',
-            'image_url' => 'client/assets/static/home/follow-me-1.png',
+            'image_url' => 'assets/static/home/follow-me-1.png',
             'post_url' => '#',
             'priority' => 0,
             'status' => 'published',

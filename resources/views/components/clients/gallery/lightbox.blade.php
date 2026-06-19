@@ -8,5 +8,5 @@
 </div>
 
 @push('scripts')
-    <script type="module" src="{{ asset('client/assets/js/gallery-lightbox.js') }}"></script>
+    <script type="module" src="{{ asset('assets/js/gallery-lightbox.js') }}"></script>
 @endpush

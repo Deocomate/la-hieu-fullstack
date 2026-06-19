@@ -64,7 +64,7 @@
         <div class="w-full flex items-center justify-between px-[43px] relative h-[26px]">
             <button id="mobile-album-prev"
                 class="cursor-pointer hover:opacity-70 transition-opacity flex items-center justify-center">
-                <img src="{{ asset('client/assets/static/event-photo/prev.svg') }}" alt="Previous" class="w-auto h-[18px]">
+                <img src="{{ asset('assets/static/event-photo/prev.svg') }}" alt="Previous" class="w-auto h-[18px]">
             </button>
 
             <h2 id="mobile-album-title"
@@ -74,7 +74,7 @@
 
             <button id="mobile-album-next"
                 class="cursor-pointer hover:opacity-70 transition-opacity flex items-center justify-center">
-                <img src="{{ asset('client/assets/static/event-photo/next.svg') }}" alt="Next"
+                <img src="{{ asset('assets/static/event-photo/next.svg') }}" alt="Next"
                     class="w-auto h-[18px]">
             </button>
         </div>
@@ -104,7 +104,7 @@
                         </a>
 
                         <div class="album-line absolute top-[11px] left-[105%] ml-[15px] {{ $index === 0 ? 'hidden lg:block' : 'hidden' }}">
-                            <img src="{{ asset('client/assets/static/event-photo/gallery-mid-line.svg') }}" alt="Line"
+                            <img src="{{ asset('assets/static/event-photo/gallery-mid-line.svg') }}" alt="Line"
                                 class="w-auto h-auto min-w-[120px] opacity-70">
                         </div>
                     </li>

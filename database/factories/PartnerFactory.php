@@ -18,7 +18,7 @@ final class PartnerFactory extends Factory
     {
         return [
             'name' => 'Default Partner',
-            'logo_image' => 'client/assets/static/home/partner-1.png',
+            'logo_image' => 'assets/static/home/partner-1.png',
             'link_url' => '#',
             'priority' => 0,
             'status' => 'published',

@@ -1,9 +1,7 @@
 @extends('components.layouts.main-client')
 
-@section('title', 'Contact')
-
 @section('content')
-    @include('client.contact.partials.contact-main-section')
+    @include('components.clients.pages.contact.main')
 
-    @include('components.clients.follow-section')
+    <x-clients.sections.follow />
 @endsection

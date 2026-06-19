@@ -15,7 +15,7 @@ final class PartnerSeeder extends Seeder
             Partner::updateOrCreate(
                 ['name' => "Partner {$number}"],
                 [
-                    'logo_image' => "client/assets/static/home/partner-{$number}.png",
+                    'logo_image' => "assets/static/home/partner-{$number}.png",
                     'link_url' => 'https://lahieu.com',
                     'priority' => $number,
                     'status' => 'published',

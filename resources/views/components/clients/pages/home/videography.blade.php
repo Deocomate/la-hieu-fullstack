@@ -65,7 +65,7 @@
         $slides = collect(range(1, 5))->map(fn ($i) => (object) [
             'title' => "Videography {$i}",
             'slug' => null,
-            'cover_image' => "client/assets/static/home/videography-{$i}.png",
+            'cover_image' => "assets/static/home/videography-{$i}.png",
         ]);
     }
 @endphp
@@ -87,7 +87,7 @@
                     @endphp
                     <div class="swiper-slide relative overflow-hidden group shadow-2xl">
                         <a href="{{ $href }}" class="block w-full h-full">
-                            <img src="{{ \App\Support\ClientImage::url($video->cover_image, 'client/assets/static/home/videography-1.png') }}"
+                            <img src="{{ \App\Support\ClientImage::url($video->cover_image, 'assets/static/home/videography-1.png') }}"
                                 alt="{{ $video->title }}" class="w-full h-full object-cover">
 
                             <div class="video-slide-overlay absolute inset-0 z-10 pointer-events-none"></div>
@@ -99,7 +99,7 @@
                                         class="font-be-vietnam text-[10px] md:text-[14px] lg:text-h-card-20-wide font-extrabold uppercase text-black tracking-[1px] md:tracking-[2px]">
                                         Watch Now
                                     </span>
-                                    <img src="{{ asset('client/assets/static/home/videography-button.svg') }}"
+                                    <img src="{{ asset('assets/static/home/videography-button.svg') }}"
                                         alt="Play"
                                         class="w-[6px] md:w-[10px] lg:w-[13px] h-[8px] md:h-[14px] lg:h-[18px] object-contain">
                                 </span>

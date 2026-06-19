@@ -1,5 +1,6 @@
 <?php
 
+use Filament\Http\Middleware\Authenticate;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function () {
             // Đăng ký file admin.php chuẩn Laravel 11/12
-            Route::middleware(['web', 'auth'])
+            Route::middleware(['web', Authenticate::class])
                 ->prefix('admin-custom') // Dùng prefix khác 'admin' để không đụng độ với core của Filament panel
                 ->name('admin.')
                 ->group(base_path('routes/admin.php'));

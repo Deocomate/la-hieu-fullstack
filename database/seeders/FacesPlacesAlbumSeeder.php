@@ -22,7 +22,7 @@ final class FacesPlacesAlbumSeeder extends Seeder
         ];
 
         foreach ($albums as $priority => $albumData) {
-            $coverImage = "client/assets/static/faces-and-places/faces-and-places-{$albumData['images'][0]}.png";
+            $coverImage = "assets/static/faces-and-places/faces-and-places-{$albumData['images'][0]}.png";
 
             $album = FacesPlacesAlbum::updateOrCreate(
                 ['slug' => Str::slug($albumData['title'])],
@@ -45,7 +45,7 @@ final class FacesPlacesAlbumSeeder extends Seeder
                 $album->media()->create([
                     'collection_name' => 'gallery',
                     'file_name' => "faces-and-places-{$imageNumber}.png",
-                    'file_url' => "client/assets/static/faces-and-places/faces-and-places-{$imageNumber}.png",
+                    'file_url' => "assets/static/faces-and-places/faces-and-places-{$imageNumber}.png",
                     'mime_type' => 'image/png',
                     'size' => 1024,
                     'width' => 1920,

@@ -54,7 +54,7 @@
     <div class="relative w-full flex items-center justify-center gap-2 md:block">
         <button
             class="videography-prev-btn md:hidden cursor-pointer focus:outline-none hover:opacity-70 transition-opacity flex items-center justify-center p-2 shrink-0">
-            <img src="{{ asset('client/assets/static/videography/previous-arrow.svg') }}" alt="Previous"
+            <img src="{{ asset('assets/static/videography/previous-arrow.svg') }}" alt="Previous"
                 class="w-auto h-auto">
         </button>
 
@@ -74,7 +74,7 @@
 
                             <div
                                 class="video-play-btn absolute inset-0 flex items-center justify-center pointer-events-none">
-                                <img src="{{ asset('client/assets/static/videography/play-button.svg') }}"
+                                <img src="{{ asset('assets/static/videography/play-button.svg') }}"
                                     alt="Play"
                                     class="w-[52px] h-[52px] md:w-[64px] md:h-[64px] object-contain transition-transform duration-300 group-hover:scale-110">
                             </div>
@@ -86,7 +86,7 @@
 
         <button
             class="videography-next-btn md:hidden cursor-pointer focus:outline-none hover:opacity-70 transition-opacity flex items-center justify-center p-2 shrink-0">
-            <img src="{{ asset('client/assets/static/videography/next-arrow.svg') }}" alt="Next"
+            <img src="{{ asset('assets/static/videography/next-arrow.svg') }}" alt="Next"
                 class="w-auto h-auto">
         </button>
     </div>
@@ -94,7 +94,7 @@
     <div class="hidden md:flex items-center justify-center mt-6" data-aos="fade-up" data-aos-delay="200">
         <button
             class="videography-prev-btn cursor-pointer focus:outline-none hover:opacity-70 transition-opacity flex items-center justify-center p-2">
-            <img src="{{ asset('client/assets/static/videography/previous-arrow.svg') }}" alt="Previous"
+            <img src="{{ asset('assets/static/videography/previous-arrow.svg') }}" alt="Previous"
                 class="w-auto h-auto">
         </button>
 
@@ -102,7 +102,7 @@
 
         <button
             class="videography-next-btn cursor-pointer focus:outline-none hover:opacity-70 transition-opacity flex items-center justify-center p-2">
-            <img src="{{ asset('client/assets/static/videography/next-arrow.svg') }}" alt="Next"
+            <img src="{{ asset('assets/static/videography/next-arrow.svg') }}" alt="Next"
                 class="w-auto h-auto">
         </button>
     </div>
@@ -134,7 +134,7 @@
                                     <img src="https://img.youtube.com/vi/${videoId}/maxresdefault.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                                     <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500"></div>
                                     <div class="video-play-btn absolute inset-0 flex items-center justify-center pointer-events-none">
-                                        <img src="{{ asset('client/assets/static/videography/play-button.svg') }}" alt="Play" class="w-[52px] h-[52px] md:w-[64px] md:h-[64px] object-contain transition-transform duration-300 group-hover:scale-110">
+                                        <img src="{{ asset('assets/static/videography/play-button.svg') }}" alt="Play" class="w-[52px] h-[52px] md:w-[64px] md:h-[64px] object-contain transition-transform duration-300 group-hover:scale-110">
                                     </div>
                                 `;
                             }

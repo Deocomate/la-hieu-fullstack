@@ -1,14 +1,12 @@
 @extends('components.layouts.main-client')
 
-@section('title', 'Videography')
-
 @section('content')
-    @include('components.clients.shared.hero-banner', [
-        'title' => $page->hero_title ?? 'VIDEOGRAPHY',
-        'bgText' => $page->hero_bg_text ?? 'VIDEOGRAPHY',
-    ])
+    <x-clients.hero.index-banner
+        :title="$page->hero_title ?? 'VIDEOGRAPHY'"
+        :bg-text="$page->hero_bg_text ?? 'VIDEOGRAPHY'"
+    />
 
-    @include('components.clients.shared.article-list', ['cardLayout' => $cardLayout ?? 'zigzag'])
+    <x-clients.article.list :articles="$articles" :card-layout="$cardLayout ?? 'zigzag'" />
 
-    @include('components.clients.follow-section')
+    <x-clients.sections.follow />
 @endsection

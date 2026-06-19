@@ -7,14 +7,14 @@
                 'pt-[50px] lg:pt-[80px]' => $index > 0,
             ])>
                 <div class="w-full px-[30px] md:px-4">
-                    @include('client.faces-and-places.partials.fap-gallery-item', [
-                        'title' => $album->title,
-                        'viewAlbumUrl' => route('faces-and-places.show', $album->slug),
-                        'description' => $album->description,
-                        'images' => $album->media->pluck('file_url')->map(fn ($path) => \App\Support\ClientImage::url($path)),
-                        'galleryId' => 'fap-' . $album->slug,
-                        'lightboxImages' => \App\Support\GalleryImage::fromMediaCollection($album->media, $album->title),
-                    ])
+                    <x-clients.pages.faces-and-places.gallery-item
+                        :title="$album->title"
+                        :view-album-url="route('faces-and-places.show', $album->slug)"
+                        :description="$album->description"
+                        :images="$album->media->pluck('file_url')->map(fn ($path) => \App\Support\ClientImage::url($path))"
+                        :gallery-id="'fap-' . $album->slug"
+                        :lightbox-images="\App\Support\GalleryImage::fromMediaCollection($album->media, $album->title)"
+                    />
                 </div>
             </div>
         @endforeach

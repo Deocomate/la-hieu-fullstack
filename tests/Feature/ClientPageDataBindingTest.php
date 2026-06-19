@@ -458,11 +458,11 @@ final class ClientPageDataBindingTest extends TestCase
         Setting::factory()->create(['key' => 'footer_author_name', 'value' => 'Dynamic Author']);
 
         SocialFeed::factory()->create([
-            'image_url' => 'client/assets/static/home/visible-social-feed.png',
+            'image_url' => 'assets/static/home/visible-social-feed.png',
             'status' => 'published',
         ]);
         SocialFeed::factory()->create([
-            'image_url' => 'client/assets/static/home/hidden-social-feed.png',
+            'image_url' => 'assets/static/home/hidden-social-feed.png',
             'status' => 'hidden',
         ]);
 
@@ -496,7 +496,7 @@ final class ClientPageDataBindingTest extends TestCase
         return [
             'collection_name' => $collection,
             'file_name' => $fileName,
-            'file_url' => "client/assets/static/testing/{$fileName}",
+            'file_url' => "assets/static/testing/{$fileName}",
             'mime_type' => 'image/png',
             'size' => 1024,
             'width' => 1920,

@@ -21,29 +21,29 @@ final class PageSeeder extends Seeder
                 'hero_description' => "Step into the journey I have been on. It all started back in 2009, chasing wild, untouched landscapes with nothing but a bike, a backpack, and a camera. Somewhere along those dusty roads, my passion quietly became my life's work. Today, whether I'm in the middle of vibrant events or out on the field trips, my heart belongs to raw human stories captured through both lens and motion. Connecting with different lives, telling their truths. I am truly living my dream.",
                 'hero_bg_text' => 'LA HIEU',
                 'hero_images' => [
-                    'hero_banner' => 'client/assets/static/home/hero-image.png',
-                    'signature_logo' => 'client/assets/static/home/hero-logo.svg',
+                    'hero_banner' => 'assets/static/home/hero-image.png',
+                    'signature_logo' => 'assets/static/home/hero-logo.svg',
                 ],
                 'content' => [
                     'event' => [
                         'title' => 'Event photography',
                         'description' => 'Even in the middle of a vibrant crowd, I am always looking for the same thing: the raw, unscripted moments that define the true character of the event',
-                        'bg_image' => 'client/assets/static/home/event-photography-background.jpg',
+                        'bg_image' => 'assets/static/home/event-photography-background.jpg',
                     ],
                     'faces' => [
                         'title' => 'faces & places',
                         'description' => 'This collection is a visual diary of the roads I have traveled and the people I have met. More than just coordinates or portraits, these images preserve the raw, real emotions of a specific fraction in time.',
                         'gallery_images' => array_map(
-                            fn (int $number): string => "client/assets/static/home/faces-and-places-{$number}.png",
+                            fn (int $number): string => "assets/static/home/faces-and-places-{$number}.png",
                             range(1, 19)
                         ),
                     ],
                     'photojournalism' => [
                         'title' => 'photojournalism',
                         'description' => 'Out in the field, there is no script. It is simply about stepping into different lives, listening quietly, and documenting their truths exactly as they unfold. Some days bring the quiet joy of a simple connection, while others carry the heavy weight of silent struggles. Yet, every moment is a humbling privilege to witness',
-                        'desktop_bg' => 'client/assets/static/home/photojournalism-background.png',
+                        'desktop_bg' => 'assets/static/home/photojournalism-background.png',
                         'mobile_bg_slides' => array_map(
-                            fn (int $number): array => ['image' => "client/assets/static/home/photojournalism-image-{$number}.png"],
+                            fn (int $number): array => ['image' => "assets/static/home/photojournalism-image-{$number}.png"],
                             range(1, 5)
                         ),
                     ],
@@ -51,7 +51,7 @@ final class PageSeeder extends Seeder
                         'title' => 'Videography',
                         'description' => 'Creating a moving video is about capturing moments that resonate deeply. It highlights the beauty of real life, showing how genuine connections and raw imperfections make a story truly perfect.',
                         'slides' => array_map(
-                            fn (int $number): string => "client/assets/static/home/videography-{$number}.png",
+                            fn (int $number): string => "assets/static/home/videography-{$number}.png",
                             range(1, 5)
                         ),
                     ],
@@ -61,7 +61,7 @@ final class PageSeeder extends Seeder
                 ],
                 'seo_title' => 'Home - La Hieu Photography',
                 'seo_description' => 'Welcome to La Hieu Photography website.',
-                'seo_image' => 'client/assets/static/home/hero-image.png',
+                'seo_image' => 'assets/static/home/hero-image.png',
             ],
             [
                 'key' => 'about',
@@ -71,15 +71,15 @@ final class PageSeeder extends Seeder
                 'hero_description' => 'Rooted in my love for backpacking, I am naturally drawn to authentic connections. What truly drives my lens is the people: I am constantly seeking those candid moments - the unguarded joy in a crowd, the quiet focus of someone hard at work, or the deep, unwritten stories etched into the faces of locals.',
                 'hero_bg_text' => 'ABOUT ME',
                 'hero_images' => [
-                    'about_image' => 'client/assets/static/about/about.png',
-                    'signature_logo' => 'client/assets/static/about/logo.svg',
+                    'about_image' => 'assets/static/about/about.png',
+                    'signature_logo' => 'assets/static/about/logo.svg',
                 ],
                 'content' => [
                     'intro' => 'Professional photographer based in Hanoi.',
                 ],
                 'seo_title' => 'About me - La Hieu Photography',
                 'seo_description' => 'Rooted in my love for backpacking, I am naturally drawn to authentic connections.',
-                'seo_image' => 'client/assets/static/about/about.png',
+                'seo_image' => 'assets/static/about/about.png',
             ],
             [
                 'key' => 'contact',
@@ -89,8 +89,8 @@ final class PageSeeder extends Seeder
                 'hero_description' => "I'm always ready for the next journey\nLet's talk about yours",
                 'hero_bg_text' => 'CONTACT',
                 'hero_images' => [
-                    'contact_image' => 'client/assets/static/contact/contact-main-image.png',
-                    'signature_logo' => 'client/assets/static/contact/logo.svg',
+                    'contact_image' => 'assets/static/contact/contact-main-image.png',
+                    'signature_logo' => 'assets/static/contact/logo.svg',
                 ],
                 'content' => [
                     'phone' => '090 2222 876',
@@ -99,7 +99,7 @@ final class PageSeeder extends Seeder
                 ],
                 'seo_title' => 'Contact - La Hieu Photography',
                 'seo_description' => "I'm always ready for the next journey. Let's talk about yours.",
-                'seo_image' => 'client/assets/static/contact/contact-main-image.png',
+                'seo_image' => 'assets/static/contact/contact-main-image.png',
             ],
             [
                 'key' => 'event-photos',
@@ -114,7 +114,7 @@ final class PageSeeder extends Seeder
                 ],
                 'seo_title' => 'Event Photos - La Hieu Photography',
                 'seo_description' => 'Even in the middle of a vibrant crowd, I am always looking for raw, genuine event moments.',
-                'seo_image' => 'client/assets/static/home/event-photography-1.png',
+                'seo_image' => 'assets/static/home/event-photography-1.png',
             ],
             [
                 'key' => 'faces-and-places',
@@ -129,7 +129,7 @@ final class PageSeeder extends Seeder
                 ],
                 'seo_title' => 'Faces & Places - La Hieu Photography',
                 'seo_description' => 'A visual diary of the roads traveled and the people met.',
-                'seo_image' => 'client/assets/static/faces-and-places/faces-and-places-1.png',
+                'seo_image' => 'assets/static/faces-and-places/faces-and-places-1.png',
             ],
             [
                 'key' => 'photojournalism',
@@ -144,7 +144,7 @@ final class PageSeeder extends Seeder
                 ],
                 'seo_title' => 'Photojournalism - La Hieu Photography',
                 'seo_description' => 'Out in the field, there is no script. Documenting truths exactly as they unfold.',
-                'seo_image' => 'client/assets/static/photojournalism/photo-image-card-1.png',
+                'seo_image' => 'assets/static/photojournalism/photo-image-card-1.png',
             ],
             [
                 'key' => 'videography',
@@ -159,7 +159,7 @@ final class PageSeeder extends Seeder
                 ],
                 'seo_title' => 'Videography - La Hieu Photography',
                 'seo_description' => 'Creating a moving video is about capturing moments that resonate deeply.',
-                'seo_image' => 'client/assets/static/home/videography-1.png',
+                'seo_image' => 'assets/static/home/videography-1.png',
             ],
         ];
 

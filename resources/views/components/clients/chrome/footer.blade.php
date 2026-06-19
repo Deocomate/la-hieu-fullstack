@@ -7,7 +7,7 @@
 
 <footer class="relative w-full md:min-h-[535px] flex flex-col lg:flex-row overflow-hidden">
     <div class="absolute inset-0 z-0">
-        <img src="{{ asset('client/assets/static/footer/background.png') }}" alt="La Hieu Footer Background"
+        <img src="{{ asset('assets/static/footer/background.png') }}" alt="La Hieu Footer Background"
             class="w-full h-full object-cover object-center" loading="lazy">
     </div>
 
@@ -17,7 +17,7 @@
         class="w-full lg:w-1/2 relative z-10 bg-black/80 flex flex-col justify-start md:justify-center px-0 md:px-16 lg:px-[103px] pt-[41px] pb-[76px] md:py-12 md:min-h-[535px]">
 
         <a href="{{ url('/') }}" class="inline-block pl-[31px] md:pl-0 mb-[22px] md:mb-0" data-aos="fade-right">
-            <img src="{{ asset('client/assets/static/footer/logo.svg') }}" alt="La Hieu Logo"
+            <img src="{{ asset('assets/static/footer/logo.svg') }}" alt="La Hieu Logo"
                 class="w-[180px] md:w-[224px] h-auto object-contain">
         </a>
 
@@ -34,7 +34,7 @@
         <div class="flex flex-col gap-0 md:gap-4 mt-0 md:mt-8 lg:mt-[40px]" data-aos="fade-up" data-aos-delay="200">
             <a href="tel:{{ preg_replace('/\D+/', '', $footerPhone) }}"
                 class="flex items-center hover:opacity-80 transition-opacity w-max pl-[37px] md:pl-0 mb-[22px] md:mb-0">
-                <img src="{{ asset('client/assets/static/footer/phone.svg') }}" alt="Phone Icon"
+                <img src="{{ asset('assets/static/footer/phone.svg') }}" alt="Phone Icon"
                     class="w-[20px] h-[20px] object-contain flex-shrink-0 md:mx-[50px]">
                 <span
                     class="font-be-vietnam text-[16px] md:text-h-sub-24-foot font-normal tracking-[0.8px] md:tracking-[1.2px] text-white ml-[17px] md:ml-0">
@@ -44,7 +44,7 @@
 
             <a href="mailto:{{ $footerEmail }}"
                 class="flex items-center hover:opacity-80 transition-opacity w-max pl-[34px] md:pl-0">
-                <img src="{{ asset('client/assets/static/footer/mail.svg') }}" alt="Mail Icon"
+                <img src="{{ asset('assets/static/footer/mail.svg') }}" alt="Mail Icon"
                     class="w-[26px] h-[20px] object-contain flex-shrink-0 md:mx-[47.5px]">
                 <span
                     class="font-be-vietnam text-[16px] md:text-h-sub-24-foot font-normal tracking-[0.8px] md:tracking-[1.2px] text-white ml-[14px] md:ml-0">

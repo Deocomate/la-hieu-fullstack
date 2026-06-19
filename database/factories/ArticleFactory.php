@@ -23,8 +23,8 @@ final class ArticleFactory extends Factory
             'title' => 'Default Article Title',
             'slug' => 'default-article-title',
             'excerpt' => 'Default excerpt content.',
-            'cover_image' => 'client/assets/static/photojournalism/photo-image-card-1.png',
-            'badge_logo' => 'client/assets/static/photojournalism/photo-logo-card-1.svg',
+            'cover_image' => 'assets/static/photojournalism/photo-image-card-1.png',
+            'badge_logo' => 'assets/static/photojournalism/photo-logo-card-1.svg',
             'youtube_urls' => null,
             'content_blocks' => [],
             'published_at' => '2026-05-25 00:00:00',
@@ -34,7 +34,7 @@ final class ArticleFactory extends Factory
             'status' => 'published',
             'seo_title' => 'Default Article Title',
             'seo_description' => 'Default Description',
-            'seo_image' => 'client/assets/static/photojournalism/photo-image-card-1.png',
+            'seo_image' => 'assets/static/photojournalism/photo-image-card-1.png',
         ];
     }
 }

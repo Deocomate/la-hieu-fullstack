@@ -14,7 +14,7 @@
             @php
                 $contactImageSrc = \App\Support\ClientImage::url(
                     $page->hero_images['contact_image'] ?? null,
-                    'client/assets/static/contact/contact-main-image.png',
+                    'assets/static/contact/contact-main-image.png',
                 );
             @endphp
             <h1
@@ -107,7 +107,7 @@
                     <!-- Social media text -> Signature logo: 48px (mt-[48px]) -->
                     <!-- Căn lệch phải trên mobile (self-end) tạo điểm nhấn, căn trái trên desktop (sm:self-start) -->
                     <div class="mt-[48px] md:mt-8 lg:mt-[105px] self-end sm:self-start">
-                        <img src="{{ asset('client/assets/static/contact/logo.svg') }}" alt="La Hieu Signature"
+                        <img src="{{ asset('assets/static/contact/logo.svg') }}" alt="La Hieu Signature"
                             class="w-[140px] lg:w-[184px] h-auto lg:h-[92px] object-contain" loading="lazy">
                     </div>
                 </div>

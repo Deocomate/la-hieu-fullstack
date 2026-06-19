@@ -4,23 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Là Hiếu - @yield('title')</title>
+    <x-clients.chrome.seo-meta
+        :title="$seo['title'] ?? null"
+        :description="$seo['description'] ?? null"
+        :image="$seo['image'] ?? null"
+    />
     <!-- Gọi file styles chứa Tailwind CDN -->
-    @include('components.clients.styles')
+    <x-clients.chrome.styles />
     @stack('styles')
 </head>
 <!-- Thêm class font-sans để áp dụng Be Vietnam Pro làm mặc định -->
 
 <body class="font-sans text-black bg-white">
-    @include('components.clients.header')
+    <x-clients.chrome.header />
 
     <main>
         @yield('content')
     </main>
 
-    @include('components.clients.footer')
-    @include('components.clients.gallery.lightbox')
-    @include('components.clients.scripts')
+    <x-clients.chrome.footer />
+    <x-clients.gallery.lightbox />
+    <x-clients.chrome.scripts />
     @stack('scripts')
 </body>
 

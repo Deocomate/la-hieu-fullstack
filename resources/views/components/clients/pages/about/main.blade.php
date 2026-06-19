@@ -8,7 +8,7 @@
         @php
             $aboutImageSrc = \App\Support\ClientImage::url(
                 $page->hero_images['about_image'] ?? null,
-                'client/assets/static/about/about.png',
+                'assets/static/about/about.png',
             );
         @endphp
         <div class="w-full md:w-[372px] flex-shrink-0" data-aos="zoom-out" data-aos-duration="1000">
@@ -44,7 +44,7 @@
             @php
                 $aboutSignatureSrc = \App\Support\ClientImage::url(
                     $page->hero_images['signature_logo'] ?? null,
-                    'client/assets/static/about/logo.svg',
+                    'assets/static/about/logo.svg',
                 );
             @endphp
             <div class="mt-8 md:mt-[30px]" data-aos="fade-up" data-aos-delay="300">

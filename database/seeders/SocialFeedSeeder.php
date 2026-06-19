@@ -13,7 +13,7 @@ final class SocialFeedSeeder extends Seeder
     {
         for ($number = 1; $number <= 5; $number++) {
             SocialFeed::updateOrCreate(
-                ['image_url' => "client/assets/static/home/follow-me-{$number}.png"],
+                ['image_url' => "assets/static/home/follow-me-{$number}.png"],
                 [
                     'platform' => 'instagram',
                     'post_url' => 'https://instagram.com/lahieuphotography',

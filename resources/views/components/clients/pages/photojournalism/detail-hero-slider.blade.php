@@ -49,8 +49,8 @@
 
     if ($sliderImages->isEmpty()) {
         $sliderImages = collect([
-            asset('client/assets/static/photojournalism/detail-slider-swiper-1.png'),
-            asset('client/assets/static/photojournalism/detail-slider-swiper-2.png'),
+            asset('assets/static/photojournalism/detail-slider-swiper-1.png'),
+            asset('assets/static/photojournalism/detail-slider-swiper-2.png'),
         ]);
     }
 @endphp

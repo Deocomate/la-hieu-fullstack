@@ -7,11 +7,11 @@
         @php
             $heroBannerSrc = \App\Support\ClientImage::url(
                 $page->hero_images['hero_banner'] ?? null,
-                'client/assets/static/home/hero-image.png',
+                'assets/static/home/hero-image.png',
             );
             $signatureLogoSrc = \App\Support\ClientImage::url(
                 $page->hero_images['signature_logo'] ?? null,
-                'client/assets/static/home/hero-logo.svg',
+                'assets/static/home/hero-logo.svg',
             );
         @endphp
         <img src="{{ $heroBannerSrc }}" alt="La Hieu Photography - Hmong Girl"

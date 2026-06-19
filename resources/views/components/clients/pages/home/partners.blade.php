@@ -10,7 +10,7 @@
 
         @foreach ($partners as $index => $partner)
             @php
-                $fallbackImage = 'client/assets/static/home/partner-' . (($index % 4) + 1) . '.png';
+                $fallbackImage = 'assets/static/home/partner-' . (($index % 4) + 1) . '.png';
             @endphp
             <div class="w-[147px] md:w-full md:max-w-[295px] aspect-square flex-shrink-0 snap-start bg-transparent rounded-full overflow-hidden flex items-center justify-center cursor-pointer"
                 data-aos="zoom-out" data-aos-delay="{{ ($index + 1) * 100 }}">

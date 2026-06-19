@@ -343,36 +343,28 @@ final class FilamentResourceTest extends TestCase
         ]);
     }
 
-    public function test_fallback_image_routes_work_and_prevent_path_traversal(): void
+    public function test_static_assets_exist_in_public_directory(): void
     {
-        // 1. Check storage fallback route
-        $response = $this->get('/storage/client/assets/static/home/partner-1.png');
-        $response->assertSuccessful();
-        $response->assertHeader('Content-Type', 'image/png');
-
-        // 2. Check client/assets fallback route
-        $response2 = $this->get('/client/assets/static/home/partner-1.png');
-        $response2->assertSuccessful();
-        $response2->assertHeader('Content-Type', 'image/png');
-
-        // 3. Check path traversal protection
-        $this->get('/storage/../../.env')->assertStatus(400);
-        $this->get('/client/assets/../../.env')->assertStatus(400);
-
-        // 4. Check 404 for non-existent files
-        $this->get('/storage/client/assets/static/home/does-not-exist.png')->assertNotFound();
-        $this->get('/client/assets/static/home/does-not-exist.png')->assertNotFound();
+        $this->assertFileExists(public_path('assets/static/home/hero-logo.svg'));
+        $this->assertStringContainsString(
+            '/assets/static/home/hero-logo.svg',
+            \App\Support\ClientImage::url('assets/static/home/hero-logo.svg')
+        );
     }
 
     public function test_client_image_url_helper_distributes_assets_correctly(): void
     {
-        // 1. SVG files should be served from public folder directly (returns asset() URL)
-        $svgUrl = \App\Support\ClientImage::url('client/assets/static/home/hero-logo.svg');
-        $this->assertSame(asset('client/assets/static/home/hero-logo.svg'), $svgUrl);
+        $svgUrl = \App\Support\ClientImage::url('assets/static/home/hero-logo.svg');
+        $this->assertSame(asset('assets/static/home/hero-logo.svg'), $svgUrl);
 
-        // 2. PNG/JPG files (which were deleted from public folder) should be served from public storage disk (returns Storage::url() URL)
-        $pngUrl = \App\Support\ClientImage::url('client/assets/static/home/partner-1.png');
-        $this->assertSame(\Illuminate\Support\Facades\Storage::disk('public')->url('client/assets/static/home/partner-1.png'), $pngUrl);
+        $pngUrl = \App\Support\ClientImage::url('assets/static/home/partner-1.png');
+        $this->assertSame(asset('assets/static/home/partner-1.png'), $pngUrl);
+
+        $uploadUrl = \App\Support\ClientImage::url('articles/covers/photo.jpg');
+        $this->assertSame(
+            \Illuminate\Support\Facades\Storage::disk('public')->url('articles/covers/photo.jpg'),
+            $uploadUrl
+        );
     }
 }
 

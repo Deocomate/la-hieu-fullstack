@@ -16,21 +16,21 @@ final class EventAlbumSeeder extends Seeder
                 'title' => 'P4G Vietnam Summit',
                 'slug' => 'p4g-vietnam-summit',
                 'event_date' => '2019-06-16',
-                'cover_image' => 'client/assets/static/home/event-photography-1.png',
+                'cover_image' => 'assets/static/home/event-photography-1.png',
                 'images' => range(1, 8),
             ],
             [
                 'title' => 'Goethe: The Gem',
                 'slug' => 'goeth-the-gem',
                 'event_date' => '2020-08-08',
-                'cover_image' => 'client/assets/static/home/event-photography-2.png',
+                'cover_image' => 'assets/static/home/event-photography-2.png',
                 'images' => range(9, 15),
             ],
             [
                 'title' => 'La Hieu Project',
                 'slug' => 'la-hieu-project',
                 'event_date' => '2021-01-01',
-                'cover_image' => 'client/assets/static/home/event-photography-3.png',
+                'cover_image' => 'assets/static/home/event-photography-3.png',
                 'images' => [16, 17, 18, 19, 1, 3, 6],
             ],
         ];
@@ -59,7 +59,7 @@ final class EventAlbumSeeder extends Seeder
                 $album->media()->create([
                     'collection_name' => 'gallery',
                     'file_name' => "gallery-{$imageNumber}.png",
-                    'file_url' => "client/assets/static/event-photo/gallery-{$imageNumber}.png",
+                    'file_url' => "assets/static/event-photo/gallery-{$imageNumber}.png",
                     'mime_type' => 'image/png',
                     'size' => 1024,
                     'width' => 1920,

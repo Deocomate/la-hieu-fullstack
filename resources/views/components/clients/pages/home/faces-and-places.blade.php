@@ -12,7 +12,7 @@
     }
 
     if ($galleryImages->isEmpty()) {
-        $galleryImages = collect(range(1, 19))->map(fn ($i) => "client/assets/static/home/faces-and-places-{$i}.png");
+        $galleryImages = collect(range(1, 19))->map(fn ($i) => "assets/static/home/faces-and-places-{$i}.png");
     }
 
     $lightboxImages = \App\Support\GalleryImage::fromPaths($galleryImages, 'Faces and Places');

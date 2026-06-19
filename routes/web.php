@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\AboutController;
 use App\Http\Controllers\Client\ContactController;
@@ -12,12 +11,10 @@ use App\Http\Controllers\Client\VideographyController;
 
 /*
 |--------------------------------------------------------------------------
-| DYNAMIC FRONTEND ROUTES ĐÃ BỊ LOẠI BỎ
-| Sử dụng Explicit Routing để tối ưu tốc độ và bảo mật.
+| Explicit frontend routes (no dynamic catch-all).
+| Static files are served from public/ by the web server — not PHP routes.
 |--------------------------------------------------------------------------
 */
-
-
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
@@ -46,28 +43,4 @@ Route::prefix('videography')->name('videography.')->group(function () {
     Route::get('/', [VideographyController::class, 'index'])->name('index');
     Route::get('/{slug}', [VideographyController::class, 'show'])->name('show');
 });
-
-// Fallback image routes for local/windows environment
-Route::get('storage/{path}', function (string $path) {
-    abort_if(str_contains($path, '..'), 400, 'Invalid path');
-
-    $filePath = storage_path('app/public/' . $path);
-    if (!file_exists($filePath)) {
-        abort(404);
-    }
-    return response()->file($filePath);
-})->where('path', '.*');
-
-Route::get('client/assets/{path}', function (string $path) {
-    abort_if(str_contains($path, '..'), 400, 'Invalid path');
-
-    $filePath = public_path('client/assets/' . $path);
-    if (!file_exists($filePath)) {
-        $filePath = storage_path('app/public/client/assets/' . $path);
-    }
-    if (!file_exists($filePath)) {
-        abort(404);
-    }
-    return response()->file($filePath);
-})->where('path', '.*');
 

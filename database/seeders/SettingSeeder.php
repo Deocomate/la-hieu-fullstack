@@ -20,7 +20,7 @@ final class SettingSeeder extends Seeder
             ['group' => 'seo', 'key' => 'seo_site_name', 'value' => 'La Hieu Photography'],
             ['group' => 'seo', 'key' => 'seo_default_title', 'value' => 'La Hieu Photography'],
             ['group' => 'seo', 'key' => 'seo_default_description', 'value' => 'Professional photography, photojournalism, videography, events, faces and places by La Hieu.'],
-            ['group' => 'seo', 'key' => 'seo_default_image', 'value' => 'client/assets/static/home/hero-image.png'],
+            ['group' => 'seo', 'key' => 'seo_default_image', 'value' => 'assets/static/home/hero-image.png'],
             ['group' => 'seo', 'key' => 'seo_meta_tags', 'value' => '[]'],
         ];
 

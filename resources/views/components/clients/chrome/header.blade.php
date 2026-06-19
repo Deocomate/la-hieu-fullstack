@@ -6,7 +6,7 @@
     <div class="md:hidden w-full h-full flex items-center pl-[31px] pr-[34px] relative">
         <!-- Hamburger Menu (Trái) -->
         <button id="mobile-menu-open" class="flex-shrink-0 hover:opacity-70 transition-opacity">
-            <img src="{{ asset('client/assets/static/header/mobile-hamburger-menu-icon.svg') }}" alt="Menu"
+            <img src="{{ asset('assets/static/header/mobile-hamburger-menu-icon.svg') }}" alt="Menu"
                 class="w-auto h-auto">
         </button>
 
@@ -14,14 +14,14 @@
         <!-- Căn giữa tuyệt đối so với toàn bộ thanh navigation -->
         <a href="{{ url('/') }}"
             class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[40px] hover:opacity-80 transition-opacity">
-            <img src="{{ asset('client/assets/static/header/logo.svg') }}" alt="La Hieu Logo"
+            <img src="{{ asset('assets/static/header/logo.svg') }}" alt="La Hieu Logo"
                 class="h-full w-auto object-contain">
         </a>
 
         <!-- Search Icon (Phải) -->
         <!-- Đẩy về sát góc phải bằng ml-auto -->
         <button class="ml-auto flex-shrink-0 flex items-center justify-center hover:opacity-70 transition-opacity">
-            <img src="{{ asset('client/assets/static/header/search.svg') }}" alt="Search"
+            <img src="{{ asset('assets/static/header/search.svg') }}" alt="Search"
                 class="w-[18px] h-[18px] object-contain">
         </button>
     </div>
@@ -34,7 +34,7 @@
         <!-- Logo bên trái -->
         <a href="{{ url('/') }}"
             class="flex-shrink-0 flex items-center h-full hover:opacity-80 transition-opacity">
-            <img src="{{ asset('client/assets/static/header/logo.svg') }}" alt="La Hieu Logo"
+            <img src="{{ asset('assets/static/header/logo.svg') }}" alt="La Hieu Logo"
                 class="h-[40px] w-auto object-contain">
         </a>
         <!-- Menu ở giữa -->
@@ -73,7 +73,7 @@
         </nav>
         <!-- Icon Search bên phải -->
         <button class="flex-shrink-0 flex items-center justify-center p-2 hover:opacity-70 transition-opacity">
-            <img src="{{ asset('client/assets/static/header/search.svg') }}" alt="Search"
+            <img src="{{ asset('assets/static/header/search.svg') }}" alt="Search"
                 class="w-[18px] h-[18px] object-contain">
         </button>
     </div>
@@ -88,7 +88,7 @@
     <!-- Khoảng cách từ lề trên đến icon: 26.63px, margin-bottom 50px -->
     <div class="w-full relative flex justify-center mt-[26.63px] mb-[50px]">
         <button id="mobile-menu-close" class="hover:opacity-70 transition-opacity p-2">
-            <img src="{{ asset('client/assets/static/header/mobile-close-icon.svg') }}" alt="Close"
+            <img src="{{ asset('assets/static/header/mobile-close-icon.svg') }}" alt="Close"
                 class="w-auto h-auto">
         </button>
     </div>
@@ -115,7 +115,7 @@
     <!-- Background Logo -->
     <!-- Khoảng cách dọc từ mục menu cuối cùng đến đỉnh logo là 159px. Mờ như watermark (opacity thấp) -->
     <div class="w-full flex justify-center mt-[159px] pb-[50px] opacity-[0.05] pointer-events-none">
-        <img src="{{ asset('client/assets/static/header/logo.svg') }}" alt="Watermark"
+        <img src="{{ asset('assets/static/header/logo.svg') }}" alt="Watermark"
             class="w-[200px] sm:w-[250px] h-auto object-contain">
     </div>
 </div>

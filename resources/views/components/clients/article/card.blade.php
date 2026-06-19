@@ -2,8 +2,8 @@
     'variant' => 'zigzag',
     'bgColor' => 'transparent',
     'isSwapped' => false,
-    'image' => asset('client/assets/static/photojournalism/photo-image-card-1.png'),
-    'logo' => asset('client/assets/static/photojournalism/photo-logo-card-1.svg'),
+    'image' => asset('assets/static/photojournalism/photo-image-card-1.png'),
+    'logo' => asset('assets/static/photojournalism/photo-logo-card-1.svg'),
     'category' => 'Uncategorized',
     'title' => 'Mordern & Trendy App Designs',
     'description' =>

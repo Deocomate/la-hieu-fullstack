@@ -1,7 +1,7 @@
 @php
     $pjDesktopBg = \App\Support\ClientImage::url(
         $page->content['photojournalism']['desktop_bg'] ?? null,
-        'client/assets/static/home/photojournalism-background.png',
+        'assets/static/home/photojournalism-background.png',
     );
     $pjMobileSlides = collect($page->content['photojournalism']['mobile_bg_slides'] ?? [])
         ->pluck('image')
@@ -13,7 +13,7 @@
         ->values();
 
     if ($pjGalleryImages->isEmpty()) {
-        $pjGalleryImages = collect(range(1, 5))->map(fn ($i) => "client/assets/static/home/photojournalism-image-{$i}.png");
+        $pjGalleryImages = collect(range(1, 5))->map(fn ($i) => "assets/static/home/photojournalism-image-{$i}.png");
     }
 
     $galleryItems = [
@@ -60,9 +60,9 @@
     </div>
 
     <div class="absolute top-[18px] left-[18px] z-20 md:hidden cursor-pointer animate-fade-in" id="pj-controller">
-        <img src="{{ asset('client/assets/static/home/mobile-pause-button.svg') }}" id="pj-pause-icon" alt="Pause"
+        <img src="{{ asset('assets/static/home/mobile-pause-button.svg') }}" id="pj-pause-icon" alt="Pause"
             class="w-[36px] h-[36px] object-contain">
-        <img src="{{ asset('client/assets/static/home/mobile-play-button.svg') }}" id="pj-play-icon" alt="Play"
+        <img src="{{ asset('assets/static/home/mobile-play-button.svg') }}" id="pj-play-icon" alt="Play"
             class="w-[36px] h-[36px] object-contain hidden">
     </div>
 
@@ -82,7 +82,7 @@
         @foreach ($galleryItems as $i => $classes)
             @php
                 $article = $pjArticles->values()->get($i - 1);
-                $image = $article?->cover_image ?? $pjGalleryImages->get($i - 1, "client/assets/static/home/photojournalism-image-{$i}.png");
+                $image = $article?->cover_image ?? $pjGalleryImages->get($i - 1, "assets/static/home/photojournalism-image-{$i}.png");
             @endphp
             <a href="{{ $article ? route('photojournalism.show', $article->slug) : route('photojournalism.index') }}"
                 class="w-[240px] sm:w-[280px] md:w-full flex-shrink-0 snap-start overflow-hidden shadow-lg group cursor-pointer {{ $classes['wrapper'] }}"

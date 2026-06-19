@@ -1,6 +1,10 @@
+@props([
+    'articles' => null,
+    'cardLayout' => 'zigzag',
+])
+
 @php
     $list = $articles ?? collect();
-    $cardLayout = $cardLayout ?? 'zigzag';
     $defaultDescription =
         'Even in the middle of a vibrant crowd, I am always looking for the same thing: the raw, genuine moments that define the true character of the event.';
 @endphp
@@ -13,14 +17,14 @@
                 $bgColor = $isHoverLayout ? 'transparent' : ($index === 0 ? 'rgba(250, 250, 250, 1)' : 'transparent');
                 $isSwapped = $isHoverLayout ? false : $index % 2 !== 0;
                 $assetIndex = ($index % 2) + 1;
-                $fallbackImage = asset('client/assets/static/photojournalism/photo-image-card-' . $assetIndex . '.png');
-                $fallbackLogo = asset('client/assets/static/photojournalism/photo-logo-card-' . $assetIndex . '.svg');
+                $fallbackImage = asset('assets/static/photojournalism/photo-image-card-' . $assetIndex . '.png');
+                $fallbackLogo = asset('assets/static/photojournalism/photo-logo-card-' . $assetIndex . '.svg');
                 $routeName = $item->type === 'videography' ? 'videography.show' : 'photojournalism.show';
                 $publishedDate = $item->published_at?->format('F j, Y') ?? '';
             @endphp
 
             <a href="{{ route($routeName, $item->slug) }}" class="block {{ $isHoverLayout ? 'group' : '' }}">
-                <x-clients.shared.article-card :variant="$cardLayout" :bg-color="$bgColor" :is-swapped="$isSwapped"
+                <x-clients.article.card :variant="$cardLayout" :bg-color="$bgColor" :is-swapped="$isSwapped"
                     :image="\App\Support\ClientImage::url($item->cover_image, $fallbackImage)"
                     :logo="\App\Support\ClientImage::url($item->badge_logo, $fallbackLogo)"
                     :category="$item->category->name ?? 'Uncategorized'"
@@ -39,7 +43,7 @@
 
     @if (method_exists($list, 'links') && $list->hasPages())
         <div class="w-full flex justify-center mt-12 lg:mt-16 px-4" data-aos="fade-up">
-            {{ $list->links('components.clients.pagination') }}
+            {{ $list->links() }}
         </div>
     @endif
 </section>

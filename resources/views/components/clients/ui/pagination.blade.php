@@ -5,13 +5,13 @@
         @if ($paginator->onFirstPage())
             <span
                 class="w-[40px] h-[40px] rounded-full border border-black/10 flex items-center justify-center flex-shrink-0 opacity-30">
-                <img src="{{ asset('client/assets/static/components/prev-buttom.svg') }}" alt="Previous"
+                <img src="{{ asset('assets/static/components/prev-buttom.svg') }}" alt="Previous"
                     class="w-[40px] h-[40px] object-contain">
             </span>
         @else
             <a href="{{ $paginator->previousPageUrl() }}"
                 class="w-[40px] h-[40px] rounded-full border border-black/20 flex items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer flex-shrink-0 group">
-                <img src="{{ asset('client/assets/static/components/prev-buttom.svg') }}" alt="Previous"
+                <img src="{{ asset('assets/static/components/prev-buttom.svg') }}" alt="Previous"
                     class="w-[40px] h-[40px] object-contain opacity-40 group-hover:opacity-100 transition-opacity">
             </a>
         @endif
@@ -45,13 +45,13 @@
         @if ($paginator->hasMorePages())
             <a href="{{ $paginator->nextPageUrl() }}"
                 class="w-[40px] h-[40px] rounded-full border border-black/20 flex items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer flex-shrink-0 group">
-                <img src="{{ asset('client/assets/static/components/next-buttom.svg') }}" alt="Next"
+                <img src="{{ asset('assets/static/components/next-buttom.svg') }}" alt="Next"
                     class="w-[40px] h-[40px] object-contain opacity-40 group-hover:opacity-100 transition-opacity">
             </a>
         @else
             <span
                 class="w-[40px] h-[40px] rounded-full border border-black/10 flex items-center justify-center flex-shrink-0 opacity-30">
-                <img src="{{ asset('client/assets/static/components/next-buttom.svg') }}" alt="Next"
+                <img src="{{ asset('assets/static/components/next-buttom.svg') }}" alt="Next"
                     class="w-[40px] h-[40px] object-contain">
             </span>
         @endif

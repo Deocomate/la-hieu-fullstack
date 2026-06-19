@@ -20,7 +20,7 @@ final class GalleryImageTest extends TestCase
         $album->media()->create([
             'collection_name' => 'gallery',
             'file_name' => 'b.jpg',
-            'file_url' => 'client/assets/static/testing/b.jpg',
+            'file_url' => 'assets/static/testing/b.jpg',
             'mime_type' => 'image/jpeg',
             'size' => 1024,
             'width' => 800,
@@ -32,7 +32,7 @@ final class GalleryImageTest extends TestCase
         $album->media()->create([
             'collection_name' => 'gallery',
             'file_name' => 'a.jpg',
-            'file_url' => 'client/assets/static/testing/a.jpg',
+            'file_url' => 'assets/static/testing/a.jpg',
             'mime_type' => 'image/jpeg',
             'size' => 1024,
             'width' => 1920,
@@ -52,7 +52,7 @@ final class GalleryImageTest extends TestCase
 
     public function test_maps_string_paths_with_client_image_urls(): void
     {
-        $result = GalleryImage::fromPaths(['client/assets/static/testing/test.png'], 'Img');
+        $result = GalleryImage::fromPaths(['assets/static/testing/test.png'], 'Img');
 
         $this->assertCount(1, $result);
         $this->assertStringContainsString('test.png', $result[0]['src']);
@@ -69,7 +69,7 @@ final class GalleryImageTest extends TestCase
         $album->media()->create([
             'collection_name' => 'gallery',
             'file_name' => 'portrait.jpg',
-            'file_url' => 'client/assets/static/testing/portrait.jpg',
+            'file_url' => 'assets/static/testing/portrait.jpg',
             'mime_type' => 'image/jpeg',
             'size' => 1024,
             'width' => null,

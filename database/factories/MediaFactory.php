@@ -21,7 +21,7 @@ final class MediaFactory extends Factory
             'model_id' => 1,
             'collection_name' => 'gallery',
             'file_name' => 'gallery-1.png',
-            'file_url' => 'client/assets/static/event-photo/gallery-1.png',
+            'file_url' => 'assets/static/event-photo/gallery-1.png',
             'mime_type' => 'image/png',
             'size' => 1024,
             'width' => 1920,
